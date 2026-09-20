@@ -1,0 +1,22 @@
+<%- include('../partials/head', { title: 'Results — ' + paper.id }) %>
+
+<main class="review-page">
+  <h1>Results <span class="en"><%= paper.id %></span></h1>
+  <div class="score-banner">Score: <strong><%= score %> / <%= total %></strong>
+    · <%= status %> · <%= timeTakenMinutes %> min</div>
+
+  <% paper.items.forEach(function(item, idx) { %>
+    <%- include('../partials/question', {
+      item: item,
+      questionNumber: idx + 1,
+      totalQuestions: paper.items.length,
+      selectedOption: answers[item.id] || null,
+      reveal: true,
+      interactive: false
+    }) %>
+  <% }); %>
+
+  <a class="nav-btn" href="/admin/dashboard">← Dashboard</a>
+</main>
+
+<%- include('../partials/foot') %>

@@ -1,0 +1,14 @@
+<%- include('../partials/head', { title: 'Teacher Login' }) %>
+
+<main class="admin-login">
+  <h1>Teacher</h1>
+  <form method="POST" action="/admin">
+    <input type="password" inputmode="numeric" name="pin" placeholder="PIN" autofocus autocomplete="off">
+    <button type="submit">Enter</button>
+  </form>
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+</main>
+
+<%- include('../partials/foot') %>

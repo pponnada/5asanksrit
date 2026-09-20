@@ -1,0 +1,21 @@
+<%- include('../partials/head', { title: 'Preview — ' + paper.id }) %>
+
+<main class="review-page">
+  <h1>Preview <span class="en"><%= paper.id %></span></h1>
+  <p class="preview-banner">PREVIEW — answers shown, not a live attempt.</p>
+  <p class="paper-summary"><%= paper.sections.join(', ') %> · <%= paper.items.length %> questions · <%= paper.timeLimitMinutes %> min</p>
+
+  <% paper.items.forEach(function(item, idx) { %>
+    <%- include('../partials/question', {
+      item: item,
+      questionNumber: idx + 1,
+      totalQuestions: paper.items.length,
+      reveal: true,
+      interactive: false
+    }) %>
+  <% }); %>
+
+  <a class="nav-btn" href="/admin/dashboard">← Dashboard</a>
+</main>
+
+<%- include('../partials/foot') %>

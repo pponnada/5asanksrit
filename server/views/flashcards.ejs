@@ -1,0 +1,39 @@
+<%- include('partials/head', { title: 'शब्दार्थ-अभ्यासपत्राणि' }) %>
+
+<main class="flashcards-page">
+  <div class="flashcards-header">
+    <a class="back-link" href="/">← गृहम् <span class="en">Home</span></a>
+    <% if (stats) { %>
+      <div class="flashcard-stats" id="fc-stats"><%= stats.mastered %>/<%= stats.total %> <span class="en">mastered</span></div>
+    <% } %>
+  </div>
+
+  <% if (!card) { %>
+    <p class="empty-state">अद्यापि कानिचित् शब्दार्थ-पत्राणि नोपलभ्यन्ते।<br><span class="en">No flashcards available yet.</span></p>
+  <% } else { %>
+    <div class="flip-card">
+      <div class="flip-card-inner" id="flip-card-inner">
+        <div class="flip-face flip-front">
+          <div class="question-stem" id="fc-stem"><%= card.stem %></div>
+          <div class="options" id="fc-options" data-question-id="<%= card.id %>">
+            <% card.options.forEach(function(opt) { %>
+              <button type="button" class="option" data-option="<%= opt %>"><%= opt %></button>
+            <% }); %>
+          </div>
+        </div>
+        <div class="flip-face flip-back" id="fc-back"></div>
+      </div>
+    </div>
+
+    <button type="button" class="nav-btn next-card-btn" id="next-card-btn" style="display:none;">
+      अग्रे →<br><span class="en">Next</span>
+    </button>
+  <% } %>
+</main>
+
+<script>
+  window.__FLASHCARD__ = <%- JSON.stringify(card) %>;
+</script>
+<script src="/js/flashcards.js"></script>
+
+<%- include('partials/foot') %>

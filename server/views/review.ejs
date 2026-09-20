@@ -1,0 +1,21 @@
+<%- include('partials/head', { title: 'समीक्षा' }) %>
+
+<main class="review-page">
+  <h1>समीक्षा <span class="en">Review</span></h1>
+  <div class="score-banner">प्राप्तांकाः : <strong><%= score %> / <%= total %></strong></div>
+
+  <% items.forEach(function(item, idx) { %>
+    <%- include('partials/question', {
+      item: item,
+      questionNumber: idx + 1,
+      totalQuestions: items.length,
+      selectedOption: answers[item.id] || null,
+      reveal: true,
+      interactive: false
+    }) %>
+  <% }); %>
+
+  <a class="nav-btn" href="/">मुख्यपृष्ठम् <span class="en">Home</span></a>
+</main>
+
+<%- include('partials/foot') %>

@@ -1,0 +1,33 @@
+<%- include('partials/head', { title: 'संस्कृत अभ्यासः' }) %>
+
+<main class="landing">
+  <h1>संस्कृत अभ्यासः</h1>
+
+  <% if (latestPaper) { %>
+    <a class="take-test-btn" href="/test/<%= latestPaper.id %>">परीक्षां ददातु<br><span class="en">Take Test</span></a>
+  <% } else { %>
+    <p class="empty-state">अद्यापि कोऽपि प्रश्नपत्रः निर्मितः नास्ति।<br><span class="en">No test has been published yet.</span></p>
+  <% } %>
+
+  <a class="flashcards-btn" href="/flashcards">शब्दार्थ-अभ्यासपत्राणि<br><span class="en">Flashcards</span></a>
+
+  <% if (otherPapers.length > 0) { %>
+    <details class="other-papers">
+      <summary>अन्ये परीक्षाः <span class="en">(other tests)</span></summary>
+      <ul>
+        <% otherPapers.forEach(function(p) { %>
+          <li>
+            <a href="/test/<%= p.id %>">
+              <%= p.id %>
+              <span class="status-tag <%= p.taken ? 'taken' : 'not-taken' %>">
+                <%= p.taken ? ('पूर्णम् — ' + p.score) : 'अपूर्णम्' %>
+              </span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </details>
+  <% } %>
+</main>
+
+<%- include('partials/foot') %>

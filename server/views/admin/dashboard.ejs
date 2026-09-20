@@ -1,0 +1,36 @@
+<%- include('../partials/head', { title: 'Teacher Dashboard' }) %>
+
+<main class="admin-dashboard">
+  <h1>Papers</h1>
+
+  <% if (papers.length === 0) { %>
+    <p>No papers composed yet. Run <code>TEACHER_WORKFLOW.md</code> in a coding-agent session to build one.</p>
+  <% } %>
+
+  <ul class="paper-list">
+    <% papers.forEach(function(p) { %>
+      <li class="paper-row">
+        <div class="paper-meta">
+          <strong><%= p.id %></strong>
+          <span class="badge badge-<%= p.badge.type %>"><%= p.badge.label %></span>
+          <div class="paper-summary">
+            <%= p.summary %><% if (p.taken) { %> · Taken — <%= p.score %><% } %>
+          </div>
+        </div>
+        <div class="paper-actions">
+          <a href="/admin/preview/<%= p.id %>">Preview</a>
+          <% if (p.taken) { %>
+            <a href="/admin/results/<%= p.id %>">View results</a>
+          <% } %>
+          <% if (!p.isLatest) { %>
+            <form method="POST" action="/admin/make-latest/<%= p.id %>">
+              <button type="submit">Make latest</button>
+            </form>
+          <% } %>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+</main>
+
+<%- include('../partials/foot') %>

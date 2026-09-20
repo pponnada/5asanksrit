@@ -1,0 +1,39 @@
+<%
+// Locals: item, questionNumber, totalQuestions, selectedOption, reveal, interactive
+const opts = item.options || [];
+%>
+<div class="question-card">
+  <% if (typeof questionNumber !== 'undefined') { %>
+    <div class="question-progress">प्रश्न <%= questionNumber %> / <%= totalQuestions %></div>
+  <% } %>
+  <div class="question-stem"><%= item.stem %></div>
+
+  <div class="options" data-question-id="<%= item.id %>">
+    <% opts.forEach(function(opt) { %>
+      <%
+        let cls = 'option';
+        if (reveal) {
+          if (opt === item.answer) cls += ' correct';
+          if (typeof selectedOption !== 'undefined' && selectedOption === opt && opt !== item.answer) cls += ' picked-wrong';
+          if (typeof selectedOption !== 'undefined' && selectedOption === opt && opt === item.answer) cls += ' picked-correct';
+        } else if (typeof selectedOption !== 'undefined' && selectedOption === opt) {
+          cls += ' selected';
+        }
+      %>
+      <% if (interactive) { %>
+        <button type="button" class="<%= cls %>" data-option="<%= opt %>"><%= opt %></button>
+      <% } else { %>
+        <div class="<%= cls %>"><%= opt %></div>
+      <% } %>
+    <% }); %>
+  </div>
+
+  <% if (reveal) { %>
+    <div class="answer-line">
+      सही उत्तरम् : <strong><%= item.answer %></strong>
+    </div>
+    <% if (item.note) { %>
+      <div class="explanation"><%= item.note %></div>
+    <% } %>
+  <% } %>
+</div>

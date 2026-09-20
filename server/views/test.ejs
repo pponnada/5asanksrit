@@ -1,0 +1,45 @@
+<%- include('partials/head', { title: 'परीक्षा' }) %>
+
+<main class="test-page">
+  <div class="timer-bar">
+    <div class="timer-fill" id="timer-fill"></div>
+  </div>
+  <div class="timer-display" id="timer-display">--:--</div>
+
+  <%- include('partials/question', {
+    item: item,
+    questionNumber: questionNumber,
+    totalQuestions: totalQuestions,
+    selectedOption: selectedOption,
+    reveal: false,
+    interactive: true
+  }) %>
+
+  <div class="nav-row">
+    <% if (questionNumber > 1) { %>
+      <a class="nav-btn prev" href="/test/<%= paperId %>/question/<%= questionNumber - 1 %>">← पूर्वम्</a>
+    <% } else { %>
+      <span></span>
+    <% } %>
+
+    <% if (questionNumber < totalQuestions) { %>
+      <a class="nav-btn next" href="/test/<%= paperId %>/question/<%= questionNumber + 1 %>">अग्रे →</a>
+    <% } else { %>
+      <form method="POST" action="/test/<%= paperId %>/submit">
+        <button type="submit" class="nav-btn submit">समर्पयतु<br><span class="en">Submit</span></button>
+      </form>
+    <% } %>
+  </div>
+</main>
+
+<script>
+  window.__ATTEMPT__ = {
+    paperId: <%- JSON.stringify(paperId) %>,
+    questionId: <%- JSON.stringify(item.id) %>,
+    endsAt: <%- JSON.stringify(endsAt) %>,
+    totalSeconds: <%- JSON.stringify(totalSeconds) %>
+  };
+</script>
+<script src="/js/test.js"></script>
+
+<%- include('partials/foot') %>
