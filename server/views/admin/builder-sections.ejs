@@ -1,0 +1,45 @@
+<%- include('../partials/head', { title: 'Build New Paper' }) %>
+
+<main class="admin-dashboard builder-page">
+  <h1>Build New Paper — Sections &amp; Counts</h1>
+  <p class="en">Select the sections to include and how many questions to draw from each.</p>
+
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+
+  <form method="POST" action="/admin/builder/sections">
+    <ul class="section-list">
+      <% sections.forEach(function(s) { %>
+        <% var sel = selected[s.number]; %>
+        <li class="section-row">
+          <label class="section-check">
+            <input
+              type="checkbox"
+              name="select_<%= s.number %>"
+              class="section-toggle"
+              data-target="count_<%= s.number %>"
+              <%= sel ? 'checked' : '' %>
+            >
+            <span class="section-title">विभागः <%= s.number %> — <%= s.title %></span>
+          </label>
+          <span class="section-counts en">
+            <%= s.nativeUsableCount %> usable in corpus · <%= s.genaiApprovedCount %> approved-GenAI
+          </span>
+          <input
+            type="number"
+            min="1"
+            name="count_<%= s.number %>"
+            class="section-count-input"
+            placeholder="Count"
+            value="<%= sel ? sel.count : '' %>"
+            style="<%= sel ? '' : 'display:none' %>"
+          >
+        </li>
+      <% }); %>
+    </ul>
+
+    <button type="submit" class="primary-btn">Continue</button>
+  </form>
+</main>
+
+<script src="/js/builder.js"></script>
+<%- include('../partials/foot') %>

@@ -260,6 +260,107 @@ button.option:active { transform: scale(0.98); }
 .badge-taken { background: #e6eefb; color: #2f5fa8; }
 .badge-not-taken { background: #f1ede2; color: var(--color-muted); }
 
+.build-new-paper-btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95em;
+  margin: 8px 0 24px;
+}
+
+/* ---------- Paper builder ---------- */
+.builder-page .error { color: var(--color-wrong); }
+
+.builder-page .primary-btn {
+  font-family: inherit;
+  font-size: 1em;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.section-list { list-style: none; padding: 0; }
+.section-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: var(--color-card);
+}
+.section-check { display: flex; align-items: center; gap: 8px; flex: 1 1 auto; }
+.section-title { font-size: 0.95em; }
+.section-counts { color: var(--color-muted); }
+.section-count-input { width: 80px; padding: 6px; }
+
+.split-existing { width: 70px; padding: 6px; }
+.split-new { color: var(--color-muted); }
+.split-fixed { color: var(--color-muted); }
+
+.generate-block {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: var(--color-card);
+}
+.generate-block.resolved { opacity: 0.7; }
+.generate-block summary { cursor: pointer; font-weight: 600; }
+
+.prompt-panel { margin: 12px 0; }
+.prompt-text {
+  width: 100%;
+  font-family: monospace;
+  font-size: 0.85em;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fdfdfb;
+}
+.copy-prompt-btn {
+  margin-top: 8px;
+  font-family: inherit;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  cursor: pointer;
+}
+
+.paste-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.parse-errors { color: var(--color-wrong); }
+
+.candidate-item {
+  border: 1px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.candidate-item label { display: block; margin-bottom: 6px; }
+.candidate-item input[type="text"] { width: 100%; padding: 6px; }
+.approve-check { display: flex; align-items: center; gap: 6px; }
+
+.time-presets { display: flex; flex-direction: column; gap: 10px; }
+
 /* ---------- Flashcards ---------- */
 .flashcards-page {
   max-width: 480px;

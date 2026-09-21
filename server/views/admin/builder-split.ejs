@@ -1,0 +1,51 @@
+<%- include('../partials/head', { title: 'Build New Paper' }) %>
+
+<main class="admin-dashboard builder-page">
+  <h1>Build New Paper — Existing vs. New</h1>
+  <p class="en">
+    For each section, how many of its questions should come from what already
+    exists (native corpus + previously-approved GenAI items) versus freshly
+    generated right now?
+  </p>
+
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+
+  <form method="POST" action="/admin/builder/split">
+    <ul class="section-list">
+      <% rows.forEach(function(r) { %>
+        <li class="section-row">
+          <div class="section-title">
+            विभागः <%= r.number %> — <%= r.title %>
+            <span class="en">(<%= r.count %> requested)</span>
+          </div>
+
+          <% if (r.isMeanings) { %>
+            <div class="split-fixed en">
+              Corpus only — Meanings is never GenAI-generated —
+              <%= r.count %> existing, 0 new.
+            </div>
+          <% } else { %>
+            <label class="en">
+              Existing (max <%= Math.min(r.available, r.count) %> of <%= r.available %> available):
+              <input
+                type="number"
+                min="0"
+                max="<%= Math.min(r.available, r.count) %>"
+                name="existing_<%= r.number %>"
+                value="<%= r.existing %>"
+                class="split-existing"
+                data-count="<%= r.count %>"
+              >
+            </label>
+            <span class="split-new en">New: <span class="split-new-value"><%= r.count - r.existing %></span></span>
+          <% } %>
+        </li>
+      <% }); %>
+    </ul>
+
+    <button type="submit" class="primary-btn">Continue</button>
+  </form>
+</main>
+
+<script src="/js/builder.js"></script>
+<%- include('../partials/foot') %>

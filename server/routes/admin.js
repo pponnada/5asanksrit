@@ -2,14 +2,10 @@ const express = require('express');
 const contentStore = require('../content/contentStore');
 const attemptsDb = require('../db/attempts');
 const { publishPaper } = require('../content/parsePaper');
+const requireAdmin = require('../middleware/requireAdmin');
 const { TEACHER_PIN, PAPERS_DIR, LATEST_FILE } = require('../config');
 
 const router = express.Router();
-
-function requireAdmin(req, res, next) {
-  if (req.session && req.session.isAdmin) return next();
-  return res.redirect('/admin');
-}
 
 function scoreAttempt(paper, answers) {
   let correct = 0;

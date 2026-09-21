@@ -3,8 +3,10 @@
 <main class="admin-dashboard">
   <h1>Papers</h1>
 
+  <a class="build-new-paper-btn" href="/admin/builder">Build New Paper</a>
+
   <% if (papers.length === 0) { %>
-    <p>No papers composed yet. Run <code>TEACHER_WORKFLOW.md</code> in a coding-agent session to build one.</p>
+    <p>No papers composed yet. Click "Build New Paper" above to create one.</p>
   <% } %>
 
   <ul class="paper-list">

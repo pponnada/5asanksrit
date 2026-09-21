@@ -1,0 +1,23 @@
+<%- include('../partials/head', { title: 'Build New Paper' }) %>
+
+<main class="admin-dashboard builder-page">
+  <h1>Build New Paper — Time Limit</h1>
+
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+
+  <form method="POST" action="/admin/builder/time">
+    <div class="time-presets">
+      <label><input type="radio" name="minutes" value="15" checked> 15 min</label>
+      <label><input type="radio" name="minutes" value="20"> 20 min</label>
+      <label><input type="radio" name="minutes" value="30"> 30 min</label>
+      <label><input type="radio" name="minutes" value="45"> 45 min</label>
+      <label class="en">
+        <input type="radio" name="minutes" value="other"> Other:
+        <input type="number" min="1" name="customMinutes">
+      </label>
+    </div>
+    <button type="submit" class="primary-btn">Compose Paper</button>
+  </form>
+</main>
+
+<%- include('../partials/foot') %>

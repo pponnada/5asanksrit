@@ -8,6 +8,7 @@ require('./db/db'); // ensures schema is created on boot
 const studentRoutes = require('./routes/student');
 const adminRoutes = require('./routes/admin');
 const flashcardsRoutes = require('./routes/flashcards');
+const builderRoutes = require('./routes/builder');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(
 app.use(studentRoutes);
 app.use(adminRoutes);
 app.use(flashcardsRoutes);
+app.use(builderRoutes);
 
 if (require.main === module) {
   app.listen(PORT, '0.0.0.0', () => {
