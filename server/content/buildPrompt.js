@@ -16,6 +16,21 @@ function inferOptionCount(sectionNumber) {
   return sample ? sample.options.length : 4;
 }
 
+/**
+ * A content-neutral worked example — placeholders only, never real Sanskrit
+ * — so it can only ever demonstrate the JSON shape and can never contradict
+ * a section's actual style the way a fixed hardcoded example would (it
+ * used to be a literal fill-in-the-blank verb example lifted from
+ * TEACHER_WORKFLOW.md, shown unchanged for every section regardless of
+ * that section's own style — wrong for e.g. a letter-decomposition section).
+ */
+function shapeExample(optionCount) {
+  const options = [];
+  for (let i = 1; i <= optionCount; i++) options.push(`<option ${i}>`);
+  const optionsJson = options.map((o) => `"${o}"`).join(', ');
+  return `{"stem": "<question stem in Devanagari>", "options": [${optionsJson}], "answer": "<copied exactly from one of the options above>", "note": "<short explanation, optional>"}`;
+}
+
 function formatContextItem(item) {
   let line = `- स्तेम: ${item.stem}`;
   if (item.hasOptions || item.options) line += `\n  विकल्पाः: ${item.options.join(', ')}`;
@@ -67,8 +82,8 @@ Reply with ONLY a JSON array — no explanation before or after it, no markdown 
 - "answer" — copied character-for-character from one of the "options".
 - "note" — a short explanation of why that answer is correct (optional but preferred).
 
-Worked example of one valid element:
-{"stem": "त्वम् ______________ । (हस्)", "options": ["हससि", "वदामः", "कूर्दामि", "चलथ"], "answer": "हससि", "note": "मध्यमपुरुष-एकवचनस्य रूपम्।"}`;
+Shape of one element (placeholders only — for actual content, style, and vocabulary, follow the existing items above, not this):
+${shapeExample(optionCount)}`;
 }
 
 module.exports = { buildPrompt, inferOptionCount };
