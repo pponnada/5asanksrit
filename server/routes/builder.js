@@ -109,33 +109,64 @@ router.post('/admin/builder/split', requireAdmin, parseForm, (req, res) => {
   res.redirect('/admin/builder/generate');
 });
 
-// ---------- Step 3: per-section prompt -> paste -> parse -> preview -> review ----------
+// ---------- Step 3: strictly section-by-section prompt -> paste -> parse -> preview -> review ----------
+//
+// Only sections with New > 0 (TEACHER_WORKFLOW.md §4/§5) take part in this
+// sequence, in ascending section-number order. The Teacher works through
+// them one page at a time; approving a section's last needed item advances
+// to the next one in the sequence automatically. Going back is always
+// allowed (an already-resolved section just shows what was approved,
+// read-only, plus a way forward again).
 
-function buildGenerateBlocks() {
-  const summaryMap = sectionSummaryMap();
-  return builderDraft
-    .sectionsList()
-    .filter((sec) => (sec.newCount || 0) > 0)
-    .map((sec) => {
-      const remaining = sec.newCount - sec.approvedItems.length;
-      const pending = builderDraft.getPending(sec.number);
-      return {
-        number: sec.number,
-        title: (summaryMap[sec.number] || {}).title || '',
-        newCount: sec.newCount,
-        approvedCount: sec.approvedItems.length,
-        remaining: Math.max(0, remaining),
-        resolved: remaining <= 0,
-        prompt: remaining > 0 ? buildPrompt(sec.number, remaining) : null,
-        pending,
-      };
-    });
+function generateSequence() {
+  return builderDraft.sectionsList().filter((sec) => (sec.newCount || 0) > 0);
 }
 
+function isSectionResolved(sec) {
+  return sec.approvedItems.length >= sec.newCount;
+}
+
+function sectionsProgress(seq) {
+  return { done: seq.filter(isSectionResolved).length, total: seq.length };
+}
+
+/** Entry point: sends the Teacher to wherever they should be — the first
+ * unresolved section, or straight to the time-limit step if none of the
+ * selected sections need any new items at all. */
 router.get('/admin/builder/generate', requireAdmin, (_req, res) => {
+  const seq = generateSequence();
+  if (seq.length === 0) return res.redirect('/admin/builder/time');
+  const target = seq.find((sec) => !isSectionResolved(sec)) || seq[0];
+  res.redirect('/admin/builder/generate/' + target.number);
+});
+
+router.get('/admin/builder/generate/:n', requireAdmin, (req, res) => {
+  const n = parseInt(req.params.n, 10);
+  const seq = generateSequence();
+  const idx = seq.findIndex((sec) => sec.number === n);
+  if (idx === -1) return res.redirect('/admin/builder/generate');
+
+  const sec = seq[idx];
+  const summaryMap = sectionSummaryMap();
+  const remaining = Math.max(0, sec.newCount - sec.approvedItems.length);
+  const resolved = remaining <= 0;
+
   res.render('admin/builder-generate', {
-    blocks: buildGenerateBlocks(),
-    allResolved: builderDraft.isFullyResolved(),
+    progress: Object.assign({ position: idx + 1 }, sectionsProgress(seq)),
+    section: {
+      number: n,
+      title: (summaryMap[n] || {}).title || '',
+      newCount: sec.newCount,
+      approvedCount: sec.approvedItems.length,
+      approvedItems: sec.approvedItems,
+      remaining,
+      resolved,
+      prompt: remaining > 0 ? buildPrompt(n, remaining) : null,
+      pending: builderDraft.getPending(n),
+    },
+    prevNumber: idx > 0 ? seq[idx - 1].number : null,
+    nextNumber: resolved && idx < seq.length - 1 ? seq[idx + 1].number : null,
+    isLastSection: idx === seq.length - 1,
   });
 });
 
@@ -149,7 +180,7 @@ router.post('/admin/builder/generate/:n/parse', requireAdmin, parseForm, (req, r
   const result = parseGenAiReply(req.body.pasted, { expectedCount: remaining, expectedOptionCount: optionCount });
 
   builderDraft.setPending(n, result);
-  res.redirect('/admin/builder/generate#section-' + n);
+  res.redirect('/admin/builder/generate/' + n);
 });
 
 router.post('/admin/builder/generate/:n/approve', requireAdmin, parseForm, (req, res) => {
@@ -187,7 +218,7 @@ router.post('/admin/builder/generate/:n/approve', requireAdmin, parseForm, (req,
 
   if (errors.length > 0) {
     builderDraft.setPending(n, { items: pending.items, errors });
-    return res.redirect('/admin/builder/generate#section-' + n);
+    return res.redirect('/admin/builder/generate/' + n);
   }
 
   if (approvedRaw.length > 0) {
@@ -197,7 +228,18 @@ router.post('/admin/builder/generate/:n/approve', requireAdmin, parseForm, (req,
     builderDraft.clearPending(n);
   }
 
-  res.redirect('/admin/builder/generate#section-' + n);
+  // Not fully resolved yet (e.g. a partial approval, or nothing was
+  // checked) — stay on this section so the Teacher can paste more.
+  if (!isSectionResolved(builderDraft.getDraft().sections[n])) {
+    return res.redirect('/admin/builder/generate/' + n);
+  }
+
+  // Resolved: move on — to the next section in the sequence, or to the
+  // time-limit step if this was the last one.
+  const seq = generateSequence();
+  const idx = seq.findIndex((sec) => sec.number === n);
+  const next = seq[idx + 1];
+  res.redirect(next ? '/admin/builder/generate/' + next.number : '/admin/builder/time');
 });
 
 // ---------- Step 4: time limit, then compose ----------

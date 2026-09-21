@@ -309,6 +309,27 @@ button.option:active { transform: scale(0.98); }
 .split-new { color: var(--color-muted); }
 .split-fixed { color: var(--color-muted); }
 
+.generate-progress { margin-bottom: 8px; }
+.generate-progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+.generate-progress-fill {
+  height: 100%;
+  background: var(--color-correct);
+  transition: width 0.3s;
+}
+.generate-progress p { color: var(--color-muted); margin: 6px 0 0; }
+
+.generate-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 0.9em;
+}
+
 .generate-block {
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -316,8 +337,9 @@ button.option:active { transform: scale(0.98); }
   margin-bottom: 12px;
   background: var(--color-card);
 }
-.generate-block.resolved { opacity: 0.7; }
-.generate-block summary { cursor: pointer; font-weight: 600; }
+.generate-block h2 { font-size: 1.1em; margin-top: 0; }
+
+.approved-summary { padding-left: 20px; color: var(--color-muted); font-size: 0.9em; }
 
 .prompt-panel { margin: 12px 0; }
 .prompt-text {
@@ -357,7 +379,8 @@ button.option:active { transform: scale(0.98); }
 }
 .candidate-item label { display: block; margin-bottom: 6px; }
 .candidate-item input[type="text"] { width: 100%; padding: 6px; }
-.approve-check { display: flex; align-items: center; gap: 6px; }
+.approve-reject { display: flex; gap: 16px; margin-bottom: 10px; }
+.approve-reject label { display: flex; align-items: center; gap: 6px; margin-bottom: 0; width: auto; }
 
 .time-presets { display: flex; flex-direction: column; gap: 10px; }
 

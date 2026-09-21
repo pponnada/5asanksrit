@@ -2,72 +2,89 @@
 
 <main class="admin-dashboard builder-page">
   <h1>Build New Paper — Generate New Questions</h1>
-  <p class="en">
-    For each section below: copy the prompt into a web chat LLM (ChatGPT,
-    Google AI Mode, or similar), paste its reply back in, then review and
-    approve the questions you want to keep.
-  </p>
 
-  <% blocks.forEach(function(b) { %>
-    <details id="section-<%= b.number %>" class="generate-block<%= b.resolved ? ' resolved' : '' %>" <%= b.resolved ? '' : 'open' %>>
-      <summary>
-        विभागः <%= b.number %> — <%= b.title %>
-        <span class="en">— <%= b.approvedCount %>/<%= b.newCount %> approved<% if (b.resolved) { %> ✓<% } %></span>
-      </summary>
+  <div class="generate-progress">
+    <div class="generate-progress-bar">
+      <div class="generate-progress-fill" style="width: <%= progress.total ? Math.round((progress.done / progress.total) * 100) : 0 %>%"></div>
+    </div>
+    <p class="en"><%= progress.done %> of <%= progress.total %> sections done — now on section <%= progress.position %> of <%= progress.total %></p>
+  </div>
 
-      <% if (!b.resolved) { %>
-        <div class="prompt-panel">
-          <textarea class="prompt-text" readonly rows="10" id="prompt-<%= b.number %>"><%= b.prompt %></textarea>
-          <button type="button" class="copy-prompt-btn" data-copy-target="prompt-<%= b.number %>">Copy Prompt</button>
-        </div>
+  <div class="generate-nav">
+    <% if (prevNumber) { %>
+      <a href="/admin/builder/generate/<%= prevNumber %>">← Previous section</a>
+    <% } else { %>
+      <span></span>
+    <% } %>
+    <% if (nextNumber) { %>
+      <a href="/admin/builder/generate/<%= nextNumber %>">Next section →</a>
+    <% } %>
+  </div>
 
-        <form method="POST" action="/admin/builder/generate/<%= b.number %>/parse" class="paste-form">
-          <label class="en" for="pasted-<%= b.number %>">Paste the LLM's JSON reply here:</label>
-          <textarea id="pasted-<%= b.number %>" name="pasted" rows="8"></textarea>
-          <button type="submit" class="primary-btn">Parse</button>
-        </form>
+  <section class="generate-block">
+    <h2>विभागः <%= section.number %> — <%= section.title %></h2>
+    <p class="en"><%= section.approvedCount %>/<%= section.newCount %> approved<% if (section.resolved) { %> ✓<% } %></p>
 
-        <% if (b.pending && b.pending.errors && b.pending.errors.length) { %>
-          <ul class="parse-errors">
-            <% b.pending.errors.forEach(function(e) { %><li><%= e %></li><% }); %>
-          </ul>
-        <% } %>
-
-        <% if (b.pending && b.pending.items && b.pending.items.length) { %>
-          <form method="POST" action="/admin/builder/generate/<%= b.number %>/approve" class="review-form">
-            <% b.pending.items.forEach(function(item, i) { %>
-              <div class="candidate-item">
-                <label class="approve-check">
-                  <input type="checkbox" name="approve_<%= i %>" checked> <span class="en">Approve</span>
-                </label>
-                <label class="en">Stem:
-                  <input type="text" name="stem_<%= i %>" value="<%= item.stem %>">
-                </label>
-                <% item.options.forEach(function(opt, j) { %>
-                  <label class="en">Option <%= j + 1 %>:
-                    <input type="text" name="option_<%= i %>_<%= j %>" value="<%= opt %>">
-                  </label>
-                <% }); %>
-                <label class="en">Answer:
-                  <input type="text" name="answer_<%= i %>" value="<%= item.answer %>">
-                </label>
-                <label class="en">Note:
-                  <input type="text" name="note_<%= i %>" value="<%= item.note || '' %>">
-                </label>
-              </div>
-            <% }); %>
-            <button type="submit" class="primary-btn">Save Approved</button>
-          </form>
-        <% } %>
+    <% if (section.resolved) { %>
+      <p class="already-latest en">This section is done.</p>
+      <% if (section.approvedItems.length) { %>
+        <ul class="approved-summary">
+          <% section.approvedItems.forEach(function(item) { %>
+            <li><strong><%= item.id %>:</strong> <%= item.stem %> — <span class="en">Answer:</span> <%= item.answer %></li>
+          <% }); %>
+        </ul>
       <% } %>
-    </details>
-  <% }); %>
+      <% if (isLastSection) { %>
+        <a class="primary-btn" href="/admin/builder/time">Continue to time limit</a>
+      <% } %>
+    <% } else { %>
+      <div class="prompt-panel">
+        <textarea class="prompt-text" readonly rows="10" id="prompt-<%= section.number %>"><%= section.prompt %></textarea>
+        <button type="button" class="copy-prompt-btn" data-copy-target="prompt-<%= section.number %>">Copy Prompt</button>
+      </div>
 
-  <% if (allResolved) { %>
-    <a class="primary-btn" href="/admin/builder/time">Continue to time limit</a>
-  <% } else { %>
-    <p class="en">Resolve every section above before continuing.</p>
-  <% } %>
+      <form method="POST" action="/admin/builder/generate/<%= section.number %>/parse" class="paste-form">
+        <label class="en" for="pasted-<%= section.number %>">Paste the LLM's JSON reply here:</label>
+        <textarea id="pasted-<%= section.number %>" name="pasted" rows="8"></textarea>
+        <button type="submit" class="primary-btn">Parse</button>
+      </form>
+
+      <% if (section.pending && section.pending.errors && section.pending.errors.length) { %>
+        <ul class="parse-errors">
+          <% section.pending.errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+        </ul>
+      <% } %>
+
+      <% if (section.pending && section.pending.items && section.pending.items.length) { %>
+        <form method="POST" action="/admin/builder/generate/<%= section.number %>/approve" class="review-form">
+          <p class="en">Review each question below, then approve or reject it.</p>
+          <% section.pending.items.forEach(function(item, i) { %>
+            <div class="candidate-item">
+              <div class="approve-reject">
+                <label><input type="radio" name="approve_<%= i %>" value="1" checked> <span class="en">Approve</span></label>
+                <label><input type="radio" name="approve_<%= i %>" value=""> <span class="en">Reject</span></label>
+              </div>
+              <label class="en">Stem:
+                <input type="text" name="stem_<%= i %>" value="<%= item.stem %>">
+              </label>
+              <% item.options.forEach(function(opt, j) { %>
+                <label class="en">Option <%= j + 1 %>:
+                  <input type="text" name="option_<%= i %>_<%= j %>" value="<%= opt %>">
+                </label>
+              <% }); %>
+              <label class="en">Answer:
+                <input type="text" name="answer_<%= i %>" value="<%= item.answer %>">
+              </label>
+              <label class="en">Note:
+                <input type="text" name="note_<%= i %>" value="<%= item.note || '' %>">
+              </label>
+            </div>
+          <% }); %>
+          <button type="submit" class="primary-btn">Save reviewed questions</button>
+        </form>
+      <% } %>
+    <% } %>
+  </section>
 </main>
 
 <script src="/js/builder.js"></script>
