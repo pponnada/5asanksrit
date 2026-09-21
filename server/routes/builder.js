@@ -177,9 +177,12 @@ router.post('/admin/builder/generate/:n/parse', requireAdmin, parseForm, (req, r
 
   const remaining = Math.max(0, entry.newCount - entry.approvedItems.length);
   const optionCount = inferOptionCount(n);
-  const result = parseGenAiReply(req.body.pasted, { expectedCount: remaining, expectedOptionCount: optionCount });
+  const pasted = req.body.pasted || '';
+  const result = parseGenAiReply(pasted, { expectedCount: remaining, expectedOptionCount: optionCount });
 
-  builderDraft.setPending(n, result);
+  // Keep the raw pasted text alongside the parse result so the Teacher can
+  // still see exactly what they pasted next to what came out of it.
+  builderDraft.setPending(n, Object.assign({ raw: pasted }, result));
   res.redirect('/admin/builder/generate/' + n);
 });
 
@@ -217,7 +220,7 @@ router.post('/admin/builder/generate/:n/approve', requireAdmin, parseForm, (req,
   });
 
   if (errors.length > 0) {
-    builderDraft.setPending(n, { items: pending.items, errors });
+    builderDraft.setPending(n, { raw: pending.raw, items: pending.items, errors });
     return res.redirect('/admin/builder/generate/' + n);
   }
 

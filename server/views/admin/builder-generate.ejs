@@ -45,7 +45,7 @@
 
       <form method="POST" action="/admin/builder/generate/<%= section.number %>/parse" class="paste-form">
         <label class="en" for="pasted-<%= section.number %>">Paste the LLM's JSON reply here:</label>
-        <textarea id="pasted-<%= section.number %>" name="pasted" rows="8"></textarea>
+        <textarea id="pasted-<%= section.number %>" name="pasted" rows="8"><%= (section.pending && section.pending.raw) || '' %></textarea>
         <button type="submit" class="primary-btn">Parse</button>
       </form>
 
