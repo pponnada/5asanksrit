@@ -5,9 +5,9 @@ const { parseCorpus } = require('../content/parseCorpus');
 
 const CORPUS_FILE = path.join(__dirname, '..', '..', 'qa-corpus.md');
 
-test('parses all 26 sections with no items lost or duplicated', () => {
+test('parses all 18 sections with no items lost or duplicated', () => {
   const { sections } = parseCorpus(CORPUS_FILE);
-  assert.equal(sections.length, 26);
+  assert.equal(sections.length, 18);
 
   const ids = new Set();
   let total = 0;
@@ -40,20 +40,26 @@ test('विभागः 1 (Meanings) is fully MCQ-ready: all 162 items have opt
   }
 });
 
-test('inline "विकल्पाः:" embedded in the stem line is correctly extracted (विभागः 14/15/16)', () => {
+test('inline "विकल्पाः:" embedded in the stem line is correctly extracted (विभागः 11, and the "विकल्पेभ्यः चयनम्" sub-group of विभागः 8)', () => {
   const { sections } = parseCorpus(CORPUS_FILE);
-  for (const num of [14, 15, 16]) {
-    const section = sections.find((s) => s.number === num);
-    for (const item of section.items) {
-      assert.ok(item.hasOptions, `${item.id} in विभागः ${num} should have options`);
-      assert.ok(!item.stem.includes('विकल्पाः'), `${item.id}'s stem should not still contain विकल्पाः`);
-    }
+
+  const section11 = sections.find((s) => s.number === 11);
+  for (const item of section11.items) {
+    assert.ok(item.hasOptions, `${item.id} in विभागः 11 should have options`);
+    assert.ok(!item.stem.includes('विकल्पाः'), `${item.id}'s stem should not still contain विकल्पाः`);
+  }
+
+  const section8 = sections.find((s) => s.number === 8);
+  const withOptions = section8.items.filter((i) => i.hasOptions);
+  assert.equal(withOptions.length, 4); // only the "विकल्पेभ्यः चयनम्" sub-group; the other two sub-groups have no embedded options
+  for (const item of withOptions) {
+    assert.ok(!item.stem.includes('विकल्पाः'), `${item.id}'s stem should not still contain विकल्पाः`);
   }
 });
 
-test('translation-only sections (e.g. विभागः 24) have no native options — expected, not a bug', () => {
+test('translation-only sections (e.g. विभागः 18) have no native options — expected, not a bug', () => {
   const { sections } = parseCorpus(CORPUS_FILE);
-  const translations = sections.find((s) => s.number === 24);
+  const translations = sections.find((s) => s.number === 18);
   for (const item of translations.items) {
     assert.equal(item.hasOptions, false);
   }

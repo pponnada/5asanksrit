@@ -83,7 +83,7 @@ Because typing Devanagari in a browser is impractical for a 10-year-old,
 **every question presented to the Student is multiple choice** — no free-text
 or handwriting input anywhere in the Student flow.
 
-- Sections that already encode options in `qa-corpus.md` (e.g. विभागः 14–16,
+- Sections that already encode options in `qa-corpus.md` (e.g. विभागः 8, 11,
   which have `विकल्पाः: ...`) use those options directly.
 - Sections that are fill-in-the-blank, translation, or open-answer in the
   corpus have no native distractors for their non-meaning items — those
@@ -141,7 +141,7 @@ Google AI Mode, or similar) the Teacher operates manually, outside the app,
 via copy/paste. Full Teacher-facing detail lives in `TEACHER_WORKFLOW.md`;
 this section states the requirement, not the UI copy.
 
-1. **Select sections.** A single screen lists all 26 sections as a
+1. **Select sections.** A single screen lists all 18 sections as a
    multi-select, each row showing its number, Devanagari + English title,
    how many native `Confirmed` items it has, and how many GenAI-approved
    items already exist for it (§5) — the Teacher never has to type or recall

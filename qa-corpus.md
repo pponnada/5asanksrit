@@ -2,7 +2,10 @@
 
 Source: cleaned-corpus.md. Sections below are in the same order and use the same
 titles as cleaned-corpus.md, so a "section" picked by the Teacher here maps 1:1
-to a section there.
+to a section there — except where several sections drilled the exact same task
+(same instructions, only the word list or option set differed), which have been
+consolidated into one section below with a `###` subheading per original
+word/option set, so the Teacher still sees them as distinct style groups.
 
 **Scope note:** All sections of cleaned-corpus.md are tested here, including
 वोकैब/शब्दार्थाः (Meanings, विभागः 1) — per Teacher's instruction, meanings are
@@ -26,7 +29,7 @@ the Teacher's decision first.
 Format per item: question stem, the single correct answer, and a status flag.
 Each item has a global ID (Qxxx) for later import into the app's database.
 IDs are assigned in the order sections were converted, not file order — विभागः 1
-(Meanings) uses Q131–Q292, appearing after विभागः 2–26 (Q001–Q130) because it was
+(Meanings) uses Q131–Q292, appearing after विभागः 2–18 (Q001–Q130) because it was
 converted later. The ID is what matters for import; file position doesn't imply ID order.
 
 ---
@@ -948,7 +951,6 @@ Status: Confirmed
 
 ---
 
-## विभागः 5 — वर्ण-विच्छेदं कुरुत (Break the words into letters)
 
 Q012: निर्झरः इत्यस्य वर्ण-विच्छेदः कः?
 Answer: न् + इ + र् + झ् + अ + र् + अ + ः
@@ -964,7 +966,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 6 — गीतस्य पंक्तिः पूरयत (Complete the lines)
+## विभागः 5 — गीतस्य पंक्तिः पूरयत (Complete the lines)
 
 Source poems supplied by Teacher:
 
@@ -1071,7 +1073,8 @@ ambiguity; the full accurate phrase is given here.
 
 ---
 
-## विभागः 7 — वाक्यानि पूरयत (Complete the sentences) (पदानि– अस्मि, त्वम्, असि, अहम्, बालकः, अध्यापकः)
+## विभागः 6 — वाक्यानि पूरयत (Complete the sentences)
+### पदानि– अस्मि, त्वम्, असि, अहम्, बालकः, अध्यापकः
 
 Q025: __ गजः अस्मि।
 Answer: अहम्
@@ -1105,7 +1108,7 @@ Note: Hint added (matching the picture-cue style already used in विभाग
 
 ---
 
-## विभागः 8 — वाक्यानि पूरयत (Complete the sentences) (पदानि– वयम्, यूयम्, स्थ, स्मः, पिपीलिकाः, हंसाः, मक्षिकाः, सरिताः)
+### पदानि– वयम्, यूयम्, स्थ, स्मः, पिपीलिकाः, हंसाः, मक्षिकाः, सरिताः
 
 Q031: यूयम् नर्तकाः ____________________ ।
 Answer: स्थ
@@ -1148,7 +1151,7 @@ four nouns from the word bank exactly once (हंसाः, मक्षिक�
 
 ---
 
-## विभागः 9 — मञ्जूषातः उचितम् क्रिया-पदम् गृहीत्वा वाक्यानि पूरयत (Pick the correct verb from the word box and complete the sentences)
+## विभागः 7 — मञ्जूषातः उचितम् क्रिया-पदम् गृहीत्वा वाक्यानि पूरयत (Pick the correct verb from the word box and complete the sentences)
 
 मञ्जूषा– कूर्दामि, वदामः, नमथ, हससि, चलथ, गर्जामः
 
@@ -1188,7 +1191,8 @@ Q039 by the picture.
 
 ---
 
-## विभागः 10 — रिक्त-स्थानानि पूरयत (Fill in the blanks) (धातुः कोष्ठके दत्तः — verb root given in brackets)
+## विभागः 8 — रिक्त-स्थानानि पूरयत (Fill in the blanks)
+### धातुः कोष्ठके दत्तः (verb root given in brackets)
 
 Q041: अहम् ______________ । (पठ्)
 Answer: पठामि
@@ -1225,47 +1229,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 11 — उत्तराणि लिखत (Write the answers) (यूयम् किम् कुरुथ? — "What do you all do?")
-
-Q049: वयम् ______________ । (भ्रम्)
-Answer: भ्रमामः
-Status: Confirmed
-
-Q050: वयम् ______________ । (नृत्-नृत्य)
-Answer: नृत्यामः
-Status: Confirmed
-
-Q051: वयम् ______________ । (हस्)
-Answer: हसामः
-Status: Confirmed
-
-Q052: वयम् ______________ । (क्रन्द्)
-Answer: क्रन्दामः
-Status: Confirmed
-
----
-
-## विभागः 12 — उचितम् पदम् लिखत (Write the correct word) (यूयम् — 2nd person plural, "you all")
-
-Q053: यूयम् ______________ । (वद्)
-Answer: वदथ
-Status: Confirmed
-
-Q054: यूयम् चित्रम् ______________ । (रच् - रचय)
-Answer: रचयथ
-Status: Confirmed
-
-Q055: यूयम् ______________ । (क्रीड्)
-Answer: क्रीडथ
-Status: Confirmed
-
-Q056: यूयम् ______________ । (पा-पिब्)
-Answer: पिबथ
-Status: Confirmed
-
----
-
-## विभागः 13 — रिक्त-स्थान-पूर्तिम् कुरुत (Fill in the blanks)
+### रिक्त-स्थान-पूर्तिः (no root/options given)
 
 Q057: वयम् धावकाः __। (प्रथमं रिक्तस्थानम्)
 Answer: स्मः
@@ -1305,7 +1269,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 14 — रिक्त-स्थानानि पूरयत (Fill in the blanks) (विकल्पेभ्यः चयनम् — choose from the options)
+### विकल्पेभ्यः चयनम् (choose from the options)
 
 Q065: वयम् हंसाः __ । विकल्पाः: अस्मि, स्मः, स्थ, असि
 Answer: स्मः
@@ -1325,7 +1289,48 @@ Status: Confirmed
 
 ---
 
-## विभागः 15 — शुद्धम् उत्तरम् लिखत (Write the correct answer) (अहम्/त्वम् — I/you)
+## विभागः 9 — उत्तराणि लिखत (Write the answers) (यूयम् किम् कुरुथ? — "What do you all do?")
+
+Q049: वयम् ______________ । (भ्रम्)
+Answer: भ्रमामः
+Status: Confirmed
+
+Q050: वयम् ______________ । (नृत्-नृत्य)
+Answer: नृत्यामः
+Status: Confirmed
+
+Q051: वयम् ______________ । (हस्)
+Answer: हसामः
+Status: Confirmed
+
+Q052: वयम् ______________ । (क्रन्द्)
+Answer: क्रन्दामः
+Status: Confirmed
+
+---
+
+## विभागः 10 — उचितम् पदम् लिखत (Write the correct word) (यूयम् — 2nd person plural, "you all")
+
+Q053: यूयम् ______________ । (वद्)
+Answer: वदथ
+Status: Confirmed
+
+Q054: यूयम् चित्रम् ______________ । (रच् - रचय)
+Answer: रचयथ
+Status: Confirmed
+
+Q055: यूयम् ______________ । (क्रीड्)
+Answer: क्रीडथ
+Status: Confirmed
+
+Q056: यूयम् ______________ । (पा-पिब्)
+Answer: पिबथ
+Status: Confirmed
+
+---
+
+## विभागः 11 — शुद्धम् उत्तरम् लिखत (Write the correct answer)
+### अहम्/त्वम् — I/you
 
 Q069: अहम् ______________ । विकल्पाः: पठामि/चलसि
 Answer: पठामि
@@ -1356,7 +1361,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 16 — शुद्धम् उत्तरम् लिखत (Write the correct answer) (वयम्/यूयम् — we/you all)
+### वयम्/यूयम् — we/you all
 
 Q075: वयम् लताः __ । विकल्पाः: स्मः/स्थ/अस्मि
 Answer: स्मः
@@ -1406,7 +1411,7 @@ typo. Hint added since all four options are otherwise grammatically valid.
 
 ---
 
-## विभागः 17 — प्रश्नान् उत्तरत (Answer the questions)
+## विभागः 12 — प्रश्नान् उत्तरत (Answer the questions)
 
 Q083: त्वम् कः असि? (संकेतः: सिंहः)
 Answer: अहम् सिंहः अस्मि।
@@ -1430,7 +1435,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 18 — चित्राणि दृष्ट्वा वाक्यानि लिखत (See the pictures and write sentences)
+## विभागः 13 — चित्राणि दृष्ट्वा वाक्यानि लिखत (See the pictures and write sentences)
 
 Q088: (Picture: Imagine girl eating food) वाक्यं पूरयत: अहम् __।
 Answer: अहम् भोजनम् खादामि।
@@ -1447,7 +1452,7 @@ Note: Picture description was already given in English in the source corpus
 
 ---
 
-## विभागः 19 — चित्रं दृष्ट्वा प्रश्नान् उत्तरत (Look at the picture and answer the questions) (सः/सा/एषः/एषा — he/she/this one (m.)/this one (f.))
+## विभागः 14 — चित्रं दृष्ट्वा प्रश्नान् उत्तरत (Look at the picture and answer the questions) (सः/सा/एषः/एषा — he/she/this one (m.)/this one (f.))
 
 Q090: चित्रम् — मत्स्यः। सः कः अस्ति?
 Answer: सः मत्स्यः अस्ति।
@@ -1471,7 +1476,8 @@ Status: Confirmed
 
 ---
 
-## विभागः 20 — 'सः' अथवा 'सा' पदम् उचित-स्थाने लिखत (Write 'सः' or 'सा' in the correct place)
+## विभागः 15 — 'सः'/'सा'/'एषः'/'एषा' पदम् उचित-स्थाने लिखत (Write 'सः'/'सा'/'एषः'/'एषा' in the correct place)
+### सः/सा
 
 Q094: __ पुरुषः।
 Answer: सः
@@ -1499,7 +1505,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 21 — एषा अथवा एषः पदम् उचित-स्थाने लिखत (Write 'एषा' or 'एषः' in the correct place)
+### एषः/एषा
 
 Q100: __ गायिका।
 Answer: एषा
@@ -1527,7 +1533,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 22 — पदानाम् मेलनम् कृत्वा वाक्यानि रचयत (Match the words and form sentences)
+## विभागः 16 — पदानाम् मेलनम् कृत्वा वाक्यानि रचयत (Match the words and form sentences)
 
 Q106: 'क' वर्गात् 'अहम्' चित्वा, समुचितं 'ख' वर्गपदं तथा 'ग' वर्गस्य 'वदामि'
 पदं योजयित्वा वाक्यं रचयत।
@@ -1551,7 +1557,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 23 — उचितम् अव्ययम् रिक्तस्थाने पूरयत (Fill the correct indeclinable in the blank)
+## विभागः 17 — उचितम् अव्ययम् रिक्तस्थाने पूरयत (Fill the correct indeclinable in the blank)
 
 अव्यय-पदानि– एव, न, तु, अपि, आम्
 
@@ -1581,7 +1587,8 @@ Status: Confirmed
 
 ---
 
-## विभागः 24 — संस्कृतेन अनुवादम् कुरुत (Translate into Sanskrit) (सेट् 1 — Set 1)
+## विभागः 18 — संस्कृतेन अनुवादम् कुरुत (Translate into Sanskrit)
+### सेट् 1 — Set 1
 
 Q114: तुम शेर हो, बिल्ली नहीं हो।
 Answer: त्वम् सिंहः असि, विडालः न असि।
@@ -1605,7 +1612,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 25 — संस्कृतेन अनुवादम् कुरुत (Translate into Sanskrit) (सेट् 2 — Set 2)
+### सेट् 2 — Set 2
 
 Q119: तुम रोते हो।
 Answer: त्वम् क्रन्दसि।
@@ -1633,7 +1640,7 @@ Status: Confirmed
 
 ---
 
-## विभागः 26 — संस्कृतेन अनुवादं कुरुत (Translate into Sanskrit) (सेट् 3 — Set 3)
+### सेट् 3 — Set 3
 
 Q125: वह एक वृद्ध है।
 Answer: सः वृद्धः अस्ति।

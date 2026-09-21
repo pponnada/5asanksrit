@@ -31,7 +31,7 @@ linear top-to-bottom the way the old chat-based workflow was.
 
 ## 2. Step 1 — Select sections
 
-A single screen listing all 26 sections of `qa-corpus.md` (विभागः 1–26) as
+A single screen listing all 18 sections of `qa-corpus.md` (विभागः 1–18) as
 checkboxes/multi-select. Each row shows, so the Teacher never has to type or
 recall a section name:
 

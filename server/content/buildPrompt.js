@@ -67,6 +67,8 @@ Section: विभागः ${section.number} — ${section.title}
 
 Every question must be multiple choice — the child selects an option by tapping, never types Sanskrit. Match the vocabulary, grammar forms, phrasing style, and difficulty of the existing items below exactly. Do not introduce vocabulary or grammar patterns that aren't already present in this section, and do not repeat any of the stems shown below.
 
+If the existing items below fall into more than one distinct sub-pattern (for example, different pronoun pairs, different grammatical persons, or different named word/option sets — sometimes marked with a heading in the source), spread your new questions across all of those sub-patterns in similar proportion to how they appear below. Do not generate every new item in only one sub-pattern.
+
 Existing items in this section (style reference only):
 
 ${nativeContext}${genaiContext}
