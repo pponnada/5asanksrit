@@ -1,7 +1,8 @@
 # Requirements — Sanskrit Practice & Testing Web App
 
-Status: **Draft v5 — reviewed, no open questions left.** Ready to turn into
-an implementation plan.
+Status: **Draft v6.** Teacher paper-generation moved from an AI-coding-agent
+chat workflow to an in-app, PIN-gated admin builder (§6) — see
+`TEACHER_WORKFLOW.md` for the full Teacher-facing requirements.
 
 ## 1. Purpose
 
@@ -9,9 +10,13 @@ A LAN-only web application that turns the content in `qa-corpus.md` into
 practice/test material for a child learning Sanskrit (5th grade level). Two
 personas use it:
 
-- **Teacher**: generates question papers through a fast, conversational
-  workflow **inside a Claude session** (§6) — not a form-filling admin UI —
-  and, in the running app, reaches a PIN-gated area to review results.
+- **Teacher**: generates question papers through a **PIN-gated in-app
+  builder** (§6) — selecting sections and counts, and for any section
+  needing freshly GenAI-drafted questions, copying a generated prompt out
+  to a separate web chat LLM (ChatGPT, Google AI Mode, or similar) and
+  pasting the reply back in for parsing/preview/approval. No AI coding
+  agent is involved and the running app never calls an LLM itself (§12).
+  The same PIN-gated area is also where the Teacher reviews results.
 - **Student**: a single, fixed Student (no accounts) opens a known URL,
   taps **"Take Test"** to start the latest published paper, answers under a
   timer, and afterward reviews the paper with correct answers and
@@ -50,22 +55,27 @@ pools — the running app never calls an LLM at runtime:
    GenAI file(s) — no filtering logic needed to exclude "the GenAI ones,"
    just don't read that file.
 
-When generating a paper, for each selected section the workflow (or,
-someday, an in-app builder) picks a **source mix**:
-- *Corpus only* — draw only from native `Confirmed` items in that section
-  (i.e. `qa-corpus.md` alone; the section's GenAI-approved file, if any, is
-  simply not consulted).
-- *Corpus + GenAI-approved* — draw from both the native section and its
-  GenAI-approved file(s).
+When generating a paper, for each selected section the Teacher sets an
+explicit numeric **split** (§6) between:
+- **Existing** — native `Confirmed` items in that section plus whatever is
+  already sitting in its GenAI-approved pool, and
+- **New** — freshly drafted items, produced through the §6 prompt/paste
+  loop, that must be reviewed and approved before the paper can be
+  composed.
+
+Existing = 0 is equivalent to the old "GenAI only" case; New = 0 is
+equivalent to the old "corpus only" case — this single split subsumes both.
 
 **Hard rule:** विभागः 1 (Meanings) is **always corpus-only**, regardless of
 what's requested elsewhere in the same paper — meaning questions must never
 be GenAI-generated, since they anchor everything else. No GenAI-approved
-file should ever be created for विभागः 1.
+file should ever be created for विभागः 1, and the split step itself is not
+shown for it (§6) — its whole count is implicitly Existing.
 
-If a section's applicable pool doesn't have enough `Confirmed`/approved
-items to satisfy the requested count, this must surface as an explicit gap
-(§6 step 2) rather than silently under-filling.
+If a section's Existing pool doesn't have enough `Confirmed`/approved items
+to satisfy the requested count, this surfaces immediately when the split is
+set (§6): the Existing field is capped at what's actually available, so any
+shortfall is simply part of the New count rather than silently under-filling.
 
 ## 4. All questions are multiple choice
 
@@ -87,142 +97,130 @@ or handwriting input anywhere in the Student flow.
 
 ## 5. File & folder conventions
 
-Concrete artifacts the §6 workflow reads and writes, all plain Markdown so
-they're easy for a Claude session to work with directly and easy for the
-app's ingestion step (§2) to parse:
+Concrete artifacts the §6 builder (and the app's ingestion step, §2) reads
+and writes:
 
-- **`qa-corpus.md`** (existing) — native corpus, unchanged format.
-- **`genai-approved/vibhaga-<NN>.md`** — one file per section that has any
-  GenAI-approved items (created on first use; a section with none simply
-  has no file, which is what makes "disregard the GenAI items" trivial —
-  §3). Same per-item shape as `qa-corpus.md` (stem / options / answer /
-  status / note), but IDs use a `G<NN>-<seq>` scheme (e.g. `G09-001`) so
-  they're visually distinct from native `Qxxx` IDs and never collide with
-  future additions to the native corpus. Each item also carries
-  `Source-Section:` and `Approved:` (date) metadata.
+- **`qa-corpus.md`** (existing) — native corpus, unchanged Markdown format,
+  still hand-edited by the Teacher outside the app.
+- **`genai-approved/vibhaga-<NN>.json`** — one file per section that has
+  any GenAI-approved items (created on first approval; a section with none
+  simply has no file, which is what makes "disregard the GenAI items"
+  trivial — §3). JSON (not Markdown) because items are already validated
+  as JSON when parsed out of the pasted LLM reply (§6) and re-serializing
+  through Markdown would be pure overhead. An array of item objects with
+  the same fields as before — stem / options / answer / status / note —
+  plus `sourceSection` and `approved` (date) metadata, and IDs on a
+  `G<NN>-<seq>` scheme (e.g. `G09-001`) so they're visually distinct from
+  native `Qxxx` IDs and never collide with future additions to the native
+  corpus. Written directly by the running app when the Teacher approves an
+  item (§6), not hand-edited.
 - **`papers/<id>.md`** — one file per *composed* paper (`id` e.g.
-  `2026-09-20-1904`), published or not. Header block with sections tested,
-  per-section source-mix and count, total time limit, a composed timestamp,
-  and a `Published-At:` field that's **absent until §6 step 9 actually
-  publishes it** (that absence is what marks a paper "Draft" on the
-  dashboard, §7). Body is the resolved, fixed-order question list (with the
-  correct option marked and the explanation carried along) — this is the
-  exact content the running app serves for that paper, whether to the
-  Teacher's preview (§6 step 8, §7) or, once published, to the Student.
+  `2026-09-20-1904`), published or not, Markdown, unchanged format. Header
+  block with sections tested, total time limit, a composed timestamp, and a
+  `Published-At:` field that's **absent until the Teacher publishes it from
+  the dashboard** (§6/§7) (that absence is what marks a paper "Draft" on
+  the dashboard, §7). Body is the resolved, fixed-order question list (with
+  the correct option marked and the explanation carried along) — this is
+  the exact content the running app serves for that paper, whether to the
+  Teacher's preview (§7) or, once published, to the Student.
 - **`papers/latest.txt`** — single line naming the currently-latest paper's
-  `id`. Updated by the §6 workflow on publish (which also sets that paper's
-  `Published-At:`). The running app reads this to know what "Take Test"
-  opens. Only papers with `Published-At:` set are ever shown to the
-  Student (§8) — a Draft is visible solely on the Teacher dashboard (§7)
-  until it's published or abandoned.
+  `id`. Updated via the **Make latest** dashboard action (§7) once the
+  Teacher approves a composed Draft (§6) (which also sets that paper's
+  `Published-At:` if not already set). The running app reads this to know
+  what "Take Test" opens. Only papers with `Published-At:` set are ever
+  shown to the Student (§8) — a Draft is visible solely on the Teacher
+  dashboard (§7) until it's published or abandoned.
 
-## 6. Teacher paper-generation workflow (inside Claude)
+## 6. Teacher paper-generation workflow (in-app admin builder)
 
-There is **no in-app "generate questions" button and no LLM API call from
-the running application** — the Teacher has no LLM API key to give it, and
-this conversational workflow is also just faster than filling out a form.
-Critically, it must **not require the Teacher to type or remember section
-names** — with 26 sections in `qa-corpus.md`, that's an unreasonable ask.
-Instead Claude drives a guided, mostly tap-not-type walkthrough:
+There is **no AI coding agent involved and no LLM API call from the running
+application** — the app never holds an LLM API key. Paper generation is a
+wizard inside the existing PIN-gated `/admin` area (§7); the only AI
+anywhere in this workflow is a general-purpose web chat LLM (ChatGPT,
+Google AI Mode, or similar) the Teacher operates manually, outside the app,
+via copy/paste. Full Teacher-facing detail lives in `TEACHER_WORKFLOW.md`;
+this section states the requirement, not the UI copy.
 
-1. **Walk through every section, asking count.** For each of the 26
-   sections in order, Claude prompts for how many questions to draw from
-   it, using a structured multiple-choice prompt (`AskUserQuestion`) —
-   never a blank "type your answer" field. Each prompt shows enough for the
-   Teacher to recognize the section without having memorized it: the
-   Devanagari + English section title, and how many native items (and, if
-   any, GenAI-approved items) currently exist for it. Options are `0
-   (skip)` plus a few sensible presets (e.g. `3`, `5`, `8`, `10`); a custom
-   number is always available via the picker's built-in "Other" option. To
-   keep this from being 26 separate round-trips, Claude batches up to 4
-   sections per `AskUserQuestion` call (its per-call limit), so the whole
-   walkthrough is ~7 quick screens, not 26.
-2. **Ask source mix, only for sections that got a non-zero count** (and
-   skipping विभागः 1, which is always corpus-only per §3 — Claude states
-   this rather than asking). Same batching approach: a multiple-choice
-   prompt per section — *"Corpus only"* vs *"Corpus + GenAI-approved"* —
-   grouped 4-at-a-time.
-3. **Ask total time limit** for the whole paper, once, as a multiple-choice
-   prompt with common presets (e.g. `15 min`, `20 min`, `30 min`, `45 min`)
-   plus "Other" for a custom value.
-4. **Checks pool sufficiency** per section against what was requested:
-   counts `Status: Confirmed` native items, plus (for corpus+genai
-   sections) items already sitting in that section's
-   `genai-approved/vibhaga-<NN>.md`.
-5. **Fast path**: if every requested (section, count) is already
-   satisfiable from existing pools, skip straight to step 7 — no drafting,
-   no review, just composition. This is the common case once a section's
-   GenAI pool has been built up once.
-6. **Slow path** (only for the shortfall, if any): Claude drafts the
-   missing questions in one batch, modeled on that section's existing
-   native items (style, difficulty, phrasing), each with a correct answer
-   and distractors, and shows the whole batch to the Teacher **as readable
-   Sanskrit text in the chat** — this step is inherently a reading/editing
-   task, not a multiple-choice one, so free-form reply ("approve all",
-   "drop #3", "change option B on #5 to...") is the right interface here,
-   unlike steps 1–3. Claude loops back only on items that need rework.
-   Approved items are appended to `genai-approved/vibhaga-<NN>.md` (§5), so
-   the next paper needing that section hits the fast path instead.
-7. **Composes a draft paper**: selects the exact question set per section
-   (random sample without replacement from the applicable pool(s) per the
-   chosen source mix), fixes the order, and writes `papers/<id>.md` (§5).
-   This file existing does **not** publish it — `papers/latest.txt` is
-   untouched until step 9.
-8. **Hands the Teacher a preview URL**: something like
-   `http://<lan-host>/admin/preview/<id>` (PIN-gated, same as §7), which
-   renders the paper exactly as the Student would see each question —
-   Devanagari layout, options, everything — but with the correct answer
-   and explanation visibly shown under each question (§7) so the Teacher
-   can proofread content and check the visual look in one pass, without
-   needing a browser or faking a timed run. The Teacher opens this on
-   their own device, then returns to the Claude session with either an
-   OK or specific change requests; Claude edits `papers/<id>.md` directly
-   and the same preview URL reflects the fix on reload — no new ID needed
-   unless the underlying question set itself must be regenerated.
-9. **Publishes only on explicit go-ahead**: once the Teacher confirms in
-   the chat, Claude updates `papers/latest.txt` to point at this paper —
-   which immediately becomes the "Take Test" target and moves the previous
-   latest paper into the "other papers" list (§8), whether or not the
-   Student ever took it.
+1. **Select sections.** A single screen lists all 26 sections as a
+   multi-select, each row showing its number, Devanagari + English title,
+   how many native `Confirmed` items it has, and how many GenAI-approved
+   items already exist for it (§5) — the Teacher never has to type or recall
+   a section name.
+2. **Set a count per selected section.** A plain numeric input per section;
+   `0` removes it.
+3. **Set the Existing/New split per selected section** (§3), skipped for
+   विभागः 1 (Meanings), which is always 100% Existing. The Existing field
+   is capped at what's actually available (native `Confirmed` + already
+   GenAI-approved); the remainder is New.
+4. **For every section with New > 0**: a prompt/paste loop —
+   - A **template-generated prompt**, filled in with that section's
+     number/titles, audience constraints (MCQ-only, roughly 5th-grade
+     level — §4), every existing native and GenAI-approved item in that
+     section as style context, the exact count of new items needed, and an
+     explicit, example-backed **output format spec**: the LLM must reply
+     with a JSON array of `{stem, options, answer, note}` objects and
+     nothing else.
+   - A **Copy Prompt** action copies this text to the clipboard for the
+     Teacher to paste into their own web chat LLM.
+   - A **paste-back textarea** takes the LLM's reply; a **Parse** action
+     extracts a JSON array (tolerating code fences or stray prose around
+     it), validates each item (non-empty stem, non-empty distinct options,
+     an answer that exactly matches one option), and reports failures
+     per-item rather than as a single opaque error.
+   - A **preview + review** step lets the Teacher approve, edit, or reject
+     each parsed candidate; only approved items are persisted to
+     `genai-approved/vibhaga-<NN>.json` (§5). This loop repeats until the
+     section's New count is fully satisfied — the next paper needing this
+     section can then draw on these as Existing items (§3).
+5. **Set the total time limit**, once every selected section is fully
+   resolved ((Existing selected) + (approved New) = requested count for
+   each): common presets (15/20/30/45 min) plus a custom value.
+6. **Compose the paper**: an explicit action that selects the exact
+   question set per section — a random sample without replacement from the
+   Existing pool(s) for the Existing portion, plus every approved New item
+   — fixes the order, and writes `papers/<id>.md` (§5) with no
+   `Published-At:` yet, i.e. a **Draft**. This does not publish it.
+7. **Preview and publish happen via the dashboard (§7)**, unchanged from
+   before: **Preview** (`/admin/preview/:id`) for proofreading with answers
+   shown, and **Make latest** (`/admin/make-latest/:id`) to actually
+   publish — the builder's job ends at producing a reviewable Draft.
 
-Growing the GenAI-approved pool (step 6) can also be run on its own, ahead
-of any specific paper, whenever the Teacher wants more variety banked for a
-section — it doesn't have to happen inline with publishing.
+Growing a section's GenAI-approved pool (step 4) can also be run on its
+own, ahead of any specific paper, whenever the Teacher wants more variety
+banked for a section — it doesn't have to happen inline with composing one.
 
 ## 7. Teacher workflow (in the running app)
 
-Because paper *generation* happens in §6, the app's Teacher-facing surface
-is intentionally thin: a PIN gate, then a single dashboard. No paper
-creation/editing controls live here — that's Claude's job.
+Paper *generation* also happens here now (§6) — the Teacher-facing surface
+is a PIN gate, then a dashboard, then the §6 builder reached from it.
 
 **PIN entry screen**: minimal and adult-oriented (unlike the Student UI, no
 need to design for a 10-year-old here) — app name, a plain PIN input
 (numeric keypad on touch devices), a submit action, and a simple error
 state on a wrong PIN. Nothing else on this screen.
 
-**Dashboard (after a correct PIN)**: one screen, a single list of every
-paper in `papers/`, most recent first. Each row shows:
+**Dashboard (after a correct PIN)**: a **"Build New Paper"** entry point
+into the §6 builder, plus a list of every paper in `papers/`, most recent
+first. Each row shows:
 
 - Paper id/date and a one-line contents summary (e.g. *"5 sections · 24
   questions · 20 min"*).
 - A status badge: **Latest** (what "Take Test" currently opens), **Draft**
-  (composed via §6 step 7 but never published — i.e. not `latest.txt` and
+  (composed via §6 step 6 but never published — i.e. not `latest.txt` and
   never was), **Taken** (with the score, e.g. *"18/24"*), or **Not taken**
   (published or draft, but the Student hasn't opened it).
-- Row actions, only the ones that apply: **Preview** (§6 step 8's
+- Row actions, only the ones that apply: **Preview** (§6's
   render-with-answers-shown view — available for any paper, published or
   not, so it doubles as both the pre-publish proofread and a permanent "what
   was actually asked" record), **View results** (only once Taken — full
   per-question breakdown: the Student's pick, the correct answer, whether
   it was right, and time taken), and, if a paper isn't already Latest,
-  **Make latest** (the §6 step 9 publish action, exposed here too as a
-  fallback/override — not the primary way to publish, which is finishing
-  the §6 chat, but available so the Teacher isn't stuck if e.g. they want
-  to re-promote an older paper).
+  **Make latest** — the actual publish action (§6 step 7): the builder only
+  ever produces a Draft, so this dashboard action is how every paper, new
+  or re-promoted, actually goes live.
 
-No charts, analytics, trends, or paper-editing UI in v1 — just this list.
-If it's ever needed, it's easy to add later; it's explicitly not required
-now (§13).
+No charts, analytics, trends in v1 beyond the builder and this list. If
+ever needed, easy to add later; not required now (§13).
 
 ## 8. Student workflow
 
@@ -263,10 +261,15 @@ now (§13).
 
 Two different kinds of state, persisted differently:
 
-- **Content (files, §5)**: native corpus, GenAI-approved pools, and
-  published papers are plain Markdown files the §6 workflow reads/writes
-  directly. The app's ingestion step loads these into its structured store
-  (§2) — it doesn't treat them as a live database.
+- **Content (files, §5)**: native corpus (`qa-corpus.md`) and published
+  papers (`papers/<id>.md`) remain plain Markdown; GenAI-approved pools
+  (`genai-approved/vibhaga-<NN>.json`, §5) are JSON. Unlike the old
+  agent-driven workflow, the **running app itself** now writes
+  GenAI-approved items (on approval, §6) and paper files (on compose/
+  publish, §6/§7), so the app's structured store (§2) must reflect a
+  newly-written file **in-process**, immediately — not only at boot —
+  otherwise a just-approved item wouldn't be selectable as an Existing item
+  in the same session's paper composition.
 - **Runtime state (app-owned store)**: this changes per Student action and
   must be a proper persisted store the app manages, not files:
   - Each **Student attempt**: which paper, start timestamp, submit
@@ -276,7 +279,7 @@ Two different kinds of state, persisted differently:
     selected, correctness — persisted incrementally as answered, not only
     at final submit.
 
-  A Teacher **preview** (§6 step 8, §7) is read-only and must **not** create
+  A Teacher **preview** (§6, §7) is read-only and must **not** create
   or touch a Student attempt record — it renders straight from the
   `papers/<id>.md` file with answers shown, entirely separate from the
   attempt/answer store above.
@@ -288,7 +291,7 @@ Two different kinds of state, persisted differently:
   enforcement mechanism (bind to LAN interface only, IP allowlist, etc.) is
   an implementation decision, not specified further here.
 - **Teacher/admin area** (§7), including the dashboard and every paper
-  **preview** URL (§6 step 8): gated by a **PIN** — a single fixed value
+  **preview** URL (§6, §7): gated by a **PIN** — a single fixed value
   stored in a local config/env file, set once at setup. Changing it means
   editing that file (no in-app "change PIN" screen for v1) — simplest
   option that still keeps results and answer keys off-limits to the
@@ -321,11 +324,14 @@ Two different kinds of state, persisted differently:
 
 ## 12. Non-functional notes
 
-- **No LLM dependency inside the running app** — question/distractor
-  generation happens entirely offline via a Claude conversation (§6); the
-  deployed app only ever reads from its persisted question bank/files. The
-  Teacher's device needs internet only during that separate, occasional
-  activity, not while the app is serving a test or showing results.
+- **No LLM dependency inside the running app** — the app itself never calls
+  an LLM API. GenAI question drafting (§6) relies on the Teacher manually
+  copying a generated prompt into a separate web chat LLM (ChatGPT, Google
+  AI Mode, or similar) and pasting the reply back in; the app only ever
+  parses that pasted text and reads from its persisted question bank/files.
+  The Teacher's device needs internet only during that separate, occasional
+  copy/paste activity, not while the app is serving a test or showing
+  results.
 - No internet dependency required for a Student to take a test (LAN-only).
 - **Scoring is simple count-correct** — no per-section or per-difficulty
   weighting.
@@ -342,9 +348,10 @@ Two different kinds of state, persisted differently:
 - Retaking a previously *submitted* paper (§8.10) — untaken papers remain
   takeable (§8.3), but a finished attempt is final.
 - Per-section/per-difficulty score weighting.
-- A form-based in-app paper builder — §6 is the paper-generation path for
-  v1; the dashboard's "Make latest" action (§7) is only a fallback
-  override, not a builder.
+- Fully automated GenAI generation with no human in the loop — the app
+  never calls an LLM directly (§12); every GenAI item is manually
+  copy/pasted from an external web chat LLM and reviewed by the Teacher
+  before it's persisted (§6).
 - Charts, analytics, or score trends on the Teacher dashboard — just the
   flat paper list (§7).
 

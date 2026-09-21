@@ -1,227 +1,287 @@
-# Teacher Workflow — Building a Question Paper
+# Teacher Workflow — Building a Question Paper (Requirements)
 
-This is a playbook for **any AI coding agent** helping the Teacher build a
-new Sanskrit test paper in this repository — Claude Code, opencode, or
-anything else with the ability to read/write files here and hold an
-ordinary back-and-forth conversation. Nothing here depends on a specific
-vendor's tools. Where your environment happens to offer a structured
-multiple-choice prompt UI, use it — batch up to 4 questions per prompt if
-your UI supports that. Where it doesn't, just present the same choices as a
-plain numbered list in chat and read back the Teacher's typed reply. The
-steps and the files you touch are identical either way.
+**Persona: Teacher only.** This document replaces the previous version of
+`TEACHER_WORKFLOW.md`, which described a workflow driven by an AI coding
+agent (Claude Code or similar) sitting in a terminal with the Teacher. That
+workflow is **retired**. Paper building now happens entirely inside the
+running web app, in the existing PIN-gated admin area — no coding agent, no
+terminal, no chat-with-an-agent round trips.
 
-You never need the web server running to do any of this — every step here
-is reading and writing plain files in this repository.
+The only AI involved anywhere in this workflow is a **general-purpose web
+chat LLM the Teacher already has separate access to** (e.g. ChatGPT, Google
+AI Mode) — the app never calls an LLM itself. This carries forward the
+existing hard rule that **the running server never makes an LLM API call**
+(no API key to manage, no runtime dependency on an LLM vendor). The Teacher
+copies a prompt out of the app, pastes it into whatever web chat tool they
+like, copies the reply back, and pastes it into the app, which parses it.
 
-**Rendering headings in chat:** some agent TUIs (including Claude Code's)
-struggle to render Devanagari correctly. When referring to a section (विभागः
-1…26) or subsection in chat with the Teacher, use **only its English
-heading/subheading** — never the Devanagari — e.g. say "Section 9 — Fill in
-the blank with the correct verb from the word box" rather than "विभागः 9 —
-मञ्जूषातः उचितम् क्रिया-पदम् गृहीत्वा वाक्यानि पूरयत". This applies to chat
-output only: file contents (`qa-corpus.md`, `genai-approved/*.md`,
-`papers/*.md`) still use Devanagari as normal — do not strip it from any
-file you write.
+## 1. Where this lives
 
-## What you're producing
+Everything below is a new area inside the **existing PIN-gated `/admin`**
+surface (same session/PIN auth as today's `/admin/dashboard`,
+`/admin/preview/:id`, etc. — see `server/routes/admin.js`). A new entry
+point, e.g. **"Build New Paper"**, on the admin dashboard leads into this
+flow (suggested route: `/admin/builder`).
 
-A file at `papers/<id>.md` (see format below) and, only once the Teacher
-explicitly says to publish, an update to `papers/latest.txt` pointing at
-it. That's the entire deliverable — the running app does the rest.
+The flow is a **wizard with independently revisitable steps** — the Teacher
+should be able to jump back to an earlier section (e.g. to add more
+questions to a section they thought they were done with) without losing
+progress already made on other sections. It is not required to be strictly
+linear top-to-bottom the way the old chat-based workflow was.
 
-## Step by step
+## 2. Step 1 — Select sections
 
-### 1. Walk through every section, asking how many questions
+A single screen listing all 26 sections of `qa-corpus.md` (विभागः 1–26) as
+checkboxes/multi-select. Each row shows, so the Teacher never has to type or
+recall a section name:
 
-Read `qa-corpus.md` and count, per section (`विभागः 1` … `विभागः 26`), how
-many `Status: Confirmed` items exist and how many have a `विकल्पाः:` line
-(only those are directly usable as MCQ — see "Usable items" below). Also
-check `genai-approved/vibhaga-<NN>.md` for that section, if it exists, and
-count its items too.
+- Section number
+- Devanagari title **and** English title (both — unlike the old chat
+  workflow, a browser renders Devanagari fine, so there's no reason to hide
+  it here)
+- **Native usable count** — native items in that section with
+  `Status: Confirmed` **and** an existing `विकल्पाः:` line (see §9 of
+  `REQUIREMENTS.md` — "usable items" is an established rule, unchanged here)
+- **Existing GenAI-approved count** — items already sitting in that
+  section's approved pool (§8 below) from a previous session
 
-For each section, ask the Teacher how many questions to draw from it.
-**Never make the Teacher type or recall a section name** — show it to them:
-the section's number and English title (Devanagari omitted per the
-rendering note above), and how many native / GenAI-approved items
-currently exist for it, e.g.:
+The Teacher checks whichever sections they want in this paper.
 
-> Section 9 — Choose the right verb form from the word box — 6 usable in
-> corpus, 0 approved-GenAI. How many? [0 / 3 / 5 / other]
+## 3. Step 2 — Question count per selected section
 
-Batch up to 4 sections per prompt if you can; otherwise ask them one at a
-time in order. `0` (skip) is always a valid answer.
+For each checked section, ask how many questions to draw from it (a plain
+numeric input is fine now that this is a real form, not a chat picker — no
+need to fake multiple-choice presets the way the old `AskUserQuestion`-based
+workflow did). `0` removes the section from the paper.
 
-### 2. Ask source mix for every section with a non-zero count
+## 4. Step 3 — Existing vs. new split (skipped for Meanings)
 
-Skip this for Section 1 (Meanings) — it is **always corpus-only**, no
-exceptions, because it's the vocabulary foundation everything else depends
-on. State this rather than asking about it.
+For **every selected section except विभागः 1 (Meanings)**, once its count
+`N` is set, ask the Teacher to split `N` into:
 
-For every other section the Teacher wants questions from, ask: **corpus
-only**, or **corpus + GenAI-approved**?
+- **Existing** — drawn from the combined pool of native usable items +
+  already-approved GenAI items for that section (§2's two counts, summed).
+  The UI caps this field at that combined total — it cannot exceed what
+  actually exists — but the Teacher is free to enter **less** than the max
+  (e.g. to force more fresh variety into the paper even when older
+  questions would technically suffice).
+- **New** — the remainder (`N` − Existing), which must be produced by the
+  prompt → paste → parse → review loop in §5–§7 before the section counts as
+  resolved.
 
-### 3. Ask the total time limit, once
+**Hard rule — विभागः 1 (Meanings) is always corpus-only, no exceptions.**
+This step is not shown for it: its entire count `N` is implicitly
+"Existing," always sourced from `qa-corpus.md` alone, and it never gets a
+prompt/paste UI (§5). No GenAI-approved pool is ever created for Meanings.
+This preserves the existing rule that Meanings — the vocabulary foundation
+everything else depends on — is never GenAI-generated.
 
-A single number of minutes for the whole paper (there is no per-question
-timer). Offer common presets (15 / 20 / 30 / 45) plus the option to type
-something else.
+## 5. Step 4 — Prompt → Copy → Paste → Parse → Preview → Review
 
-### 4. Check whether every request can actually be filled
+Shown once per selected non-Meanings section whose "New" count (§4) is
+greater than 0. Each section gets its own self-contained block on the page:
 
-For each section, is `(native Confirmed usable items) [+ (GenAI-approved
-items) if that section's mix includes GenAI]` ≥ the requested count? If
-every section clears this bar, skip straight to step 6 — most sessions,
-once a section's GenAI pool has been built up once, will land here.
+1. **A collapsed prompt panel**, specific to this section, generated from a
+   template (§6) filled in with this section's context. Collapsed by
+   default so the page stays scannable when several sections need new
+   questions; expandable to read in full.
+2. **A "Copy Prompt" button** that copies the complete, filled-in prompt
+   text to the clipboard, ready to paste into whatever web chat LLM the
+   Teacher is using (ChatGPT, Google AI Mode, or anything else — the prompt
+   makes no assumptions about which one).
+3. Below that, a **paste textarea** — the Teacher pastes the LLM's full
+   reply here.
+4. A **"Parse" action** that runs the response through the parser (§7) and
+   shows either:
+   - a **preview** of the successfully parsed candidate questions
+     (rendered the same way a question looks to a Student — stem, options,
+     marked correct answer, note), or
+   - a clear **error** naming what's wrong (§7) so the Teacher can either
+     fix the pasted text by hand or go back to the LLM chat and ask it to
+     correct its answer, then paste again.
+5. A **review step** on the preview: the Teacher can, per candidate item,
+   **approve**, **edit** (stem/options/answer/note, re-validated the same
+   way as §7), or **reject** it. Only approved items are persisted (§8).
+   Paste → Parse → Preview → Review can be repeated as many times as needed
+   for a section (e.g. if some items are rejected and the Teacher wants to
+   generate replacements) until enough approved items exist to satisfy that
+   section's "New" count.
 
-### 5. If something's short, draft it — then get it approved
+A section is **resolved** once (approved Existing selection) + (approved New
+items) together equal its requested count `N`. The wizard should visibly
+track this per section (e.g. "6 / 8 resolved") and only allow moving on to
+§10 (time limit) once every selected section is resolved.
 
-For any section that's short, draft the missing items yourself, modeled on
-that section's existing style (same kind of stem, same register, same
-difficulty), each with a correct answer and (for non-Meanings sections)
-plausible distractors. **Never draft new Meanings items** — that section is
-corpus-only, full stop.
+## 6. Prompt template contents
 
-Show the whole batch to the Teacher as plain, readable Sanskrit text in the
-chat — this step is a reading/proofreading task, not a multiple-choice one,
-so let the Teacher reply in free text ("approve all", "drop #3", "change
-option B on #5 to X"). Loop only on what needs rework.
+The template is filled in per section and must make the LLM's task and the
+expected reply shape unambiguous, since the reply is hand-pasted from an
+arbitrary web chat tool with no guaranteed formatting discipline. It must
+include:
 
-Once approved, append the items to `genai-approved/vibhaga-<NN>.md`,
-creating the file if it doesn't exist yet (format below). This means the
-next paper that needs this section will very likely hit the fast path at
-step 4.
+- The section's number, Devanagari title, and English title.
+- A plain-language description of this paper's audience: a single Student,
+  roughly 5th-grade level, learning Sanskrit; every question must be
+  presented as multiple choice (no free-text/handwriting), because typing
+  Devanagari on a tablet is impractical for the age group (carries forward
+  the existing hard rule in `REQUIREMENTS.md` §4).
+- **Style context**, assembled automatically from `qa-corpus.md` (and, if
+  any exist, the section's own `genai-approved/vibhaga-<NN>.json`, §8):
+  - Every native item currently in that section (all of them — sections
+    other than Meanings are small; none needs sampling/truncation), shown
+    as stem + answer + note where present, **even for items that don't
+    have a `विकल्पाः:` line** — those still convey the exact vocabulary,
+    verb forms, and phrasing this section drills, which the new items must
+    match.
+  - Every existing GenAI-approved item for that section, if any, shown in
+    full (stem + options + answer + note) — these are the closest possible
+    style template since they're already in the target MCQ shape.
+- The **exact number of new items requested** (the section's "New" count
+  from §4).
+- An explicit instruction to avoid duplicating the stems already shown as
+  context.
+- An explicit, unambiguous **output format specification** (§7) — including
+  a worked example of exactly one item in that format — and an instruction
+  to reply with **only** that output, no explanatory prose before or after.
 
-### 6. Compose the paper file
+## 7. Expected output format & parsing
 
-Pick the exact items per section — a random sample without replacement from
-whichever pool(s) the source-mix choice allows — fix their order, and write
-`papers/<id>.md` (format below). Use an id that sorts correctly against
-other papers, e.g. `YYYY-MM-DD-HHMM`. **Do not touch `papers/latest.txt`
-yet** — writing this file does not publish anything.
+The LLM is asked to reply with a **JSON array**, one object per requested
+item, shaped as:
 
-### 7. Hand the Teacher a preview link
-
-Tell them: `http://<lan-host>:<port>/admin/preview/<id>` (they'll need
-their Teacher PIN). This renders the paper exactly as the Student will see
-each question, but with the correct answer and explanation shown inline and
-no timer, so they can proofread content and check the visual look without
-faking a timed run.
-
-Wait for their response. If they ask for changes, edit `papers/<id>.md`
-directly and tell them to reload the same URL — no new id needed unless the
-underlying question selection itself has to be redone.
-
-### 8. Publish only when they explicitly say to
-
-On a clear go-ahead ("looks good, publish" or equivalent), two writes,
-in order:
-
-1. Add a `Published-At: <current ISO timestamp>` line to `papers/<id>.md`'s
-   header block (right after `Composed-At:`). This stamp is what makes the
-   paper reachable/takeable by the Student at all, and it's what keeps it
-   reachable later even after a newer paper takes over "latest" — so it
-   must never be removed or overwritten once set.
-2. Overwrite `papers/latest.txt` with just the paper's id (one line, no
-   extra whitespace beyond a trailing newline).
-
-Together these are the only things that make a paper live — the paper
-immediately becomes what the Student's "Take Test" button opens, and the
-paper it replaces moves into the "other papers" list on the landing page
-(reachable and takeable if the Student never got to it, review-only if
-they already finished it).
-
-Never publish without an explicit go-ahead, and never skip step 7. If a
-paper is already published and you're just re-promoting it back to
-"latest" (the Teacher asks for an older paper to become the target again),
-only do write 2 — never touch an existing `Published-At` stamp.
-
-## Usable items
-
-An item only counts as ready-to-serve if it has a `विकल्पाः:` line already
-(native items in translation/fill-blank sections that lack one are not
-directly usable — see `server/content/parseCorpus.js` for the exact rule).
-If a section the Teacher wants is short specifically because of this,
-that's exactly what step 5's drafting-and-approval loop is for: draft a
-GenAI-approved replacement item in that section's style, with proper
-options this time.
-
-## File formats
-
-### `genai-approved/vibhaga-<NN>.md`
-
-One file per section that has any approved items — `NN` is the section
-number, zero-padded to 2 digits (e.g. `vibhaga-09.md`). Never create
-`vibhaga-01.md` (Meanings is corpus-only). Same per-item shape as
-`qa-corpus.md`, with two extra metadata lines and IDs in a `G<NN>-<seq>`
-scheme so they never collide with native `Qxxx` IDs:
-
-```
-G09-001: वयम् ______________ । (चल्)
-विकल्पाः: चलामः, चलसि, चलथ, चलति
-Answer: चलामः
-Status: Confirmed
-Source-Section: विभागः 9
-Approved: 2026-09-20
-Note: उत्तमपुरुष-बहुवचनस्य रूपम्।
-
-G09-002: ...
+```json
+[
+  {
+    "stem": "त्वम् ______________ । (हस्)",
+    "options": ["हससि", "वदामः", "कूर्दामि", "चलथ"],
+    "answer": "हससि",
+    "note": "मध्यमपुरुष-एकवचनस्य रूपम्।"
+  }
+]
 ```
 
-### `papers/<id>.md`
+- `stem` — the question text (required, non-empty).
+- `options` — the multiple-choice options, matching the option count this
+  section's existing items use (every section observed today uses 4;
+  the parser should accept whatever count the section's own examples in
+  §6 showed, not hard-code "4" globally).
+- `answer` — required; must exactly match one of `options` (trimmed
+  whitespace comparison, exact text otherwise — Devanagari has no
+  meaningful case-folding to fall back on).
+- `note` — optional explanation string, carried through unchanged if
+  present.
 
-A small metadata header (blank line terminates it), then the resolved,
-fixed-order item list — same per-item shape again, minus `Status` (already
-implied by being included) and minus the `G<NN>-<seq>` source metadata
-(irrelevant once it's in a paper):
+JSON (over the corpus's native Markdown item-block shape) was chosen because
+it is far more reliable to parse out of arbitrary, hand-pasted web-chat
+output — no ambiguity about line wrapping, delimiters, or field order.
 
+**Parsing must tolerate common LLM formatting habits**, since the Teacher
+cannot fix the LLM's output style, only re-paste or re-prompt:
+
+- Strip surrounding ```` ```json ... ``` ```` or ```` ``` ... ``` ```` code
+  fences if present.
+- If the whole pasted text isn't valid JSON on its own (e.g. the LLM added
+  a sentence before/after the array), locate the outermost `[` … `]` and
+  parse that substring.
+- If parsing still fails, or the result isn't an array, surface a clear
+  error rather than a stack trace or a blank preview.
+
+**Per-item validation**, reported per item so the Teacher can see exactly
+which of the pasted items is the problem, not just "parse failed":
+
+- `stem` present and non-empty.
+- `options` is a list of strings, all non-empty, no duplicates.
+- `answer` present and exactly matches one entry in `options`.
+- If the returned count doesn't match the requested "New" count from §4,
+  say so explicitly (e.g. "asked for 5, got 3") rather than silently
+  under/over-filling — the Teacher decides whether to accept what parsed,
+  reject and re-prompt, or top up with another paste.
+
+## 8. Persisted storage for GenAI-approved items
+
+Approved items (§5 review step) are persisted per section, same directory
+as today (`genai-approved/`), but as **JSON instead of Markdown** — chosen
+because the item was already validated as JSON in §7 and re-serializing
+through Markdown and back would be pure overhead with no benefit:
+
+**`genai-approved/vibhaga-<NN>.json`** — one file per section that has any
+approved items (created on first approval; a section with none simply has
+no file, same "absence means don't consult it" convention as today). An
+array of item objects:
+
+```json
+[
+  {
+    "id": "G09-007",
+    "stem": "त्वम् ______________ । (हस्)",
+    "options": ["हससि", "वदामः", "कूर्दामि", "चलथ"],
+    "answer": "हससि",
+    "status": "Confirmed",
+    "note": "मध्यमपुरुष-एकवचनस्य रूपम्।",
+    "sourceSection": "विभागः 9",
+    "approved": "2026-09-21"
+  }
+]
 ```
-# Paper 2026-09-20-1904
 
-Sections: विभागः 1, विभागः 9, विभागः 24
-Time-Limit-Minutes: 20
-Composed-At: 2026-09-20T19:04:00Z
-Published-At: 2026-09-20T19:10:00Z
+Field meanings are unchanged from the old Markdown format — same
+`G<NN>-<seq>` ID scheme (so IDs stay visually distinct from native `Qxxx`
+IDs and never collide with future corpus additions), same
+`sourceSection`/`approved` metadata. Only the file encoding changes.
 
-Q131: "अहम्" इत्यस्य अर्थः कः?
-विकल्पाः: मैं, तुम, हम सब, तुम सब
-Answer: मैं
+**Migration note:** sections that already have a `genai-approved/vibhaga-
+<NN>.md` file from the old workflow (currently वि. 2–13, 17–26) need a
+one-time conversion to the new `.json` shape before this new builder can see
+them as "existing" pool items (§4) — otherwise those pools would silently
+appear empty. This conversion is a prerequisite implementation step, not
+optional cleanup.
 
-G09-001: वयम् ______________ । (चल्)
-विकल्पाः: चलामः, चलसि, चलथ, चलति
-Answer: चलामः
-Note: उत्तमपुरुष-बहुवचनस्य रूपम्।
-```
+`qa-corpus.md` itself and `papers/<id>.md` are **unchanged** — this format
+switch is scoped to the GenAI-approved pool only.
 
-`Published-At` is what step 6 leaves out and step 8 adds — a paper file on
-disk without it is a **Draft**: composed, previewable, but not reachable by
-the Student and not eligible to be "latest" until step 8 stamps it.
+## 9. Step 5 — Exam time limit
 
-## Example session
+Once every selected section is resolved (§5), ask for a single total time
+limit for the whole paper (there is no per-question or per-section timer).
+Offer common presets (15 / 20 / 30 / 45 minutes) plus a custom value.
 
-```
-Teacher: let's build a new test
+## 10. Step 6 — Compose the paper
 
-Agent:  [reads qa-corpus.md + genai-approved/*.md]
-        Section 1 — Meanings — 162 usable in corpus.
-        How many? [0 / 5 / 8 / 10 / other]
-Teacher: 8
-Agent:  Section 9 — Choose the right verb form from the word box — 6 usable, 0 approved-genai.
-        How many? [0 / 3 / other]
-Teacher: 8
-... (all 26 sections, batched)
+An explicit "Compose Paper" action, enabled once every section is resolved
+and a time limit is set. This performs the exact same composition the old
+workflow's step 6 did — **unchanged**:
 
-Agent:  Section 9 (8 requested): corpus only, or corpus + genai-approved?
-Teacher: corpus + genai
+- For each section, pick the exact item set: the chosen number of
+  **Existing** items via a random sample without replacement from the
+  applicable pool(s), plus every approved **New** item from §5.
+- Fix the final order.
+- Write `papers/<id>.md` in the existing format (`REQUIREMENTS.md` §5),
+  with no `Published-At:` yet — i.e. a **Draft**.
 
-Agent:  Total time for the paper? [15 / 20 / 30 / other]
-Teacher: 20
+## 11. Handoff to existing preview/publish — unchanged
 
-Agent:  Section 9 is short by 2 — drafting 2 candidates now...
-        [shows the 2 draft Q&A blocks]
-Teacher: approve both
-Agent:  Saved to genai-approved/vibhaga-09.md. Composing the paper...
-        Draft ready: papers/2026-09-20-1904.md (5 sections, 24 questions, 20 min)
-        Preview: http://<lan-host>:3000/admin/preview/2026-09-20-1904
-Teacher: [checks it] looks good, publish
-Agent:  Published — papers/latest.txt now points at 2026-09-20-1904.
-```
+Everything after composition is **already a web page today and needs no
+change**:
+
+- The new Draft shows up on `/admin/dashboard` like any other paper, with a
+  **Preview** action (`/admin/preview/:id`) for proofreading — same
+  answers-shown, no-timer render as today.
+- Publishing is the existing **"Make latest"** action
+  (`/admin/make-latest/:id`), which stamps `Published-At:` (if not already
+  set) and repoints `papers/latest.txt` — exactly as today. No separate
+  "publish" step needs to be added to the new builder; it hands off to the
+  dashboard the same way a manually-edited paper file would.
+
+## 12. What's removed
+
+- The AI-coding-agent-driven conversational workflow (the old
+  `AskUserQuestion`-batched section walkthrough, the free-text
+  drafting-and-approval chat loop, the "Devanagari doesn't render well in
+  some agent TUIs" workaround) is gone entirely. It is not a fallback or an
+  alternate path — the web builder above is the only paper-generation path
+  going forward.
+- No coding agent (Claude Code, opencode, or otherwise) needs read/write
+  access to this repository to build a paper anymore.
+
+`REQUIREMENTS.md` §1/§3/§5/§6/§7/§9/§12/§13 have been updated to match this
+document.
