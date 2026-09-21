@@ -424,3 +424,21 @@ button.option:active { transform: scale(0.98); }
   font-family: 'Noto Sans', sans-serif;
   font-size: 0.85em;
 }
+
+.publish-form { text-align: center; margin: 16px 0; }
+.publish-form button {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.95em;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+}
+.already-latest {
+  text-align: center;
+  color: var(--color-correct);
+  font-size: 0.85em;
+  margin: 16px 0;
+}

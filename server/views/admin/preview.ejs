@@ -5,6 +5,14 @@
   <p class="preview-banner">PREVIEW — answers shown, not a live attempt.</p>
   <p class="paper-summary"><%= paper.sections.join(', ') %> · <%= paper.items.length %> questions · <%= paper.timeLimitMinutes %> min</p>
 
+  <% if (!isLatest) { %>
+    <form method="POST" action="/admin/make-latest/<%= paper.id %>" class="publish-form">
+      <button type="submit" class="primary-btn">Publish — make this the Student's "Take Test" paper</button>
+    </form>
+  <% } else { %>
+    <p class="already-latest en">This is already the Student's current "Take Test" paper.</p>
+  <% } %>
+
   <% paper.items.forEach(function(item, idx) { %>
     <%- include('../partials/question', {
       item: item,

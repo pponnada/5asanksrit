@@ -66,7 +66,8 @@ router.get('/admin/dashboard', requireAdmin, (_req, res) => {
 router.get('/admin/preview/:id', requireAdmin, (req, res) => {
   const paper = contentStore.getPaper(req.params.id);
   if (!paper) return res.status(404).send('Paper not found.');
-  res.render('admin/preview', { paper });
+  const isLatest = paper.id === contentStore.getLatestId();
+  res.render('admin/preview', { paper, isLatest });
 });
 
 router.get('/admin/results/:id', requireAdmin, (req, res) => {
