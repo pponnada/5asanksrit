@@ -64,3 +64,21 @@ test('translation-only sections (e.g. विभागः 18) have no native opti
     assert.equal(item.hasOptions, false);
   }
 });
+
+test('विभागः 5\'s source poems are captured as preamble, including one interleaved between item blocks', () => {
+  const { sections } = parseCorpus(CORPUS_FILE);
+  const section5 = sections.find((s) => s.number === 5);
+  assert.ok(section5.preamble, 'विभागः 5 should have a non-null preamble');
+  assert.match(section5.preamble, /Poem 1/);
+  assert.match(section5.preamble, /Poem 2/);
+  // Poem 3 sits between Q015 and Q016 in qa-corpus.md, not before the
+  // section's first item — it must still be captured, not silently dropped.
+  assert.match(section5.preamble, /Poem 3/);
+  assert.match(section5.preamble, /वर्णमालागीतम्/);
+});
+
+test('a section with no free-text source material has a null preamble (e.g. विभागः 9)', () => {
+  const { sections } = parseCorpus(CORPUS_FILE);
+  const section9 = sections.find((s) => s.number === 9);
+  assert.equal(section9.preamble, null);
+});

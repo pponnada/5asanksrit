@@ -30,9 +30,14 @@ function splitOptions(raw) {
  * @param {(line: string) => boolean} [isBoundary] - optional extra line
  *   patterns (e.g. a section heading) that should also end the current item
  *   without being consumed as item content.
+ * @param {(line: string) => void} [onStray] - optional callback invoked
+ *   with every line that falls outside any item block (e.g. qa-corpus.md's
+ *   free-text source material — poems, word banks — interleaved between
+ *   items), in file order, so a caller that cares about it doesn't have to
+ *   silently lose it.
  * @returns {object[]} flat list of items
  */
-function parseItemBlocks(lines, itemRe, isBoundary) {
+function parseItemBlocks(lines, itemRe, isBoundary, onStray) {
   const items = [];
   let currentItem = null;
   let captureField = null; // 'stem' | 'answer' | 'note'
@@ -87,7 +92,10 @@ function parseItemBlocks(lines, itemRe, isBoundary) {
       continue;
     }
 
-    if (!currentItem) continue; // stray line outside any item
+    if (!currentItem) {
+      if (onStray) onStray(line);
+      continue; // stray line outside any item
+    }
 
     const optionsMatch = line.match(OPTIONS_RE);
     if (optionsMatch) {

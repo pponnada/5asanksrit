@@ -32,13 +32,13 @@ function makeId(now) {
 /**
  * Writes papers/<id>.md as a Draft (no Published-At — REQUIREMENTS.md §5)
  * from a resolved builder draft (server/content/builderDraft.js shape):
- * draft.sections = [{ number, existing, approvedItems }, ...].
+ * draft.sections = [{ number, count }, ...].
  *
  * For each section, in ascending section-number order: a random sample
- * (size = existing) from native-usable ∪ GenAI-approved, excluding any
- * item this same build session just approved (so it can't appear twice —
- * once as a random "existing" pick, once as an explicit "new" item),
- * followed by every approved "new" item for that section.
+ * (size = count) without replacement from native-usable ∪ GenAI-approved
+ * — the section's question bank (server/content/bankDraft.js,
+ * server/routes/questionBank.js build this up ahead of time; composing a
+ * paper only ever draws from it, never generates anything new).
  */
 function composePaper(draft) {
   const { sections: corpusSections } = parseCorpus(CORPUS_FILE);
@@ -56,18 +56,13 @@ function composePaper(draft) {
     if (!corpusSection) continue;
     sectionLabels.push(`विभागः ${sec.number}`);
 
-    const approvedItems = sec.approvedItems || [];
-    const approvedIds = new Set(approvedItems.map((i) => i.id));
-
     const nativeUsable = corpusSection.items
       .filter((i) => i.status === 'Confirmed' && i.hasOptions)
       .map((i) => ({ id: i.id, stem: i.stem, options: i.options, answer: i.answer, note: i.note }));
-    const genaiPool = loadSectionPool(sec.number, GENAI_APPROVED_DIR).filter((i) => !approvedIds.has(i.id));
+    const genaiPool = loadSectionPool(sec.number, GENAI_APPROVED_DIR);
 
-    const existingPicks = sample(nativeUsable.concat(genaiPool), sec.existing || 0);
-    const newPicks = approvedItems.map((i) => ({ id: i.id, stem: i.stem, options: i.options, answer: i.answer, note: i.note }));
-
-    allItems.push(...existingPicks, ...newPicks);
+    const picks = sample(nativeUsable.concat(genaiPool), sec.count || 0);
+    allItems.push(...picks);
   }
 
   const id = makeId(new Date());

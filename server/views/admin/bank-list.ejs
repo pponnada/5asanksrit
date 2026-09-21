@@ -1,0 +1,29 @@
+<%- include('../partials/head', { title: 'Question Bank' }) %>
+
+<main class="admin-dashboard builder-page">
+  <h1>Question Bank</h1>
+  <p class="en">
+    Build up each section's pool of usable questions ahead of time. When you
+    build a paper, you'll draw a count straight from what's banked here.
+  </p>
+
+  <a class="build-new-paper-btn" href="/admin/builder">Create Question Paper</a>
+
+  <ul class="section-list">
+    <% sections.forEach(function(s) { %>
+      <li class="section-row">
+        <span class="section-title">विभागः <%= s.number %> — <%= s.title %></span>
+        <span class="section-counts en">
+          <%= s.nativeUsableCount %> usable in corpus · <%= s.genaiApprovedCount %> approved-GenAI
+        </span>
+        <% if (s.isMeanings) { %>
+          <span class="bank-locked en">Corpus only</span>
+        <% } else { %>
+          <a class="bank-manage-link" href="/admin/bank/<%= s.number %>">Manage →</a>
+        <% } %>
+      </li>
+    <% }); %>
+  </ul>
+</main>
+
+<%- include('../partials/foot') %>

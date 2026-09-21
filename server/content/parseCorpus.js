@@ -30,7 +30,16 @@ function parseCorpus(filePath) {
 
   function flushSection(section) {
     if (section) {
-      section.items = parseItemBlocks(section.lines, ITEM_RE).map((item) => ({
+      // Some sections carry free-text source material interleaved between
+      // items — e.g. विभागः 5's poems (a second poem sits between two item
+      // blocks, not just before the first one), or विभागः 7/17's मञ्जूषा
+      // word banks. This is the ground truth the section's items are drawn
+      // from, so it's kept (as `preamble`, null if a section has none)
+      // rather than silently dropped, and fed into the GenAI prompt
+      // (buildPrompt.js) so new items stay grounded in it instead of being
+      // invented from nothing.
+      const strayLines = [];
+      section.items = parseItemBlocks(section.lines, ITEM_RE, null, (line) => strayLines.push(line)).map((item) => ({
         id: 'Q' + item.id,
         stem: item.stem,
         options: item.options,
@@ -39,6 +48,7 @@ function parseCorpus(filePath) {
         note: item.note,
         hasOptions: item.hasOptions,
       }));
+      section.preamble = strayLines.join('\n').replace(/\n{3,}/g, '\n\n').trim() || null;
       delete section.lines;
       sections.push(section);
     }

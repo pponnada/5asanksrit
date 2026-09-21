@@ -260,6 +260,8 @@ button.option:active { transform: scale(0.98); }
 .badge-taken { background: #e6eefb; color: #2f5fa8; }
 .badge-not-taken { background: #f1ede2; color: var(--color-muted); }
 
+.dashboard-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0 24px; }
+
 .build-new-paper-btn {
   display: inline-block;
   background: var(--color-primary);
@@ -268,7 +270,12 @@ button.option:active { transform: scale(0.98); }
   padding: 10px 18px;
   border-radius: 8px;
   font-size: 0.95em;
-  margin: 8px 0 24px;
+  margin: 0;
+}
+.build-new-paper-btn.secondary {
+  background: #fff;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
 }
 
 /* ---------- Paper builder ---------- */
@@ -305,9 +312,19 @@ button.option:active { transform: scale(0.98); }
 .section-counts { color: var(--color-muted); }
 .section-count-input { width: 80px; padding: 6px; }
 
-.split-existing { width: 70px; padding: 6px; }
-.split-new { color: var(--color-muted); }
-.split-fixed { color: var(--color-muted); }
+.bank-locked { color: var(--color-muted); }
+.bank-manage-link { white-space: nowrap; }
+
+.link-btn {
+  font-family: inherit;
+  font-size: 0.9em;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 .generate-progress { margin-bottom: 8px; }
 .generate-progress-bar {
@@ -393,12 +410,39 @@ button.option:active { transform: scale(0.98); }
 
 .flashcards-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 20px;
 }
 .back-link { color: var(--color-muted); text-decoration: none; font-size: 0.9em; }
-.flashcard-stats { color: var(--color-muted); font-size: 0.9em; }
+
+.flashcard-stats {
+  display: flex;
+  gap: 6px;
+}
+.stat-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.72em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+.stat-pill strong {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.stat-pill-mastered strong { color: var(--color-correct); }
+.stat-pill-due.has-due { border-color: var(--color-primary); background: #fbe9e2; }
+.stat-pill-due.has-due strong { color: var(--color-primary); }
 
 .flip-card { perspective: 1200px; margin-bottom: 20px; }
 

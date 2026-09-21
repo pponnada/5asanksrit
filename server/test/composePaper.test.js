@@ -51,8 +51,8 @@ test('composes a Draft (no Published-At) with the requested sections and time li
   const draft = {
     timeLimitMinutes: 20,
     sections: [
-      { number: 9, existing: 0, approvedItems: [{ id: 'G09-001', stem: 'new stem', options: ['a', 'b'], answer: 'a', note: null }] },
-      { number: 1, existing: 1, approvedItems: [] },
+      { number: 9, count: 1 },
+      { number: 1, count: 1 },
     ],
   };
 
@@ -67,28 +67,20 @@ test('composes a Draft (no Published-At) with the requested sections and time li
   assert.equal(paper.items.length, 2);
 
   const ids = paper.items.map((i) => i.id);
-  assert.ok(ids.includes('G09-001'));
+  assert.ok(ids.includes('Q010')); // only usable item in विभागः 9
   assert.ok(ids.includes('Q001') || ids.includes('Q002'));
 });
 
-test('never picks the same item twice as both a random "existing" pick and an explicit "new" item', () => {
-  // Simulate this build session having just approved G09-001, which is
-  // therefore also already sitting in the section's on-disk pool file.
+test('draws a section\'s count from its bank (native usable + GenAI-approved) without duplicates', () => {
   fs.writeFileSync(
     path.join(genaiDir, 'vibhaga-09.json'),
-    JSON.stringify([{ id: 'G09-001', stem: 'pool copy', options: ['a', 'b'], answer: 'a', status: 'Confirmed' }]),
+    JSON.stringify([{ id: 'G09-001', stem: 'banked item', options: ['a', 'b'], answer: 'a', status: 'Confirmed' }]),
     'utf8'
   );
 
   const draft = {
     timeLimitMinutes: 15,
-    sections: [
-      {
-        number: 9,
-        existing: 1, // would normally sample G09-001 back out of the pool file
-        approvedItems: [{ id: 'G09-001', stem: 'new stem', options: ['a', 'b'], answer: 'a', note: null }],
-      },
-    ],
+    sections: [{ number: 9, count: 2 }], // विभागः 9's whole bank: Q010 (corpus) + G09-001 (GenAI-approved)
   };
 
   const id = composePaper(draft);
@@ -96,10 +88,5 @@ test('never picks the same item twice as both a random "existing" pick and an ex
 
   const ids = paper.items.map((i) => i.id);
   assert.equal(ids.length, new Set(ids).size, 'no duplicate item ids in the composed paper');
-  assert.ok(ids.includes('G09-001'));
-  // The "existing" sample must fall back to the section's native item
-  // (Q010) rather than re-picking G09-001, which was excluded because
-  // this session just approved it as a "new" item.
-  assert.ok(ids.includes('Q010'));
-  assert.equal(ids.length, 2);
+  assert.deepEqual(new Set(ids), new Set(['Q010', 'G09-001']));
 });

@@ -1,8 +1,10 @@
 # Requirements — Sanskrit Practice & Testing Web App
 
-Status: **Draft v6.** Teacher paper-generation moved from an AI-coding-agent
-chat workflow to an in-app, PIN-gated admin builder (§6) — see
-`TEACHER_WORKFLOW.md` for the full Teacher-facing requirements.
+Status: **Draft v7.** Teacher paper-generation moved from an AI-coding-agent
+chat workflow to an in-app, PIN-gated admin builder (§6). Growing a
+section's GenAI-approved pool is now its own standalone **Manage Question
+Bank** area, split out from paper building — see `TEACHER_WORKFLOW.md` for
+the full Teacher-facing requirements.
 
 ## 1. Purpose
 
@@ -10,13 +12,16 @@ A LAN-only web application that turns the content in `qa-corpus.md` into
 practice/test material for a child learning Sanskrit (5th grade level). Two
 personas use it:
 
-- **Teacher**: generates question papers through a **PIN-gated in-app
-  builder** (§6) — selecting sections and counts, and for any section
-  needing freshly GenAI-drafted questions, copying a generated prompt out
-  to a separate web chat LLM (ChatGPT, Google AI Mode, or similar) and
-  pasting the reply back in for parsing/preview/approval. No AI coding
-  agent is involved and the running app never calls an LLM itself (§12).
-  The same PIN-gated area is also where the Teacher reviews results.
+- **Teacher**: grows each section's **question bank** (§3) through a
+  standalone, PIN-gated **Manage Question Bank** area — copying a generated
+  prompt out to a separate web chat LLM (ChatGPT, Google AI Mode, or
+  similar), pasting the reply back in for parsing/preview/approval — ahead
+  of, and independent from, building any specific paper. Separately,
+  generates question papers through a **PIN-gated in-app builder** (§6) by
+  selecting sections and how many questions to draw from each section's
+  bank. No AI coding agent is involved and the running app never calls an
+  LLM itself (§12). The same PIN-gated area is also where the Teacher
+  reviews results.
 - **Student**: a single, fixed Student (no accounts) opens a known URL,
   taps **"Take Test"** to start the latest published paper, answers under a
   timer, and afterward reviews the paper with correct answers and
@@ -42,40 +47,41 @@ personas use it:
   meaning plus 3 same-category distractors. See §4 for a hard rule specific
   to this section.
 
-## 3. Question sourcing: native vs. GenAI-approved
+## 3. Question sourcing: native vs. GenAI-approved, and the question bank
 
 Every question the app can ever serve comes from one of two **pre-persisted**
 pools — the running app never calls an LLM at runtime:
 
 1. **Native items** — taken directly from a section in `qa-corpus.md`.
 2. **GenAI-approved items** — questions modeled on a section's style,
-   drafted and approved one-by-one through the §6 workflow, stored
-   **separately** from the native corpus (§5) precisely so that a paper
-   can be composed from native content alone by simply disregarding the
-   GenAI file(s) — no filtering logic needed to exclude "the GenAI ones,"
-   just don't read that file.
+   drafted and approved one-by-one, stored **separately** from the native
+   corpus (§5) precisely so that a paper can be composed from native
+   content alone by simply disregarding the GenAI file(s) — no filtering
+   logic needed to exclude "the GenAI ones," just don't read that file.
 
-When generating a paper, for each selected section the Teacher sets an
-explicit numeric **split** (§6) between:
-- **Existing** — native `Confirmed` items in that section plus whatever is
-  already sitting in its GenAI-approved pool, and
-- **New** — freshly drafted items, produced through the §6 prompt/paste
-  loop, that must be reviewed and approved before the paper can be
-  composed.
-
-Existing = 0 is equivalent to the old "GenAI only" case; New = 0 is
-equivalent to the old "corpus only" case — this single split subsumes both.
+Together, a section's native `Confirmed` items plus whatever's already
+sitting in its GenAI-approved pool are that section's **question bank**.
+Growing the bank (drafting and approving new GenAI items) is a standalone
+workflow, **Manage Question Bank**, done ahead of and independently from
+building any specific paper — see `TEACHER_WORKFLOW.md` §2. When generating
+a paper (§6), the Teacher just picks, per selected section, how many
+questions to draw from that section's bank; composing the paper takes a
+random sample of that size, without replacement, from the bank. There is no
+per-paper "new" generation step anymore — if a section's bank is too small
+for what a paper needs, the Teacher tops it up via Manage Question Bank
+first.
 
 **Hard rule:** विभागः 1 (Meanings) is **always corpus-only**, regardless of
 what's requested elsewhere in the same paper — meaning questions must never
 be GenAI-generated, since they anchor everything else. No GenAI-approved
-file should ever be created for विभागः 1, and the split step itself is not
-shown for it (§6) — its whole count is implicitly Existing.
+file should ever be created for विभागः 1, and Manage Question Bank offers no
+generation UI for it (`TEACHER_WORKFLOW.md` §2.1) — its bank is always just
+its native items.
 
-If a section's Existing pool doesn't have enough `Confirmed`/approved items
-to satisfy the requested count, this surfaces immediately when the split is
-set (§6): the Existing field is capped at what's actually available, so any
-shortfall is simply part of the New count rather than silently under-filling.
+If a section's bank doesn't have enough items to satisfy the count a
+Teacher wants for a paper, this surfaces immediately when setting that
+count (§6): the count field is capped at what's actually banked, so a
+paper is never silently under-filled by an over-large request.
 
 ## 4. All questions are multiple choice
 
@@ -87,8 +93,8 @@ or handwriting input anywhere in the Student flow.
   which have `विकल्पाः: ...`) use those options directly.
 - Sections that are fill-in-the-blank, translation, or open-answer in the
   corpus have no native distractors for their non-meaning items — those
-  must come from the §6 drafting-and-approval workflow before an item can
-  be shown to a Student.
+  must come from the Manage Question Bank drafting-and-approval workflow
+  (`TEACHER_WORKFLOW.md` §2) before an item can be shown to a Student.
 - विभागः 1 (Meanings) is already fully MCQ-ready natively (§2) — no GenAI
   distractor generation applies there, consistent with the §3 hard rule.
 - Distractor sets, once approved, are persisted and never regenerated per
@@ -97,8 +103,9 @@ or handwriting input anywhere in the Student flow.
 
 ## 5. File & folder conventions
 
-Concrete artifacts the §6 builder (and the app's ingestion step, §2) reads
-and writes:
+Concrete artifacts the §6 builder, Manage Question Bank
+(`TEACHER_WORKFLOW.md` §2), and the app's ingestion step (§2) read and
+write:
 
 - **`qa-corpus.md`** (existing) — native corpus, unchanged Markdown format,
   still hand-edited by the Teacher outside the app.
@@ -106,14 +113,15 @@ and writes:
   any GenAI-approved items (created on first approval; a section with none
   simply has no file, which is what makes "disregard the GenAI items"
   trivial — §3). JSON (not Markdown) because items are already validated
-  as JSON when parsed out of the pasted LLM reply (§6) and re-serializing
-  through Markdown would be pure overhead. An array of item objects with
-  the same fields as before — stem / options / answer / status / note —
-  plus `sourceSection` and `approved` (date) metadata, and IDs on a
-  `G<NN>-<seq>` scheme (e.g. `G09-001`) so they're visually distinct from
-  native `Qxxx` IDs and never collide with future additions to the native
-  corpus. Written directly by the running app when the Teacher approves an
-  item (§6), not hand-edited.
+  as JSON when parsed out of the pasted LLM reply (`TEACHER_WORKFLOW.md`
+  §6) and re-serializing through Markdown would be pure overhead. An array
+  of item objects with the same fields as before — stem / options / answer
+  / status / note — plus `sourceSection` and `approved` (date) metadata,
+  and IDs on a `G<NN>-<seq>` scheme (e.g. `G09-001`) so they're visually
+  distinct from native `Qxxx` IDs and never collide with future additions
+  to the native corpus. Written directly by the running app when the
+  Teacher approves an item in Manage Question Bank (`TEACHER_WORKFLOW.md`
+  §2), not hand-edited.
 - **`papers/<id>.md`** — one file per *composed* paper (`id` e.g.
   `2026-09-20-1904`), published or not, Markdown, unchanged format. Header
   block with sections tested, total time limit, a composed timestamp, and a
@@ -135,64 +143,78 @@ and writes:
 
 There is **no AI coding agent involved and no LLM API call from the running
 application** — the app never holds an LLM API key. Paper generation is a
-wizard inside the existing PIN-gated `/admin` area (§7); the only AI
-anywhere in this workflow is a general-purpose web chat LLM (ChatGPT,
-Google AI Mode, or similar) the Teacher operates manually, outside the app,
-via copy/paste. Full Teacher-facing detail lives in `TEACHER_WORKFLOW.md`;
-this section states the requirement, not the UI copy.
+wizard inside the existing PIN-gated `/admin` area (§7), and it is
+**separate from growing a section's question bank** (§6a) — the builder
+only ever draws from banks that already exist; it never generates anything
+itself. Full Teacher-facing detail lives in `TEACHER_WORKFLOW.md`; this
+section states the requirement, not the UI copy.
 
-1. **Select sections.** A single screen lists all 18 sections as a
-   multi-select, each row showing its number, Devanagari + English title,
-   how many native `Confirmed` items it has, and how many GenAI-approved
-   items already exist for it (§5) — the Teacher never has to type or recall
-   a section name.
-2. **Set a count per selected section.** A plain numeric input per section;
-   `0` removes it.
-3. **Set the Existing/New split per selected section** (§3), skipped for
-   विभागः 1 (Meanings), which is always 100% Existing. The Existing field
-   is capped at what's actually available (native `Confirmed` + already
-   GenAI-approved); the remainder is New.
-4. **For every section with New > 0**: a prompt/paste loop —
-   - A **template-generated prompt**, filled in with that section's
-     number/titles, audience constraints (MCQ-only, roughly 5th-grade
-     level — §4), every existing native and GenAI-approved item in that
-     section as style context, the exact count of new items needed, and an
-     explicit, example-backed **output format spec**: the LLM must reply
-     with a JSON array of `{stem, options, answer, note}` objects and
-     nothing else.
-   - A **Copy Prompt** action copies this text to the clipboard for the
-     Teacher to paste into their own web chat LLM.
-   - A **paste-back textarea** takes the LLM's reply; a **Parse** action
-     extracts a JSON array (tolerating code fences or stray prose around
-     it), validates each item (non-empty stem, non-empty distinct options,
-     an answer that exactly matches one option), and reports failures
-     per-item rather than as a single opaque error.
-   - A **preview + review** step lets the Teacher approve, edit, or reject
-     each parsed candidate; only approved items are persisted to
-     `genai-approved/vibhaga-<NN>.json` (§5). This loop repeats until the
-     section's New count is fully satisfied — the next paper needing this
-     section can then draw on these as Existing items (§3).
-5. **Set the total time limit**, once every selected section is fully
-   resolved ((Existing selected) + (approved New) = requested count for
-   each): common presets (15/20/30/45 min) plus a custom value.
-6. **Compose the paper**: an explicit action that selects the exact
-   question set per section — a random sample without replacement from the
-   Existing pool(s) for the Existing portion, plus every approved New item
-   — fixes the order, and writes `papers/<id>.md` (§5) with no
-   `Published-At:` yet, i.e. a **Draft**. This does not publish it.
-7. **Preview and publish happen via the dashboard (§7)**, unchanged from
+1. **Select sections and counts.** A single screen lists all 18 sections as
+   a multi-select, each row showing its number, Devanagari + English title,
+   how many native `Confirmed` items it has, how many GenAI-approved items
+   already exist for it (§5), and the two summed (that section's bank
+   total, §3) — the Teacher never has to type or recall a section name. For
+   each checked section, a plain numeric input sets how many questions to
+   draw from its bank; `0` removes the section. **The count is capped at
+   that section's bank total** — it cannot exceed what's actually banked.
+   If the Teacher needs more, they grow that section's bank first (§6a),
+   then come back. विभागः 1 (Meanings) works the same way, capped at its
+   native count (§3's hard rule — its bank is corpus-only).
+2. **Set the total time limit**, once every selected section has a valid
+   count: common presets (15/20/30/45 min) plus a custom value.
+3. **Compose the paper**: an explicit action that, for each selected
+   section, takes a random sample without replacement — sized to that
+   section's requested count — from its bank (native `Confirmed` items ∪
+   GenAI-approved pool, §3), fixes the order, and writes `papers/<id>.md`
+   (§5) with no `Published-At:` yet, i.e. a **Draft**. This does not
+   publish it.
+4. **Preview and publish happen via the dashboard (§7)**, unchanged from
    before: **Preview** (`/admin/preview/:id`) for proofreading with answers
    shown, and **Make latest** (`/admin/make-latest/:id`) to actually
    publish — the builder's job ends at producing a reviewable Draft.
 
-Growing a section's GenAI-approved pool (step 4) can also be run on its
-own, ahead of any specific paper, whenever the Teacher wants more variety
-banked for a section — it doesn't have to happen inline with composing one.
+## 6a. Manage Question Bank (in-app, standalone)
+
+Reached from the dashboard independently of the §6 builder — growing a
+section's GenAI-approved pool never has to happen inline with composing a
+specific paper (`TEACHER_WORKFLOW.md` §2 has the full detail):
+
+1. A section list (`/admin/bank`) showing the same per-section counts as §6
+   step 1, each with a link into that section's own page — except विभागः 1
+   (Meanings), which shows a "corpus only" note and no link, per §3's hard
+   rule.
+2. A per-section page showing what's already banked (native usable count +
+   every current GenAI-approved item), and a plain numeric input for "how
+   many new questions to generate" — an arbitrary count the Teacher
+   chooses, unrelated to any paper's requested count.
+3. The same **template-generated prompt → Copy Prompt → paste-back
+   textarea → Parse → preview + review → approve/edit/reject** loop
+   described for the old inline workflow: a prompt filled in with the
+   section's number/titles, audience constraints (MCQ-only, roughly
+   5th-grade level — §4), **any free-text source material `qa-corpus.md`
+   carries for that section outside its item blocks** (e.g. विभागः 5's
+   poems, विभागः 7/17's मञ्जूषा word banks) shown in full with an explicit
+   instruction that it's the only material new items may draw from — a
+   poem-backed item's answer must be an actual line copied from the poem,
+   never invented — every existing native and GenAI-approved item in that
+   section as style context, the requested count, and an explicit,
+   example-backed **output format spec** (the LLM must reply with a JSON
+   array of `{stem, options, answer, note}` objects and nothing else, §5).
+   Parse extracts a JSON array (tolerating code fences or stray prose
+   around it), validates each item (non-empty stem, non-empty distinct
+   options, an answer that exactly matches one option), and reports
+   failures per-item rather than as a single opaque error. Only items the
+   Teacher approves are persisted to `genai-approved/vibhaga-<NN>.json`
+   (§5).
+4. This can be repeated as many times as the Teacher likes, for any
+   section, at any time — there's no fixed target to reach; the bank simply
+   grows by however much gets approved.
 
 ## 7. Teacher workflow (in the running app)
 
-Paper *generation* also happens here now (§6) — the Teacher-facing surface
-is a PIN gate, then a dashboard, then the §6 builder reached from it.
+Paper *generation* and *question-bank growth* both happen here now (§6,
+§6a) — the Teacher-facing surface is a PIN gate, then a dashboard, then
+either the §6 builder or the §6a bank manager reached from it.
 
 **PIN entry screen**: minimal and adult-oriented (unlike the Student UI, no
 need to design for a 10-year-old here) — app name, a plain PIN input
@@ -200,13 +222,14 @@ need to design for a 10-year-old here) — app name, a plain PIN input
 state on a wrong PIN. Nothing else on this screen.
 
 **Dashboard (after a correct PIN)**: a **"Build New Paper"** entry point
-into the §6 builder, plus a list of every paper in `papers/`, most recent
-first. Each row shows:
+into the §6 builder, a **"Manage Question Bank"** entry point into the §6a
+bank manager, plus a list of every paper in `papers/`, most recent first.
+Each row shows:
 
 - Paper id/date and a one-line contents summary (e.g. *"5 sections · 24
   questions · 20 min"*).
 - A status badge: **Latest** (what "Take Test" currently opens), **Draft**
-  (composed via §6 step 6 but never published — i.e. not `latest.txt` and
+  (composed via §6 step 3 but never published — i.e. not `latest.txt` and
   never was), **Taken** (with the score, e.g. *"18/24"*), or **Not taken**
   (published or draft, but the Student hasn't opened it).
 - Row actions, only the ones that apply: **Preview** (§6's
@@ -215,7 +238,7 @@ first. Each row shows:
   was actually asked" record), **View results** (only once Taken — full
   per-question breakdown: the Student's pick, the correct answer, whether
   it was right, and time taken), and, if a paper isn't already Latest,
-  **Make latest** — the actual publish action (§6 step 7): the builder only
+  **Make latest** — the actual publish action (§6 step 4): the builder only
   ever produces a Draft, so this dashboard action is how every paper, new
   or re-promoted, actually goes live.
 
@@ -265,11 +288,11 @@ Two different kinds of state, persisted differently:
   papers (`papers/<id>.md`) remain plain Markdown; GenAI-approved pools
   (`genai-approved/vibhaga-<NN>.json`, §5) are JSON. Unlike the old
   agent-driven workflow, the **running app itself** now writes
-  GenAI-approved items (on approval, §6) and paper files (on compose/
+  GenAI-approved items (on approval, §6a) and paper files (on compose/
   publish, §6/§7), so the app's structured store (§2) must reflect a
   newly-written file **in-process**, immediately — not only at boot —
-  otherwise a just-approved item wouldn't be selectable as an Existing item
-  in the same session's paper composition.
+  otherwise a just-approved item wouldn't be selectable as part of a
+  section's bank in the same or a later paper composition.
 - **Runtime state (app-owned store)**: this changes per Student action and
   must be a proper persisted store the app manages, not files:
   - Each **Student attempt**: which paper, start timestamp, submit
@@ -325,7 +348,7 @@ Two different kinds of state, persisted differently:
 ## 12. Non-functional notes
 
 - **No LLM dependency inside the running app** — the app itself never calls
-  an LLM API. GenAI question drafting (§6) relies on the Teacher manually
+  an LLM API. GenAI question drafting (§6a) relies on the Teacher manually
   copying a generated prompt into a separate web chat LLM (ChatGPT, Google
   AI Mode, or similar) and pasting the reply back in; the app only ever
   parses that pasted text and reads from its persisted question bank/files.
@@ -344,14 +367,14 @@ Two different kinds of state, persisted differently:
 - Multi-student / multi-classroom / multi-teacher / multi-tenant support —
   single fixed Student, single Teacher.
 - Any in-app/live LLM integration — all GenAI question drafting happens
-  offline per §6.
+  offline per §6a.
 - Retaking a previously *submitted* paper (§8.10) — untaken papers remain
   takeable (§8.3), but a finished attempt is final.
 - Per-section/per-difficulty score weighting.
 - Fully automated GenAI generation with no human in the loop — the app
   never calls an LLM directly (§12); every GenAI item is manually
   copy/pasted from an external web chat LLM and reviewed by the Teacher
-  before it's persisted (§6).
+  before it's persisted (§6a).
 - Charts, analytics, or score trends on the Teacher dashboard — just the
   flat paper list (§7).
 

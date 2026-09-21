@@ -61,11 +61,19 @@ function buildPrompt(sectionNumber, newCount) {
       genaiItems.map(formatContextItem).join('\n\n')
     : '';
 
+  const sourceMaterialBlock = section.preamble
+    ? `\nSource material for this section, supplied by the Teacher (poems, word banks, or similar) — this is the ONLY material your new items may draw on:\n\n${section.preamble}\n`
+    : '';
+
+  const groundingInstruction = section.preamble
+    ? ` Every new item's stem and correct answer must be built strictly from the source material above — e.g. if it's a poem, the answer must be an actual line or phrase copied from that poem, not one you invent; if it's a word bank, the answer must be one of the given words. Never introduce a line, phrase, or word that isn't already present in the source material. Prefer parts of the source material not already covered by the existing items below, so new items don't duplicate them.`
+    : '';
+
   return `You are helping a parent build a Sanskrit practice test for their child (roughly 5th-grade level, learning Sanskrit as a second language).
 
 Section: विभागः ${section.number} — ${section.title}
-
-Every question must be multiple choice — the child selects an option by tapping, never types Sanskrit. Match the vocabulary, grammar forms, phrasing style, and difficulty of the existing items below exactly. Do not introduce vocabulary or grammar patterns that aren't already present in this section, and do not repeat any of the stems shown below.
+${sourceMaterialBlock}
+Every question must be multiple choice — the child selects an option by tapping, never types Sanskrit. Match the vocabulary, grammar forms, phrasing style, and difficulty of the existing items below exactly. Do not introduce vocabulary or grammar patterns that aren't already present in this section, and do not repeat any of the stems shown below.${groundingInstruction}
 
 If the existing items below fall into more than one distinct sub-pattern (for example, different pronoun pairs, different grammatical persons, or different named word/option sets — sometimes marked with a heading in the source), spread your new questions across all of those sub-patterns in similar proportion to how they appear below. Do not generate every new item in only one sub-pattern.
 

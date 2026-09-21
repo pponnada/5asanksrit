@@ -3,7 +3,10 @@
 <main class="admin-dashboard">
   <h1>Papers</h1>
 
-  <a class="build-new-paper-btn" href="/admin/builder">Build New Paper</a>
+  <div class="dashboard-actions">
+    <a class="build-new-paper-btn" href="/admin/builder">Build New Paper</a>
+    <a class="build-new-paper-btn secondary" href="/admin/bank">Manage Question Bank</a>
+  </div>
 
   <% if (papers.length === 0) { %>
     <p>No papers composed yet. Click "Build New Paper" above to create one.</p>

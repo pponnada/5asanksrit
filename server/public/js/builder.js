@@ -14,20 +14,7 @@
     });
   });
 
-  // --- Split page: live "New" = count - existing ---
-  document.querySelectorAll('.split-existing').forEach(function (input) {
-    var row = input.closest('.section-row');
-    var out = row ? row.querySelector('.split-new-value') : null;
-    if (!out) return;
-
-    var count = parseInt(input.dataset.count, 10) || 0;
-    input.addEventListener('input', function () {
-      var existing = parseInt(input.value, 10) || 0;
-      out.textContent = Math.max(0, count - existing);
-    });
-  });
-
-  // --- Generate page: Copy Prompt ---
+  // --- Generate/bank pages: Copy Prompt ---
   document.querySelectorAll('.copy-prompt-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var target = document.getElementById(btn.dataset.copyTarget);

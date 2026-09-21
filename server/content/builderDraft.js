@@ -1,18 +1,20 @@
 /**
- * In-memory state for the in-progress paper build (TEACHER_WORKFLOW.md §5,
- * plan's "Architecture decisions"). A server-side singleton, not a DB table
- * or cookie payload: this app assumes a single fixed Teacher building one
- * paper at a time, same simplicity assumption as everywhere else
- * (REQUIREMENTS.md §13). Anything already Teacher-approved is durably
- * written to genai-approved/*.json immediately (genaiApprovedStore.js) —
- * only the in-progress selections/splits/pending-candidates live here, so
- * a lost server process only costs cheap-to-redo picks, never approved work.
+ * In-memory state for the in-progress paper build. A server-side
+ * singleton, not a DB table or cookie payload: this app assumes a single
+ * fixed Teacher building one paper at a time, same simplicity assumption
+ * as everywhere else (REQUIREMENTS.md §13).
+ *
+ * Growing a section's question bank (native corpus + GenAI-approved pool)
+ * is a separate, standalone flow (server/content/bankDraft.js,
+ * server/routes/questionBank.js) — by the time a Teacher is here, each
+ * selected section's count is just a draw size against whatever is already
+ * banked, so this only needs to track sections + counts + the time limit.
  */
 
 let draft = null;
 
 function reset() {
-  draft = { sections: {}, timeLimitMinutes: null, pending: {} };
+  draft = { sections: {}, timeLimitMinutes: null };
   return draft;
 }
 
@@ -31,52 +33,8 @@ function setSections(list) {
   });
 
   list.forEach(({ number, count }) => {
-    const prev = d.sections[number] || {};
-    d.sections[number] = {
-      number,
-      count,
-      existing: prev.existing || 0,
-      newCount: prev.newCount || 0,
-      approvedItems: prev.approvedItems || [],
-    };
+    d.sections[number] = { number, count };
   });
-}
-
-function setSplit(number, existing, newCount) {
-  const entry = getDraft().sections[number];
-  if (!entry) return;
-  entry.existing = existing;
-  entry.newCount = newCount;
-}
-
-function setPending(number, result) {
-  getDraft().pending[number] = result;
-}
-
-function getPending(number) {
-  return getDraft().pending[number] || null;
-}
-
-function clearPending(number) {
-  delete getDraft().pending[number];
-}
-
-function recordApproved(number, items) {
-  const entry = getDraft().sections[number];
-  if (!entry) return;
-  entry.approvedItems = entry.approvedItems.concat(items);
-  clearPending(number);
-}
-
-function isResolved(number) {
-  const entry = getDraft().sections[number];
-  if (!entry) return true;
-  return (entry.approvedItems || []).length >= (entry.newCount || 0);
-}
-
-function isFullyResolved() {
-  const d = getDraft();
-  return Object.keys(d.sections).every((n) => isResolved(Number(n)));
 }
 
 function setTimeLimit(minutes) {
@@ -91,13 +49,6 @@ module.exports = {
   reset,
   getDraft,
   setSections,
-  setSplit,
-  setPending,
-  getPending,
-  clearPending,
-  recordApproved,
-  isResolved,
-  isFullyResolved,
   setTimeLimit,
   sectionsList,
 };

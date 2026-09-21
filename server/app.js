@@ -9,6 +9,7 @@ const studentRoutes = require('./routes/student');
 const adminRoutes = require('./routes/admin');
 const flashcardsRoutes = require('./routes/flashcards');
 const builderRoutes = require('./routes/builder');
+const questionBankRoutes = require('./routes/questionBank');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(studentRoutes);
 app.use(adminRoutes);
 app.use(flashcardsRoutes);
 app.use(builderRoutes);
+app.use(questionBankRoutes);
 
 if (require.main === module) {
   app.listen(PORT, '0.0.0.0', () => {

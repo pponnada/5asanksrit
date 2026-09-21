@@ -2,7 +2,11 @@
 
 <main class="admin-dashboard builder-page">
   <h1>Build New Paper — Sections &amp; Counts</h1>
-  <p class="en">Select the sections to include and how many questions to draw from each.</p>
+  <p class="en">
+    Select the sections to include and how many questions to draw from each
+    section's question bank. Need more than what's shown? Add to the bank
+    first via <a href="/admin/bank">Manage Question Bank</a>.
+  </p>
 
   <% if (error) { %><p class="error"><%= error %></p><% } %>
 
@@ -22,11 +26,12 @@
             <span class="section-title">विभागः <%= s.number %> — <%= s.title %></span>
           </label>
           <span class="section-counts en">
-            <%= s.nativeUsableCount %> usable in corpus · <%= s.genaiApprovedCount %> approved-GenAI
+            <%= s.available %> banked (<%= s.nativeUsableCount %> corpus · <%= s.genaiApprovedCount %> approved-GenAI)
           </span>
           <input
             type="number"
             min="1"
+            max="<%= s.available %>"
             name="count_<%= s.number %>"
             class="section-count-input"
             placeholder="Count"
