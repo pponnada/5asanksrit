@@ -8,6 +8,55 @@
     <a class="build-new-paper-btn secondary" href="/admin/bank">Manage Question Bank</a>
   </div>
 
+  <% if (typeof restored !== 'undefined' && restored) { %>
+    <p class="flash flash-success" role="status">Backup restored successfully. The data below is from the restored file.</p>
+  <% } %>
+  <% if (typeof backupError !== 'undefined' && backupError) { %>
+    <p class="flash flash-error" role="alert"><%= backupError %></p>
+  <% } %>
+
+  <section class="backup-card" aria-labelledby="backup-heading">
+    <h2 id="backup-heading">Database backup</h2>
+    <% if (typeof dbStats !== 'undefined' && dbStats) { %>
+      <p class="backup-stats">
+        <%= dbStats.attempts %> attempt(s) ·
+        <%= dbStats.answers %> answer(s) ·
+        <%= dbStats.flashcards %> flashcard(s) ·
+        <%= dbStats.dbSizeBytes == null ? 'unknown size'
+          : dbStats.dbSizeBytes < 1024 ? dbStats.dbSizeBytes + ' B'
+          : dbStats.dbSizeBytes < 1048576 ? (dbStats.dbSizeBytes / 1024).toFixed(1) + ' KB'
+          : (dbStats.dbSizeBytes / 1048576).toFixed(2) + ' MB' %>
+      </p>
+    <% } %>
+    <div class="backup-actions">
+      <a class="backup-download-btn" href="/admin/backup" download>Download backup (.db)</a>
+      <span class="backup-hint">Save this file somewhere safe before big changes.</span>
+    </div>
+
+    <details class="restore-details">
+      <summary>Restore from a backup file…</summary>
+      <p class="restore-warning">
+        Restoring <strong>replaces all current results</strong> — test attempts,
+        answers, and flashcard progress — with the contents of the backup file.
+        This cannot be undone. Download a fresh backup first if you might need
+        the current data.
+      </p>
+      <div class="restore-row">
+        <label class="restore-file-label" for="restore-file">Backup file (.db)</label>
+        <input type="file" id="restore-file" accept=".db,.sqlite,.sqlite3,application/octet-stream">
+        <span class="restore-file-name" id="restore-file-name">No file chosen</span>
+      </div>
+      <label class="restore-confirm">
+        <input type="checkbox" id="restore-confirm">
+        I understand this will replace all current data.
+      </label>
+      <div class="restore-row">
+        <button type="button" class="restore-btn" id="restore-btn" disabled>Restore backup</button>
+        <span class="restore-status" id="restore-status" role="status"></span>
+      </div>
+    </details>
+  </section>
+
   <% if (papers.length === 0) { %>
     <p>No papers composed yet. Click "Build New Paper" above to create one.</p>
   <% } %>
@@ -37,5 +86,77 @@
     <% }); %>
   </ul>
 </main>
+
+<script>
+(function () {
+  var fileInput = document.getElementById('restore-file');
+  var fileName = document.getElementById('restore-file-name');
+  var confirmBox = document.getElementById('restore-confirm');
+  var restoreBtn = document.getElementById('restore-btn');
+  var statusEl = document.getElementById('restore-status');
+  if (!fileInput || !restoreBtn) return;
+
+  function refresh() {
+    var hasFile = fileInput.files && fileInput.files.length > 0;
+    if (hasFile) {
+      var f = fileInput.files[0];
+      fileName.textContent = f.name + ' (' + Math.max(1, Math.round(f.size / 1024)) + ' KB)';
+    } else {
+      fileName.textContent = 'No file chosen';
+    }
+    restoreBtn.disabled = !(hasFile && confirmBox.checked) || restoreBtn.dataset.busy === '1';
+  }
+
+  fileInput.addEventListener('change', function () {
+    statusEl.textContent = '';
+    statusEl.className = 'restore-status';
+    refresh();
+  });
+  confirmBox.addEventListener('change', refresh);
+
+  restoreBtn.addEventListener('click', function () {
+    var file = fileInput.files && fileInput.files[0];
+    if (!file) return;
+    if (!confirm('Replace ALL current data with "' + file.name + '"? This cannot be undone.')) return;
+
+    restoreBtn.dataset.busy = '1';
+    restoreBtn.disabled = true;
+    statusEl.textContent = 'Restoring…';
+    statusEl.className = 'restore-status';
+
+    fetch('/admin/restore', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: file,
+      credentials: 'same-origin',
+    })
+      .then(function (res) {
+        return res.json().then(function (body) {
+          return { status: res.status, body: body };
+        }).catch(function () {
+          return { status: res.status, body: { error: 'Restore failed (status ' + res.status + ').' } };
+        });
+      })
+      .then(function (result) {
+        if (result.status === 200 && result.body && result.body.ok) {
+          window.location.href = '/admin/dashboard?restored=1';
+        } else {
+          statusEl.textContent = (result.body && result.body.error) || 'Restore failed.';
+          statusEl.className = 'restore-status error';
+          restoreBtn.dataset.busy = '';
+          refresh();
+        }
+      })
+      .catch(function (err) {
+        statusEl.textContent = 'Restore failed: ' + err.message;
+        statusEl.className = 'restore-status error';
+        restoreBtn.dataset.busy = '';
+        refresh();
+      });
+  });
+
+  refresh();
+})();
+</script>
 
 <%- include('../partials/foot') %>

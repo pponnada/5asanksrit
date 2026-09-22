@@ -509,3 +509,116 @@ button.option:active { transform: scale(0.98); }
   font-size: 0.85em;
   margin: 16px 0;
 }
+
+/* ---------- Database backup / restore ---------- */
+.flash {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  margin: 0 0 16px;
+}
+.flash-success {
+  background: #e9f6ee;
+  color: var(--color-correct);
+  border: 1px solid #bfe0cc;
+}
+.flash-error {
+  background: #fbeaea;
+  color: var(--color-wrong);
+  border: 1px solid #efc2c2;
+}
+
+.backup-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+}
+.backup-card h2 {
+  margin: 0 0 4px;
+  font-size: 1.1em;
+}
+.backup-stats {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+  font-size: 0.85em;
+}
+.backup-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.backup-download-btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95em;
+}
+.backup-hint {
+  color: var(--color-muted);
+  font-size: 0.85em;
+}
+
+.restore-details {
+  margin-top: 14px;
+  border-top: 1px dashed var(--color-border);
+  padding-top: 10px;
+  font-size: 0.9em;
+}
+.restore-details summary {
+  cursor: pointer;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.restore-warning {
+  background: #fff3cd;
+  color: #7a5a00;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.85em;
+}
+.restore-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.restore-file-label { font-weight: 600; }
+.restore-file-name {
+  color: var(--color-muted);
+  font-size: 0.85em;
+}
+.restore-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+.restore-btn {
+  font-family: inherit;
+  font-size: 0.95em;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--color-wrong);
+  background: #fff;
+  color: var(--color-wrong);
+  cursor: pointer;
+  font-weight: 700;
+}
+.restore-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.restore-btn:not(:disabled):hover {
+  background: var(--color-wrong);
+  color: #fff;
+}
+.restore-status { font-size: 0.85em; }
+.restore-status.error { color: var(--color-wrong); }
