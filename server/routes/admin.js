@@ -5,7 +5,9 @@ const path = require('path');
 const contentStore = require('../content/contentStore');
 const attemptsDb = require('../db/attempts');
 const backup = require('../db/backup');
+const flashcardsDb = require('../db/flashcards');
 const { publishPaper } = require('../content/parsePaper');
+const { listSubjects, getSubject, uiForPaper } = require('../content/subjects');
 const requireAdmin = require('../middleware/requireAdmin');
 const { TEACHER_PIN, PAPERS_DIR, LATEST_FILE } = require('../config');
 
@@ -37,7 +39,15 @@ router.post('/admin', express.urlencoded({ extended: false }), (req, res) => {
 });
 
 router.get('/admin/dashboard', requireAdmin, (req, res) => {
-  const latestId = contentStore.getLatestId();
+  const subjects = listSubjects();
+  const subjectNames = {};
+  const latestIds = new Set();
+  subjects.forEach((subj) => {
+    subjectNames[subj.id] = subj.nameEn;
+    const id = contentStore.getLatestId(subj);
+    if (id) latestIds.add(id);
+  });
+
   const papers = contentStore.listAllPapers().map((p) => {
     const attempt = attemptsDb.getByPaperId(p.id);
     const finalized = attempt && attempt.status !== 'in_progress';
@@ -47,7 +57,7 @@ router.get('/admin/dashboard', requireAdmin, (req, res) => {
       score = scoreAttempt(p, answers) + '/' + p.items.length;
     }
 
-    const isLatest = p.id === latestId;
+    const isLatest = latestIds.has(p.id);
     let badge;
     if (isLatest) badge = { type: 'latest', label: 'Latest' };
     else if (!p.publishedAt) badge = { type: 'draft', label: 'Draft' };
@@ -56,6 +66,7 @@ router.get('/admin/dashboard', requireAdmin, (req, res) => {
 
     return {
       id: p.id,
+      subjectName: subjectNames[p.subject] || p.subject,
       summary: summarize(p),
       badge,
       isLatest,
@@ -65,9 +76,11 @@ router.get('/admin/dashboard', requireAdmin, (req, res) => {
   });
 
   res.render('admin/dashboard', {
+    subjects,
     papers,
     dbStats: backup.getStats(),
     restored: req.query.restored === '1',
+    flashcardsReset: req.query.flashcardsReset === '1',
     backupError: typeof req.query.error === 'string' ? req.query.error.slice(0, 200) : null,
   });
 });
@@ -75,8 +88,9 @@ router.get('/admin/dashboard', requireAdmin, (req, res) => {
 router.get('/admin/preview/:id', requireAdmin, (req, res) => {
   const paper = contentStore.getPaper(req.params.id);
   if (!paper) return res.status(404).send('Paper not found.');
-  const isLatest = paper.id === contentStore.getLatestId();
-  res.render('admin/preview', { paper, isLatest });
+  const subject = getSubject(paper.subject);
+  const isLatest = !!subject && paper.id === contentStore.getLatestId(subject);
+  res.render('admin/preview', { paper, isLatest, ui: uiForPaper(paper) });
 });
 
 router.get('/admin/results/:id', requireAdmin, (req, res) => {
@@ -93,6 +107,7 @@ router.get('/admin/results/:id', requireAdmin, (req, res) => {
   const timeTakenMinutes = Math.round((attempt.submit_ts - attempt.start_ts) / 60000);
 
   res.render('admin/results', {
+    ui: uiForPaper(paper),
     paper,
     answers,
     score,
@@ -109,7 +124,9 @@ router.post('/admin/make-latest/:id', requireAdmin, (req, res) => {
   // Equivalent to TEACHER_WORKFLOW.md's publish step: stamps Published-At
   // if this paper has never been published before, then points latest.txt
   // at it. A Draft can be promoted straight from here as a fallback.
-  publishPaper(PAPERS_DIR, LATEST_FILE, paper.id);
+  // Each subject has its own "latest" pointer.
+  const subject = getSubject(paper.subject);
+  publishPaper(PAPERS_DIR, subject ? subject.latestFile : LATEST_FILE, paper.id);
   res.redirect('/admin/dashboard');
 });
 
@@ -166,6 +183,12 @@ router.post(
     }
   }
 );
+
+// Wipes the flashcard drill so every card starts again from zero.
+router.post('/admin/flashcards/reset', requireAdmin, (_req, res) => {
+  flashcardsDb.resetAll();
+  res.redirect('/admin/dashboard?flashcardsReset=1');
+});
 
 router.get('/admin/backup-info', requireAdmin, (_req, res) => {
   const stats = backup.getStats();

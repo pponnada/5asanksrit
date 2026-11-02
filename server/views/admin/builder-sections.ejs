@@ -1,16 +1,16 @@
 <%- include('../partials/head', { title: 'Build New Paper' }) %>
 
 <main class="admin-dashboard builder-page">
-  <h1>Build New Paper — Sections &amp; Counts</h1>
+  <h1>Build New Paper — <%= subject.nameEn %> — Sections &amp; Counts</h1>
   <p class="en">
     Select the sections to include and how many questions to draw from each
     section's question bank. Need more than what's shown? Add to the bank
-    first via <a href="/admin/bank">Manage Question Bank</a>.
+    first via <a href="<%= base %>/bank">Manage Question Bank</a>.
   </p>
 
   <% if (error) { %><p class="error"><%= error %></p><% } %>
 
-  <form method="POST" action="/admin/builder/sections">
+  <form method="POST" action="<%= base %>/builder/sections">
     <ul class="section-list">
       <% sections.forEach(function(s) { %>
         <% var sel = selected[s.number]; %>
@@ -23,7 +23,7 @@
               data-target="count_<%= s.number %>"
               <%= sel ? 'checked' : '' %>
             >
-            <span class="section-title">विभागः <%= s.number %> — <%= s.title %></span>
+            <span class="section-title"><%= s.label %> <%= s.number %> — <%= s.title %></span>
           </label>
           <span class="section-counts en">
             <%= s.available %> banked (<%= s.nativeUsableCount %> corpus · <%= s.genaiApprovedCount %> approved-GenAI)

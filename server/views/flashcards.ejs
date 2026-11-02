@@ -4,17 +4,24 @@
   <div class="flashcards-header">
     <a class="back-link" href="/">← गृहम् <span class="en">Home</span></a>
     <% if (stats) { %>
-      <div class="flashcard-stats" id="fc-stats"><%= stats.mastered %>/<%= stats.total %> <span class="en">mastered</span></div>
+      <div class="flashcard-stats" id="fc-stats">
+        <span class="stat-pill" id="fc-stat-attempted"><strong><%= stats.attempted %>/<%= stats.total %></strong>attempted</span>
+        <span class="stat-pill stat-pill-mastered" id="fc-stat-mastered"><strong><%= stats.mastered %>/<%= stats.total %></strong>mastered</span>
+        <span class="stat-pill stat-pill-due<%= stats.remaining > 0 ? ' has-due' : '' %>" id="fc-stat-remaining"><strong><%= stats.remaining %></strong>left</span>
+      </div>
     <% } %>
   </div>
 
-  <% if (!card) { %>
+  <% if (!card && !poolEmpty) { %>
+    <p class="empty-state" id="fc-done">सर्वं सम्यक्! सर्वाणि पत्राणि पूर्णानि।<br><span class="en">All cards mastered!</span></p>
+  <% } else if (!card) { %>
     <p class="empty-state">अद्यापि कानिचित् शब्दार्थ-पत्राणि नोपलभ्यन्ते।<br><span class="en">No flashcards available yet.</span></p>
   <% } else { %>
     <div class="flip-card">
       <div class="flip-card-inner" id="flip-card-inner">
         <div class="flip-face flip-front">
           <div class="question-stem" id="fc-stem"><%= card.stem %></div>
+          <div class="fc-progress" id="fc-progress"><%= card.correctCount %>/<%= card.required %> correct</div>
           <div class="options" id="fc-options" data-question-id="<%= card.id %>">
             <% card.options.forEach(function(opt) { %>
               <button type="button" class="option" data-option="<%= opt %>"><%= opt %></button>

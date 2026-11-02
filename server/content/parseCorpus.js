@@ -1,12 +1,14 @@
 const fs = require('fs');
 const { parseItemBlocks } = require('./itemBlocks');
 
-const SECTION_RE = /^##\s+विभागः\s+(\d+)\s+—\s+(.+)$/;
+// "## विभागः 5 — title" (Sanskrit), "## Lesson 2 — title" (maths), ... —
+// the label word is kept so prompts and papers can echo it back.
+const SECTION_RE = /^##\s+(\S+)\s+(\d+)\s+[—–-]\s+(.+)$/;
 const SUBHEADING_RE = /^###\s+/;
 const ITEM_RE = /^Q(\S+):\s?(.*)$/;
 
 /**
- * Parses qa-corpus.md into { sections: [{ number, title, items: [...] }] }.
+ * Parses a subject's corpus.md into { sections: [{ label, number, title, items, preamble }] }.
  *
  * Simplification (see REQUIREMENTS.md §4 / implementation plan): an item
  * only counts as "usable" (hasOptions: true) if it already carries a
@@ -60,8 +62,9 @@ function parseCorpus(filePath) {
     if (sectionMatch) {
       flushSection(current);
       current = {
-        number: parseInt(sectionMatch[1], 10),
-        title: sectionMatch[2].trim(),
+        label: sectionMatch[1],
+        number: parseInt(sectionMatch[2], 10),
+        title: sectionMatch[3].trim(),
         lines: [],
       };
       continue;

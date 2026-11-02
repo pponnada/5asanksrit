@@ -5,7 +5,7 @@
 
   <% if (error) { %><p class="error"><%= error %></p><% } %>
 
-  <form method="POST" action="/admin/builder/time">
+  <form method="POST" action="<%= base %>/builder/time">
     <div class="time-presets">
       <label><input type="radio" name="minutes" value="15" checked> 15 min</label>
       <label><input type="radio" name="minutes" value="20"> 20 min</label>

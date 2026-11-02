@@ -4,7 +4,7 @@ const opts = item.options || [];
 %>
 <div class="question-card">
   <% if (typeof questionNumber !== 'undefined') { %>
-    <div class="question-progress">प्रश्न <%= questionNumber %> / <%= totalQuestions %></div>
+    <div class="question-progress"><%= ui.text.question %> <%= questionNumber %> / <%= totalQuestions %></div>
   <% } %>
   <div class="question-stem"><%= item.stem %></div>
 
@@ -30,7 +30,7 @@ const opts = item.options || [];
 
   <% if (reveal) { %>
     <div class="answer-line">
-      सही उत्तरम् : <strong><%= item.answer %></strong>
+      <%= ui.text.correctAnswer %> : <strong><%= item.answer %></strong>
     </div>
     <% if (item.note) { %>
       <div class="explanation"><%= item.note %></div>

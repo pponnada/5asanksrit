@@ -1,8 +1,8 @@
-<%- include('partials/head', { title: 'समीक्षा' }) %>
+<%- include('partials/head', { title: ui.text.reviewTitle }) %>
 
 <main class="review-page">
-  <h1>समीक्षा <span class="en">Review</span></h1>
-  <div class="score-banner">प्राप्तांकाः : <strong><%= score %> / <%= total %></strong></div>
+  <h1><%= ui.text.reviewTitle %><% if (ui.hint.reviewTitle) { %> <span class="en"><%= ui.hint.reviewTitle %></span><% } %></h1>
+  <div class="score-banner"><%= ui.text.score %> : <strong><%= score %> / <%= total %></strong></div>
 
   <% items.forEach(function(item, idx) { %>
     <%- include('partials/question', {
@@ -10,12 +10,13 @@
       questionNumber: idx + 1,
       totalQuestions: items.length,
       selectedOption: answers[item.id] || null,
+      ui: ui,
       reveal: true,
       interactive: false
     }) %>
   <% }); %>
 
-  <a class="nav-btn" href="/">मुख्यपृष्ठम् <span class="en">Home</span></a>
+  <a class="nav-btn" href="/"><%= ui.text.home %><% if (ui.hint.home) { %> <span class="en"><%= ui.hint.home %></span><% } %></a>
 </main>
 
 <%- include('partials/foot') %>

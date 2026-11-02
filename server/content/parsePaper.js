@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseItemBlocks } = require('./itemBlocks');
+const { DEFAULT_SUBJECT } = require('../config');
 
 // A paper's items reuse native Qxxx or GenAI-approved G<NN>-<seq> IDs
 // verbatim — no re-prefixing needed here, unlike parseCorpus/parseGenaiApproved.
@@ -54,6 +55,7 @@ function parsePaperFile(filePath) {
 
   return {
     id,
+    subject: header['Subject'] || DEFAULT_SUBJECT,
     sections,
     timeLimitMinutes: parseInt(header['Time-Limit-Minutes'], 10) || null,
     composedAt: header['Composed-At'] || null,

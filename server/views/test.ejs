@@ -1,4 +1,4 @@
-<%- include('partials/head', { title: 'परीक्षा' }) %>
+<%- include('partials/head', { title: ui.text.testTitle }) %>
 
 <main class="test-page">
   <div class="timer-bar">
@@ -11,22 +11,23 @@
     questionNumber: questionNumber,
     totalQuestions: totalQuestions,
     selectedOption: selectedOption,
+    ui: ui,
     reveal: false,
     interactive: true
   }) %>
 
   <div class="nav-row">
     <% if (questionNumber > 1) { %>
-      <a class="nav-btn prev" href="/test/<%= paperId %>/question/<%= questionNumber - 1 %>">← पूर्वम्</a>
+      <a class="nav-btn prev" href="/test/<%= paperId %>/question/<%= questionNumber - 1 %>"><%= ui.text.previous %></a>
     <% } else { %>
       <span></span>
     <% } %>
 
     <% if (questionNumber < totalQuestions) { %>
-      <a class="nav-btn next" href="/test/<%= paperId %>/question/<%= questionNumber + 1 %>">अग्रे →</a>
+      <a class="nav-btn next" href="/test/<%= paperId %>/question/<%= questionNumber + 1 %>"><%= ui.text.next %></a>
     <% } else { %>
       <form method="POST" action="/test/<%= paperId %>/submit">
-        <button type="submit" class="nav-btn submit">समर्पयतु<br><span class="en">Submit</span></button>
+        <button type="submit" class="nav-btn submit"><%= ui.text.submit %><% if (ui.hint.submit) { %><br><span class="en"><%= ui.hint.submit %></span><% } %></button>
       </form>
     <% } %>
   </div>

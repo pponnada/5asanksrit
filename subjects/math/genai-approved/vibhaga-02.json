@@ -1,0 +1,737 @@
+[
+  {
+    "id": "GM02-001",
+    "stem": "Multiply $\\frac{1}{4}$ by $\\frac{3}{5}$.",
+    "options": [
+      "$\\frac{3}{20}$",
+      "$\\frac{4}{9}$",
+      "$\\frac{17}{20}$",
+      "$\\frac{5}{12}$"
+    ],
+    "answer": "$\\frac{3}{20}$",
+    "status": "Confirmed",
+    "note": "Multiply the numerators: $1 \\times 3 = 3$. Multiply the denominators: $4 \\times 5 = 20$. The product is $\\frac{3}{20}$.",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-002",
+    "stem": "Multiply $\\frac{2}{3}$ by $\\frac{4}{7}$.",
+    "options": [
+      "$\\frac{8}{21}$",
+      "$\\frac{6}{10}$",
+      "$\\frac{14}{12}$",
+      "$\\frac{21}{8}$"
+    ],
+    "answer": "$\\frac{8}{21}$",
+    "status": "Confirmed",
+    "note": "Multiply the numerators: $2 \\times 4 = 8$. Multiply the denominators: $3 \\times 7 = 21$. The product is $\\frac{8}{21}$.",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-003",
+    "stem": "Multiply \\(\\frac{5}{8}\\) by \\(\\frac{1}{3}\\).",
+    "options": [
+      "\\(\\frac{5}{24}\\)",
+      "\\(\\frac{6}{11}\\)",
+      "\\(\\frac{19}{24}\\)",
+      "\\(\\frac{15}{8}\\)"
+    ],
+    "answer": "\\(\\frac{5}{24}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators: \\(5 \\times 1 = 5\\). Multiply the denominators: \\(8 \\times 3 = 24\\). The product is \\(\\frac{5}{24}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-004",
+    "stem": "Multiply \\(\\frac{2}{5}\\) by \\(\\frac{3}{4}\\).",
+    "options": [
+      "\\(\\frac{3}{10}\\)",
+      "\\(\\frac{6}{20}\\)",
+      "\\(\\frac{5}{9}\\)",
+      "\\(\\frac{8}{15}\\)"
+    ],
+    "answer": "\\(\\frac{3}{10}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{6}{20}\\). Simplify by dividing the numerator and denominator by 2 to get \\(\\frac{3}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-005",
+    "stem": "Multiply \\(\\frac{3}{4}\\) by \\(\\frac{4}{9}\\).",
+    "options": [
+      "\\(\\frac{1}{3}\\)",
+      "\\(\\frac{12}{36}\\)",
+      "\\(\\frac{7}{13}\\)",
+      "\\(\\frac{27}{16}\\)"
+    ],
+    "answer": "\\(\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 4 from the numerators and denominators, and cancel 3 from 3 and 9, leaving \\(\\frac{1 \\times 1}{1 \\times 3} = \\frac{1}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-006",
+    "stem": "Multiply \\(\\frac{4}{7}\\) by \\(\\frac{3}{8}\\).",
+    "options": [
+      "\\(\\frac{3}{14}\\)",
+      "\\(\\frac{12}{56}\\)",
+      "\\(\\frac{7}{15}\\)",
+      "\\(\\frac{32}{21}\\)"
+    ],
+    "answer": "\\(\\frac{3}{14}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 4 from 4 and 8, leaving 1 and 2. Then multiply: \\(\\frac{1 \\times 3}{7 \\times 2} = \\frac{3}{14}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-007",
+    "stem": "Multiply \\(\\frac{5}{6}\\) by \\(\\frac{3}{10}\\).",
+    "options": [
+      "\\(\\frac{1}{4}\\)",
+      "\\(\\frac{15}{60}\\)",
+      "\\(\\frac{8}{16}\\)",
+      "\\(\\frac{4}{1}\\)"
+    ],
+    "answer": "\\(\\frac{1}{4}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 5 and 10 to get 1 and 2. Cancel 3 from 3 and 6 to get 1 and 2. This leaves \\(\\frac{1 \\times 1}{2 \\times 2} = \\frac{1}{4}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-008",
+    "stem": "Multiply \\(\\frac{7}{9}\\) by \\(\\frac{3}{14}\\).",
+    "options": [
+      "\\(\\frac{1}{6}\\)",
+      "\\(\\frac{21}{126}\\)",
+      "\\(\\frac{10}{23}\\)",
+      "\\(\\frac{6}{1}\\)"
+    ],
+    "answer": "\\(\\frac{1}{6}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 7 from 7 and 14, leaving 1 and 2. Cancel 3 from 3 and 9, leaving 1 and 3. Multiply to get \\(\\frac{1 \\times 1}{3 \\times 2} = \\frac{1}{6}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-009",
+    "stem": "Multiply \\(\\frac{2}{11}\\) by \\(\\frac{5}{6}\\).",
+    "options": [
+      "\\(\\frac{5}{33}\\)",
+      "\\(\\frac{10}{66}\\)",
+      "\\(\\frac{7}{17}\\)",
+      "\\(\\frac{12}{55}\\)"
+    ],
+    "answer": "\\(\\frac{5}{33}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 2 from 2 and 6, leaving 1 and 3. Then multiply: \\(\\frac{1 \\times 5}{11 \\times 3} = \\frac{5}{33}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-010",
+    "stem": "Multiply \\(\\frac{8}{15}\\) by \\(\\frac{5}{12}\\).",
+    "options": [
+      "\\(\\frac{2}{9}\\)",
+      "\\(\\frac{40}{180}\\)",
+      "\\(\\frac{13}{27}\\)",
+      "\\(\\frac{32}{75}\\)"
+    ],
+    "answer": "\\(\\frac{2}{9}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 5 and 15, leaving 1 and 3. Cancel 4 from 8 and 12, leaving 2 and 3. This gives \\(\\frac{2 \\times 1}{3 \\times 3} = \\frac{2}{9}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-011",
+    "stem": "Multiply \\(\\frac{3}{8}\\) by \\(\\frac{4}{5}\\).",
+    "options": [
+      "\\(\\frac{3}{10}\\)",
+      "\\(\\frac{12}{40}\\)",
+      "\\(\\frac{7}{13}\\)",
+      "\\(\\frac{15}{32}\\)"
+    ],
+    "answer": "\\(\\frac{3}{10}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 4 from 4 and 8, leaving 1 and 2. Then multiply: \\(\\frac{3 \\times 1}{2 \\times 5} = \\frac{3}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-012",
+    "stem": "Multiply \\(\\frac{9}{10}\\) by \\(\\frac{5}{6}\\).",
+    "options": [
+      "\\(\\frac{3}{4}\\)",
+      "\\(\\frac{45}{60}\\)",
+      "\\(\\frac{14}{16}\\)",
+      "\\(\\frac{27}{25}\\)"
+    ],
+    "answer": "\\(\\frac{3}{4}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 5 and 10, leaving 1 and 2. Cancel 3 from 9 and 6, leaving 3 and 2. This leaves \\(\\frac{3 \\times 1}{2 \\times 2} = \\frac{3}{4}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-013",
+    "stem": "Multiply \\(\\frac{1}{7}\\) by \\(\\frac{7}{8}\\).",
+    "options": [
+      "\\(\\frac{1}{8}\\)",
+      "\\(\\frac{7}{56}\\)",
+      "\\(\\frac{8}{15}\\)",
+      "\\(\\frac{7}{15}\\)"
+    ],
+    "answer": "\\(\\frac{1}{8}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 7 from both the numerator and denominator, leaving \\(\\frac{1}{8}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-014",
+    "stem": "Multiply \\(\\frac{6}{11}\\) by \\(\\frac{2}{3}\\).",
+    "options": [
+      "\\(\\frac{4}{11}\\)",
+      "\\(\\frac{12}{33}\\)",
+      "\\(\\frac{8}{14}\\)",
+      "\\(\\frac{9}{22}\\)"
+    ],
+    "answer": "\\(\\frac{4}{11}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 3 from 6 and 3, leaving 2 and 1. Then multiply: \\(\\frac{2 \\times 2}{11 \\times 1} = \\frac{4}{11}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-015",
+    "stem": "Multiply \\(\\frac{5}{12}\\) by \\(\\frac{4}{5}\\).",
+    "options": [
+      "\\(\\frac{1}{3}\\)",
+      "\\(\\frac{20}{60}\\)",
+      "\\(\\frac{9}{17}\\)",
+      "\\(\\frac{25}{48}\\)"
+    ],
+    "answer": "\\(\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from the numerator and denominator, and cancel 4 from 4 and 12, leaving \\(\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-016",
+    "stem": "Multiply \\(\\frac{7}{10}\\) by \\(\\frac{5}{14}\\).",
+    "options": [
+      "\\(\\frac{1}{4}\\)",
+      "\\(\\frac{35}{140}\\)",
+      "\\(\\frac{12}{24}\\)",
+      "\\(\\frac{49}{25}\\)"
+    ],
+    "answer": "\\(\\frac{1}{4}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 7 from 7 and 14 to get 1 and 2. Cancel 5 from 5 and 10 to get 1 and 2. The result is \\(\\frac{1 \\times 1}{2 \\times 2} = \\frac{1}{4}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-017",
+    "stem": "Multiply \\(\\frac{3}{13}\\) by \\(\\frac{2}{3}\\).",
+    "options": [
+      "\\(\\frac{2}{13}\\)",
+      "\\(\\frac{6}{39}\\)",
+      "\\(\\frac{5}{16}\\)",
+      "\\(\\frac{9}{26}\\)"
+    ],
+    "answer": "\\(\\frac{2}{13}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 3 from the numerator and denominator, leaving \\(\\frac{2}{13}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-018",
+    "stem": "Multiply \\(\\frac{10}{21}\\) by \\(\\frac{7}{15}\\).",
+    "options": [
+      "\\(\\frac{2}{9}\\)",
+      "\\(\\frac{70}{315}\\)",
+      "\\(\\frac{17}{36}\\)",
+      "\\(\\frac{9}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{9}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 7 from 7 and 21, leaving 1 and 3. Cancel 5 from 10 and 15, leaving 2 and 3. Multiply to get \\(\\frac{2 \\times 1}{3 \\times 3} = \\frac{2}{9}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-019",
+    "stem": "Multiply \\(\\frac{4}{5}\\) by \\(\\frac{5}{8}\\).",
+    "options": [
+      "\\(\\frac{1}{2}\\)",
+      "\\(\\frac{20}{40}\\)",
+      "\\(\\frac{9}{13}\\)",
+      "\\(\\frac{32}{25}\\)"
+    ],
+    "answer": "\\(\\frac{1}{2}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from the numerator and denominator, and cancel 4 from 4 and 8, leaving \\(\\frac{1}{2}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-020",
+    "stem": "Multiply \\(\\frac{3}{2}\\) by \\(\\frac{5}{4}\\).",
+    "options": [
+      "\\(1\\frac{7}{8}\\)",
+      "\\(\\frac{15}{8}\\)",
+      "\\(\\frac{8}{6}\\)",
+      "\\(\\frac{2}{3}\\)"
+    ],
+    "answer": "\\(1\\frac{7}{8}\\)",
+    "status": "Confirmed",
+    "note": "Multiply numerators and denominators to get the improper fraction \\(\\frac{15}{8}\\). Convert it to a mixed fraction: \\(15 \\div 8 = 1\\) with a remainder of 7, so \\(1\\frac{7}{8}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-021",
+    "stem": "Multiply \\(\\frac{4}{3}\\) by \\(\\frac{5}{3}\\).",
+    "options": [
+      "\\(2\\frac{2}{9}\\)",
+      "\\(\\frac{20}{9}\\)",
+      "\\(\\frac{9}{6}\\)",
+      "\\(\\frac{1}{2}\\)"
+    ],
+    "answer": "\\(2\\frac{2}{9}\\)",
+    "status": "Confirmed",
+    "note": "Multiply numerators and denominators to get \\(\\frac{20}{9}\\). Converting to a mixed fraction gives \\(2\\frac{2}{9}\\) because \\(20 = 2 \\times 9 + 2\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-022",
+    "stem": "Multiply \\(\\frac{7}{5}\\) by \\(\\frac{3}{2}\\).",
+    "options": [
+      "\\(2\\frac{1}{10}\\)",
+      "\\(\\frac{21}{10}\\)",
+      "\\(\\frac{10}{7}\\)",
+      "\\(\\frac{14}{15}\\)"
+    ],
+    "answer": "\\(2\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "Multiply to get the improper fraction \\(\\frac{21}{10}\\). Convert to a mixed fraction to get \\(2\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-023",
+    "stem": "Multiply \\(\\frac{5}{2}\\) by \\(\\frac{3}{2}\\).",
+    "options": [
+      "\\(3\\frac{3}{4}\\)",
+      "\\(\\frac{15}{4}\\)",
+      "\\(\\frac{8}{4}\\)",
+      "\\(\\frac{4}{3}\\)"
+    ],
+    "answer": "\\(3\\frac{3}{4}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{15}{4}\\). Convert to a mixed fraction: \\(15 \\div 4 = 3\\) with a remainder of 3, so \\(3\\frac{3}{4}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-024",
+    "stem": "Multiply \\(\\frac{8}{3}\\) by \\(\\frac{2}{5}\\).",
+    "options": [
+      "\\(1\\frac{1}{15}\\)",
+      "\\(\\frac{16}{15}\\)",
+      "\\(\\frac{10}{8}\\)",
+      "\\(\\frac{20}{3}\\)"
+    ],
+    "answer": "\\(1\\frac{1}{15}\\)",
+    "status": "Confirmed",
+    "note": "Multiply to get \\(\\frac{16}{15}\\). Convert this improper fraction to a mixed fraction to get \\(1\\frac{1}{15}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-025",
+    "stem": "Multiply \\(\\frac{9}{4}\\) by \\(\\frac{3}{2}\\).",
+    "options": [
+      "\\(3\\frac{3}{8}\\)",
+      "\\(\\frac{27}{8}\\)",
+      "\\(\\frac{12}{6}\\)",
+      "\\(\\frac{8}{27}\\)"
+    ],
+    "answer": "\\(3\\frac{3}{8}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{27}{8}\\). Convert to a mixed fraction to get \\(3\\frac{3}{8}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-026",
+    "stem": "Multiply \\(\\frac{5}{3}\\) by \\(\\frac{7}{4}\\).",
+    "options": [
+      "\\(2\\frac{11}{12}\\)",
+      "\\(\\frac{35}{12}\\)",
+      "\\(\\frac{12}{7}\\)",
+      "\\(\\frac{20}{21}\\)"
+    ],
+    "answer": "\\(2\\frac{11}{12}\\)",
+    "status": "Confirmed",
+    "note": "Multiply to get \\(\\frac{35}{12}\\). Convert to a mixed fraction: \\(35 \\div 12 = 2\\) with a remainder of 11, so \\(2\\frac{11}{12}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-027",
+    "stem": "Multiply \\(\\frac{6}{5}\\) by \\(\\frac{4}{3}\\).",
+    "options": [
+      "\\(1\\frac{3}{5}\\)",
+      "\\(\\frac{8}{5}\\)",
+      "\\(\\frac{24}{15}\\)",
+      "\\(\\frac{10}{8}\\)"
+    ],
+    "answer": "\\(1\\frac{3}{5}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 3 from 6 and 3, leaving 2 and 1. Multiply to get \\(\\frac{8}{5}\\), which converts to the mixed fraction \\(1\\frac{3}{5}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-028",
+    "stem": "Multiply \\(\\frac{7}{4}\\) by \\(\\frac{6}{5}\\).",
+    "options": [
+      "\\(2\\frac{1}{10}\\)",
+      "\\(\\frac{21}{10}\\)",
+      "\\(\\frac{42}{20}\\)",
+      "\\(\\frac{13}{9}\\)"
+    ],
+    "answer": "\\(2\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 2 from 6 and 4, leaving 3 and 2. Multiply to get \\(\\frac{21}{10}\\), which converts to the mixed fraction \\(2\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-029",
+    "stem": "Multiply \\(\\frac{10}{3}\\) by \\(\\frac{2}{5}\\).",
+    "options": [
+      "\\(1\\frac{1}{3}\\)",
+      "\\(\\frac{4}{3}\\)",
+      "\\(\\frac{20}{15}\\)",
+      "\\(\\frac{12}{8}\\)"
+    ],
+    "answer": "\\(1\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 10 and 5, leaving 2 and 1. Multiply to get \\(\\frac{4}{3}\\), which converts to the mixed fraction \\(1\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-030",
+    "stem": "Multiply \\(\\frac{9}{2}\\) by \\(\\frac{5}{6}\\).",
+    "options": [
+      "\\(3\\frac{3}{4}\\)",
+      "\\(\\frac{15}{4}\\)",
+      "\\(\\frac{45}{12}\\)",
+      "\\(\\frac{14}{8}\\)"
+    ],
+    "answer": "\\(3\\frac{3}{4}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 3 from 9 and 6, leaving 3 and 2. Multiply to get \\(\\frac{15}{4}\\), which converts to the mixed fraction \\(3\\frac{3}{4}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-031",
+    "stem": "Multiply \\(\\frac{11}{4}\\) by \\(\\frac{2}{3}\\).",
+    "options": [
+      "\\(1\\frac{5}{6}\\)",
+      "\\(\\frac{11}{6}\\)",
+      "\\(\\frac{22}{12}\\)",
+      "\\(\\frac{13}{7}\\)"
+    ],
+    "answer": "\\(1\\frac{5}{6}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 2 from 2 and 4, leaving 1 and 2. Multiply to get \\(\\frac{11}{6}\\), which converts to the mixed fraction \\(1\\frac{5}{6}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-032",
+    "stem": "Multiply \\(\\frac{5}{2}\\) by \\(\\frac{7}{3}\\).",
+    "options": [
+      "\\(5\\frac{5}{6}\\)",
+      "\\(\\frac{35}{6}\\)",
+      "\\(\\frac{12}{5}\\)",
+      "\\(\\frac{15}{14}\\)"
+    ],
+    "answer": "\\(5\\frac{5}{6}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{35}{6}\\). Convert to a mixed fraction: \\(35 \\div 6 = 5\\) with a remainder of 5, so \\(5\\frac{5}{6}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-033",
+    "stem": "Multiply \\(\\frac{8}{5}\\) by \\(\\frac{7}{4}\\).",
+    "options": [
+      "\\(2\\frac{4}{5}\\)",
+      "\\(\\frac{14}{5}\\)",
+      "\\(\\frac{56}{20}\\)",
+      "\\(\\frac{15}{9}\\)"
+    ],
+    "answer": "\\(2\\frac{4}{5}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 4 from 8 and 4, leaving 2 and 1. Multiply to get \\(\\frac{14}{5}\\), which converts to the mixed fraction \\(2\\frac{4}{5}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-034",
+    "stem": "Multiply \\(\\frac{12}{7}\\) by \\(\\frac{5}{6}\\).",
+    "options": [
+      "\\(1\\frac{3}{7}\\)",
+      "\\(\\frac{10}{7}\\)",
+      "\\(\\frac{60}{42}\\)",
+      "\\(\\frac{17}{13}\\)"
+    ],
+    "answer": "\\(1\\frac{3}{7}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 6 from 12 and 6, leaving 2 and 1. Multiply to get \\(\\frac{10}{7}\\), which converts to the mixed fraction \\(1\\frac{3}{7}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-035",
+    "stem": "Multiply \\(\\frac{7}{3}\\) by \\(\\frac{5}{2}\\).",
+    "options": [
+      "\\(5\\frac{5}{6}\\)",
+      "\\(\\frac{35}{6}\\)",
+      "\\(\\frac{12}{5}\\)",
+      "\\(\\frac{14}{15}\\)"
+    ],
+    "answer": "\\(5\\frac{5}{6}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{35}{6}\\). Convert to a mixed fraction to get \\(5\\frac{5}{6}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-036",
+    "stem": "Multiply \\(\\frac{9}{5}\\) by \\(\\frac{4}{3}\\).",
+    "options": [
+      "\\(2\\frac{2}{5}\\)",
+      "\\(\\frac{12}{5}\\)",
+      "\\(\\frac{36}{15}\\)",
+      "\\(\\frac{13}{8}\\)"
+    ],
+    "answer": "\\(2\\frac{2}{5}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 3 from 9 and 3, leaving 3 and 1. Multiply to get \\(\\frac{12}{5}\\), which converts to the mixed fraction \\(2\\frac{2}{5}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-037",
+    "stem": "Multiply \\(\\frac{11}{5}\\) by \\(\\frac{3}{2}\\).",
+    "options": [
+      "\\(3\\frac{3}{10}\\)",
+      "\\(\\frac{33}{10}\\)",
+      "\\(\\frac{14}{7}\\)",
+      "\\(\\frac{22}{15}\\)"
+    ],
+    "answer": "\\(3\\frac{3}{10}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{33}{10}\\). Convert to a mixed fraction to get \\(3\\frac{3}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-038",
+    "stem": "Multiply \\(\\frac{13}{4}\\) by \\(\\frac{3}{5}\\).",
+    "options": [
+      "\\(1\\frac{19}{20}\\)",
+      "\\(\\frac{39}{20}\\)",
+      "\\(\\frac{16}{9}\\)",
+      "\\(\\frac{65}{12}\\)"
+    ],
+    "answer": "\\(1\\frac{19}{20}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{39}{20}\\). Convert to a mixed fraction to get \\(1\\frac{19}{20}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-039",
+    "stem": "Multiply \\(\\frac{7}{2}\\) by \\(\\frac{3}{5}\\).",
+    "options": [
+      "\\(2\\frac{1}{10}\\)",
+      "\\(\\frac{21}{10}\\)",
+      "\\(\\frac{10}{7}\\)",
+      "\\(\\frac{35}{6}\\)"
+    ],
+    "answer": "\\(2\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "Multiply the numerators and denominators to get \\(\\frac{21}{10}\\). Convert to a mixed fraction to get \\(2\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-040",
+    "stem": "Multiply \\(\\frac{2}{5}\\) by \\(\\frac{5}{9}\\).",
+    "options": [
+      "\\(\\frac{2}{9}\\)",
+      "\\(\\frac{10}{45}\\)",
+      "\\(\\frac{7}{14}\\)",
+      "\\(\\frac{18}{25}\\)"
+    ],
+    "answer": "\\(\\frac{2}{9}\\)",
+    "status": "Confirmed",
+    "note": "Cancel the common factor 5 from the numerator and denominator, leaving \\(\\frac{2}{9}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-041",
+    "stem": "Multiply \\(\\frac{3}{7}\\) by \\(\\frac{14}{15}\\).",
+    "options": [
+      "\\(\\frac{2}{5}\\)",
+      "\\(\\frac{42}{105}\\)",
+      "\\(\\frac{17}{22}\\)",
+      "\\(\\frac{5}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{5}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 3 from 3 and 15, leaving 1 and 5. Cancel 7 from 14 and 7, leaving 2 and 1. Multiply to get \\(\\frac{1 \\times 2}{1 \\times 5} = \\frac{2}{5}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-042",
+    "stem": "Multiply \\(\\frac{5}{9}\\) by \\(\\frac{3}{10}\\).",
+    "options": [
+      "\\(\\frac{1}{6}\\)",
+      "\\(\\frac{15}{90}\\)",
+      "\\(\\frac{8}{19}\\)",
+      "\\(\\frac{6}{1}\\)"
+    ],
+    "answer": "\\(\\frac{1}{6}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 5 and 10, leaving 1 and 2. Cancel 3 from 3 and 9, leaving 1 and 3. Multiply to get \\(\\frac{1 \\times 1}{3 \\times 2} = \\frac{1}{6}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-043",
+    "stem": "Multiply \\(\\frac{4}{11}\\) by \\(\\frac{11}{12}\\).",
+    "options": [
+      "\\(\\frac{1}{3}\\)",
+      "\\(\\frac{44}{132}\\)",
+      "\\(\\frac{15}{23}\\)",
+      "\\(\\frac{3}{1}\\)"
+    ],
+    "answer": "\\(\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 11 from the numerator and denominator, and cancel 4 from 4 and 12, leaving \\(\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-044",
+    "stem": "Multiply \\(\\frac{6}{7}\\) by \\(\\frac{14}{15}\\).",
+    "options": [
+      "\\(\\frac{4}{5}\\)",
+      "\\(\\frac{84}{105}\\)",
+      "\\(\\frac{20}{22}\\)",
+      "\\(\\frac{5}{4}\\)"
+    ],
+    "answer": "\\(\\frac{4}{5}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 7 from 14 and 7, leaving 2 and 1. Cancel 3 from 6 and 15, leaving 2 and 5. Multiply to get \\(\\frac{2 \\times 2}{1 \\times 5} = \\frac{4}{5}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-045",
+    "stem": "Multiply \\(\\frac{3}{8}\\) by \\(\\frac{16}{21}\\).",
+    "options": [
+      "\\(\\frac{2}{7}\\)",
+      "\\(\\frac{48}{168}\\)",
+      "\\(\\frac{19}{29}\\)",
+      "\\(\\frac{7}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{7}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 8 from 16 and 8, leaving 2 and 1. Cancel 3 from 3 and 21, leaving 1 and 7. Multiply to get \\(\\frac{1 \\times 2}{1 \\times 7} = \\frac{2}{7}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-046",
+    "stem": "Multiply \\(\\frac{5}{12}\\) by \\(\\frac{4}{15}\\).",
+    "options": [
+      "\\(\\frac{1}{9}\\)",
+      "\\(\\frac{20}{180}\\)",
+      "\\(\\frac{9}{27}\\)",
+      "\\(\\frac{9}{1}\\)"
+    ],
+    "answer": "\\(\\frac{1}{9}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 5 from 5 and 15, leaving 1 and 3. Cancel 4 from 4 and 12, leaving 1 and 3. Multiply to get \\(\\frac{1 \\times 1}{3 \\times 3} = \\frac{1}{9}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-047",
+    "stem": "Multiply \\(\\frac{7}{8}\\) by \\(\\frac{16}{21}\\).",
+    "options": [
+      "\\(\\frac{2}{3}\\)",
+      "\\(\\frac{112}{168}\\)",
+      "\\(\\frac{23}{29}\\)",
+      "\\(\\frac{3}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 7 from 7 and 21, leaving 1 and 3. Cancel 8 from 16 and 8, leaving 2 and 1. Multiply to get \\(\\frac{1 \\times 2}{1 \\times 3} = \\frac{2}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-048",
+    "stem": "Multiply \\(\\frac{9}{10}\\) by \\(\\frac{20}{27}\\).",
+    "options": [
+      "\\(\\frac{2}{3}\\)",
+      "\\(\\frac{180}{270}\\)",
+      "\\(\\frac{29}{37}\\)",
+      "\\(\\frac{3}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 9 from 9 and 27, leaving 1 and 3. Cancel 10 from 20 and 10, leaving 2 and 1. Multiply to get \\(\\frac{1 \\times 2}{1 \\times 3} = \\frac{2}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM02-049",
+    "stem": "Multiply \\(\\frac{10}{13}\\) by \\(\\frac{13}{15}\\).",
+    "options": [
+      "\\(\\frac{2}{3}\\)",
+      "\\(\\frac{130}{195}\\)",
+      "\\(\\frac{23}{28}\\)",
+      "\\(\\frac{3}{2}\\)"
+    ],
+    "answer": "\\(\\frac{2}{3}\\)",
+    "status": "Confirmed",
+    "note": "Cancel 13 from the numerator and denominator, and cancel 5 from 10 and 15, leaving \\(\\frac{2}{3}\\).",
+    "sourceSection": "Lesson 2",
+    "approved": "2026-11-02"
+  }
+]

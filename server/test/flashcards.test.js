@@ -13,7 +13,7 @@ process.env.PAPERS_DIR = papersDir;
 process.env.LATEST_FILE = path.join(papersDir, 'latest.txt');
 process.env.DB_FILE = path.join(tmpDir, 'app.db');
 
-const corpusFile = path.join(tmpDir, 'qa-corpus.md');
+const { writeSubject } = require('./helpers/subjectFixture');
 const corpusText = `## विभागः 1 — शब्दार्थाः (Meanings)
 
 Q131: "अहम्" इत्यस्य अर्थः कः?
@@ -43,8 +43,7 @@ Q001: अ _ इ ई _ ऊ । रिक्तस्थानयोः उचि�
 Answer: आ, उ
 Status: Confirmed
 `;
-fs.writeFileSync(corpusFile, corpusText);
-process.env.CORPUS_FILE = corpusFile;
+process.env.SUBJECTS_DIR = writeSubject(tmpDir, 'sanskrit', corpusText, { flashcards: true, corpusOnlySections: [1] });
 
 const app = require('../app');
 const db = require('../db/db');
@@ -70,64 +69,88 @@ test('flashcards pool only includes Confirmed Meanings items with options, exclu
   assert.doesNotMatch(html, /Q999/);
 });
 
-test('a correct answer is recorded and promotes the card to box 2', async () => {
-  const res = await fetch(`${base}/flashcards/answer`, {
+const post = (url, body) =>
+  fetch(base + url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ questionId: 'Q131', selectedOption: 'मैं' }),
-  });
-  assert.equal(res.status, 200);
-  const body = await res.json();
+    body: JSON.stringify(body),
+  }).then((r) => r.json());
+
+const drillRow = (id) => db.prepare('SELECT * FROM flashcard_drill WHERE question_id = ?').get(id);
+
+test('a correct answer counts toward the default requirement of 3', async () => {
+  const body = await post('/flashcards/answer', { questionId: 'Q131', selectedOption: 'मैं' });
   assert.equal(body.correct, true);
   assert.equal(body.correctAnswer, 'मैं');
-
-  const row = db.prepare('SELECT * FROM flashcard_progress WHERE question_id = ?').get('Q131');
-  assert.equal(row.box, 2);
-  assert.equal(row.correct_count, 1);
-  assert.ok(row.due_ts > Date.now(), 'a correct answer should push the next review into the future');
+  assert.equal(body.correctCount, 1);
+  assert.equal(body.required, 3);
+  assert.equal(drillRow('Q131').correct_count, 1);
 });
 
-test('a wrong answer resets the card to box 1, due immediately', async () => {
-  // First get it into box 2.
-  await fetch(`${base}/flashcards/answer`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ questionId: 'Q132', selectedOption: 'तुम' }),
-  });
-  let row = db.prepare('SELECT * FROM flashcard_progress WHERE question_id = ?').get('Q132');
-  assert.equal(row.box, 2);
+test('a wrong answer resets the count and raises the requirement to 5', async () => {
+  await post('/flashcards/answer', { questionId: 'Q132', selectedOption: 'तुम' });
+  assert.equal(drillRow('Q132').correct_count, 1);
 
-  // Then miss it.
-  const res = await fetch(`${base}/flashcards/answer`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ questionId: 'Q132', selectedOption: 'मेरा' }),
-  });
-  const body = await res.json();
+  const body = await post('/flashcards/answer', { questionId: 'Q132', selectedOption: 'मेरा' });
   assert.equal(body.correct, false);
-  assert.equal(body.correctAnswer, 'तुम');
+  assert.equal(body.correctCount, 0);
+  assert.equal(body.required, 5);
+  assert.equal(drillRow('Q132').wrong_count, 1);
+});
 
-  row = db.prepare('SELECT * FROM flashcard_progress WHERE question_id = ?').get('Q132');
-  assert.equal(row.box, 1);
-  assert.equal(row.incorrect_count, 1);
-  assert.ok(row.due_ts <= Date.now(), 'a wrong answer should be due again immediately');
+test('a card finishes after 3 correct (never missed) or 5 correct (after a miss)', async () => {
+  for (let i = 0; i < 2; i++) await post('/flashcards/answer', { questionId: 'Q131', selectedOption: 'मैं' });
+  assert.equal((await post('/flashcards/answer', { questionId: 'Q131', selectedOption: 'मैं' })).correctCount, 4); // over-answering is harmless
+  let next;
+  for (let i = 0; i < 30; i++) {
+    next = await (await fetch(`${base}/flashcards/next`)).json();
+    assert.notEqual(next.card.id, 'Q131', 'finished card must not be served again');
+  }
+
+  for (let i = 0; i < 4; i++) await post('/flashcards/answer', { questionId: 'Q132', selectedOption: 'तुम' });
+  let ids = new Set();
+  for (let i = 0; i < 60; i++) ids.add((await (await fetch(`${base}/flashcards/next`)).json()).card.id);
+  assert.ok(ids.has('Q132'), 'Q132 has 4/5 and must still be served');
+  await post('/flashcards/answer', { questionId: 'Q132', selectedOption: 'तुम' });
+  ids = new Set();
+  for (let i = 0; i < 60; i++) ids.add((await (await fetch(`${base}/flashcards/next`)).json()).card.id);
+  assert.deepEqual([...ids], ['Q163']);
+});
+
+test('options are reshuffled between serves', async () => {
+  const orders = new Set();
+  for (let i = 0; i < 40; i++) {
+    const { card } = await (await fetch(`${base}/flashcards/next?exclude=none`)).json();
+    assert.deepEqual([...card.options].sort(), [...card.options].sort());
+    orders.add(card.options.join('|'));
+  }
+  assert.ok(orders.size > 1);
+});
+
+test('the same card is not served twice in a row, and done:true when all finished', async () => {
+  for (let i = 0; i < 30; i++) {
+    const { card } = await (await fetch(`${base}/flashcards/next?exclude=Q163`)).json();
+    assert.ok(card); // Q163 is the only open card, so it is allowed to repeat
+  }
+  for (let i = 0; i < 3; i++) await post('/flashcards/answer', { questionId: 'Q163', selectedOption: 'दूरदर्शन (टी.वी.)' });
+  const done = await (await fetch(`${base}/flashcards/next`)).json();
+  assert.equal(done.done, true);
+  assert.equal(done.stats.remaining, 0);
 });
 
 test('a Latin-script parenthetical in the answer is surfaced as the English meaning', async () => {
-  const res = await fetch(`${base}/flashcards/answer`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ questionId: 'Q163', selectedOption: 'दूरदर्शन (टी.वी.)' }),
-  });
-  const body = await res.json();
-  // टी.वी. is Devanagari transliteration, not Latin script — no English gloss here.
+  const body = await post('/flashcards/answer', { questionId: 'Q163', selectedOption: 'दूरदर्शन (टी.वी.)' });
   assert.equal(body.englishMeaning, null);
 });
 
-test('/flashcards/next never repeats the excluded card while other due cards exist', async () => {
-  const res = await fetch(`${base}/flashcards/next?exclude=Q131`);
-  assert.equal(res.status, 200);
-  const body = await res.json();
-  assert.equal(body.ok, true);
-  assert.notEqual(body.card.id, 'Q131');
+test('resetAll clears all drill progress', () => {
+  require('../db/flashcards').resetAll();
+  assert.equal(db.prepare('SELECT COUNT(*) n FROM flashcard_drill').get().n, 0);
+});
+
+test('with 2+ open cards, /flashcards/next never repeats the excluded card', async () => {
+  for (let i = 0; i < 40; i++) {
+    const { card } = await (await fetch(`${base}/flashcards/next?exclude=Q131`)).json();
+    assert.notEqual(card.id, 'Q131');
+  }
 });

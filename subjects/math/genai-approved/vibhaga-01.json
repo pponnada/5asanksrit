@@ -1,0 +1,827 @@
+[
+  {
+    "id": "GM01-001",
+    "stem": "What is \\(\\frac{3}{4}\\) of 8?",
+    "options": [
+      "6",
+      "11",
+      "2",
+      "32"
+    ],
+    "answer": "6",
+    "status": "Confirmed",
+    "note": "\\(\\frac{3}{4}\\) of \\(8 = \\frac{3 \\times 8}{4} = \\frac{24}{4} = 6\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-002",
+    "stem": "What is Converter \\(\\frac{2}{5}\\) of 400 g?",
+    "options": [
+      "160 g",
+      "80 g",
+      "1000 g",
+      "200 g"
+    ],
+    "answer": "160 g",
+    "status": "Confirmed",
+    "note": "Divide 400 by 5 first to get 80, then multiply by 2: \\(2 \\times 80 = 160\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-003",
+    "stem": "What is \\(\\frac{1}{6}\\) of ₹ 42?",
+    "options": [
+      "₹ 7",
+      "₹ 252",
+      "₹ 6",
+      "₹ 8"
+    ],
+    "answer": "₹ 7",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{6}\\) of ₹ 42 \\(= \\frac{42}{6} =\\) ₹ 7.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-004",
+    "stem": "What is \\(\\frac{4}{9}\\) of 54?",
+    "options": [
+      "24",
+      "6",
+      "135",
+      "48"
+    ],
+    "answer": "24",
+    "status": "Confirmed",
+    "note": "Divide 54 by 9 first to get 6, then multiply by 4: \\(4 \\times 6 = 24\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-005",
+    "stem": "What is \\(\\frac{3}{5}\\) of ₹ 35?",
+    "options": [
+      "₹ 21",
+      "₹ 7",
+      "₹ 15",
+      "₹ 105"
+    ],
+    "answer": "₹ 21",
+    "status": "Confirmed",
+    "note": "Divide 35 by 5 first to get 7, then multiply by 3: \\(3 \\times 7 =\\) ₹ 21.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-006",
+    "stem": "What is \\(\\frac{2}{5}\\) of 15?",
+    "options": [
+      "6",
+      "13",
+      "3",
+      "37"
+    ],
+    "answer": "6",
+    "status": "Confirmed",
+    "note": "\\(\\frac{2}{5}\\) of \\(15 = \\frac{2 \\times 15}{5} = \\frac{30}{5} = 6\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-007",
+    "stem": "What is \\(\\frac{3}{4}\\) of 24?",
+    "options": [
+      "18",
+      "22",
+      "6",
+      "32"
+    ],
+    "answer": "18",
+    "status": "Confirmed",
+    "note": "Divide 24 by 4 first, which gives 6, then multiply by 3: \\(3 \\times 6 = 18\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-008",
+    "stem": "What is \\(\\frac{1}{4}\\) of ₹ 36?",
+    "options": [
+      "₹ 9",
+      "₹ 40",
+      "₹ 144",
+      "₹ 8"
+    ],
+    "answer": "₹ 9",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{4}\\) of ₹ 36 \\(= \\frac{36}{4} =\\) ₹ 9.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-009",
+    "stem": "What is \\(\\frac{5}{6}\\) of 180 g?",
+    "options": [
+      "150 g",
+      "30 g",
+      "216 g",
+      "1080 g"
+    ],
+    "answer": "150 g",
+    "status": "Confirmed",
+    "note": "Divide 180 by 6 first, which gives 30, then multiply by 5: \\(5 \\times 30 = 150\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-010",
+    "stem": "What is \\(\\frac{2}{7}\\) of 28?",
+    "options": [
+      "8",
+      "23",
+      "4",
+      "98"
+    ],
+    "answer": "8",
+    "status": "Confirmed",
+    "note": "\\(\\frac{2}{7}\\) of \\(28 = \\frac{2 \\times 28}{7} = \\frac{56}{7} = 8\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-011",
+    "stem": "What is \\(\\frac{3}{10}\\) of 500 g?",
+    "options": [
+      "150 g",
+      "50 g",
+      "1666 g",
+      "503 g"
+    ],
+    "answer": "150 g",
+    "status": "Confirmed",
+    "note": "Divide 500 by 10 first, which gives 50, then multiply by 3: \\(3 \\times 50 = 150\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-012",
+    "stem": "What is \\(\\frac{1}{3}\\) of ₹ 90?",
+    "options": [
+      "₹ 30",
+      "₹ 93",
+      "₹ 270",
+      "₹ 27"
+    ],
+    "answer": "₹ 30",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{3}\\) of ₹ 90 \\(= \\frac{90}{3} =\\) ₹ 30.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-013",
+    "stem": "What is \\(\\frac{4}{5}\\) of 45?",
+    "options": [
+      "36",
+      "41",
+      "9",
+      "225"
+    ],
+    "answer": "36",
+    "status": "Confirmed",
+    "note": "Divide 45 by 5 first, which gives 9, then multiply by 4: \\(4 \\times 9 = 36\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-014",
+    "stem": "What is \\(\\frac{3}{8}\\) of 64?",
+    "options": [
+      "24",
+      "59",
+      "8",
+      "168"
+    ],
+    "answer": "24",
+    "status": "Confirmed",
+    "note": "\\(\\frac{3}{8}\\) of \\(64 = \\frac{3 \\times 64}{8} = \\frac{192}{8} = 24\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-015",
+    "stem": "What is \\(\\frac{1}{8}\\) of 480 g?",
+    "options": [
+      "60 g",
+      "472 g",
+      "3840 g",
+      "40 g"
+    ],
+    "answer": "60 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{8}\\) of 480 g \\(= \\frac{480}{8} = 60\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-016",
+    "stem": "What is \\(\\frac{2}{3}\\) of ₹ 27?",
+    "options": [
+      "₹ 18",
+      "₹ 25",
+      "₹ 9",
+      "₹ 81"
+    ],
+    "answer": "₹ 18",
+    "status": "Confirmed",
+    "note": "Divide 27 by 3 first, which gives 9, then multiply by 2: \\(2 \\times 9 =\\) ₹ 18.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-017",
+    "stem": "What is \\(\\frac{4}{7}\\) of 35?",
+    "options": [
+      "20",
+      "32",
+      "5",
+      "245"
+    ],
+    "answer": "20",
+    "status": "Confirmed",
+    "note": "\\(\\frac{4}{7}\\) of \\(35 = \\frac{4 \\times 35}{7} = \\frac{140}{7} = 20\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-018",
+    "stem": "What is \\(\\frac{5}{8}\\) of 40?",
+    "options": [
+      "25",
+      "37",
+      "5",
+      "64"
+    ],
+    "answer": "25",
+    "status": "Confirmed",
+    "note": "Divide 40 by 8 first, which gives 5, then multiply by 5: \\(5 \\times 5 = 25\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-019",
+    "stem": "What is \\(\\frac{1}{10}\\) of ₹ 70?",
+    "options": [
+      "₹ 7",
+      "₹ 60",
+      "₹ 700",
+      "₹ 17"
+    ],
+    "answer": "₹ 7",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{10}\\) of ₹ 70 \\(= \\frac{70}{10} =\\) ₹ 7.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-020",
+    "stem": "What is \\(\\frac{3}{7}\\) of 210 g?",
+    "options": [
+      "90 g",
+      "30 g",
+      "490 g",
+      "1470 g"
+    ],
+    "answer": "90 g",
+    "status": "Confirmed",
+    "note": "Divide 210 by 7 first, which gives 30, then multiply by 3: \\(3 \\times 30 = 90\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-021",
+    "stem": "What is \\(\\frac{3}{4}\\) of 16?",
+    "options": [
+      "12",
+      "19",
+      "4",
+      "64"
+    ],
+    "answer": "12",
+    "status": "Confirmed",
+    "note": "\\(\\frac{3}{4}\\) of \\(16 = \\frac{3 \\times 16}{4} = \\frac{48}{4} = 12\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-022",
+    "stem": "What is \\(\\frac{2}{9}\\) of 81?",
+    "options": [
+      "18",
+      "74",
+      "9",
+      "3645"
+    ],
+    "answer": "18",
+    "status": "Confirmed",
+    "note": "Divide 81 by 9 first, which gives 9, then multiply by 2: \\(2 \\times 9 = 18\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-023",
+    "stem": "What is \\(\\frac{1}{5}\\) of 300 g?",
+    "options": [
+      "60 g",
+      "295 g",
+      "1500 g",
+      "150 g"
+    ],
+    "answer": "60 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{5}\\) of 300 g \\(= \\frac{300}{5} = 60\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-024",
+    "stem": "What is \\(\\frac{4}{5}\\) of ₹ 50?",
+    "options": [
+      "₹ 40",
+      "₹ 46",
+      "₹ 10",
+      "₹ 250"
+    ],
+    "answer": "₹ 40",
+    "status": "Confirmed",
+    "note": "Divide 50 by 5 first, which gives 10, then multiply by 4: \\(4 \\times 10 =\\) ₹ 40.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-025",
+    "stem": "What is \\(\\frac{5}{9}\\) of 45?",
+    "options": [
+      "25",
+      "41",
+      "5",
+      "81"
+    ],
+    "answer": "25",
+    "status": "Confirmed",
+    "note": "\\(\\frac{5}{9}\\) of \\(45 = \\frac{5 \\times 45}{9} = \\frac{225}{9} = 25\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-026",
+    "stem": "What is \\(\\frac{3}{5}\\) of 250 g?",
+    "options": [
+      "150 g",
+      "50 g",
+      "416 g",
+      "1250 g"
+    ],
+    "answer": "150 g",
+    "status": "Confirmed",
+    "note": "Divide 250 by 5 first, which gives 50, then multiply by 3: \\(3 \\times 50 = 150\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-027",
+    "stem": "What is \\(\\frac{1}{7}\\) of ₹ 63?",
+    "options": [
+      "₹ 9",
+      "₹ 56",
+      "₹ 441",
+      "₹ 7"
+    ],
+    "answer": "₹ 9",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{7}\\) of ₹ 63 \\(= \\frac{63}{7} =\\) ₹ 9.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-028",
+    "stem": "What is \\(\\frac{3}{4}\\) of 40?",
+    "options": [
+      "30",
+      "39",
+      "10",
+      "160"
+    ],
+    "answer": "30",
+    "status": "Confirmed",
+    "note": "Divide 40 by 4 first, which gives 10, then multiply by 3: \\(3 \\times 10 = 30\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-029",
+    "stem": "What is \\(\\frac{2}{3}\\) of 18?",
+    "options": [
+      "12",
+      "17",
+      "6",
+      "54"
+    ],
+    "answer": "12",
+    "status": "Confirmed",
+    "note": "\\(\\frac{2}{3}\\) of \\(18 = \\frac{2 \\times 18}{3} = \\frac{36}{3} = 12\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-030",
+    "stem": "What is \\(\\frac{1}{9}\\) of 720 g?",
+    "options": [
+      "80 g",
+      "711 g",
+      "6480 g",
+      "8 g"
+    ],
+    "answer": "80 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{9}\\) of 720 g \\(= \\frac{720}{9} = 80\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-031",
+    "stem": "What is \\(\\frac{4}{5}\\) of ₹ 100?",
+    "options": [
+      "₹ 80",
+      "₹ 96",
+      "₹ 20",
+      "₹ 500"
+    ],
+    "answer": "₹ 80",
+    "status": "Confirmed",
+    "note": "Divide 100 by 5 first, which gives 20, then multiply by 4: \\(4 \\times 20 =\\) ₹ 80.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-032",
+    "stem": "What is \\(\\frac{5}{7}\\) of 49?",
+    "options": [
+      "35",
+      "47",
+      "7",
+      "245"
+    ],
+    "answer": "35",
+    "status": "Confirmed",
+    "note": "\\(\\frac{5}{7}\\) of \\(49 = \\frac{5 \\times 49}{7} = \\frac{245}{7} = 35\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-033",
+    "stem": "What is \\(\\frac{3}{8}\\) of 400 g?",
+    "options": [
+      "150 g",
+      "50 g",
+      "1066 g",
+      "3200 g"
+    ],
+    "answer": "150 g",
+    "status": "Confirmed",
+    "note": "Divide 400 by 8 first, which gives 50, then multiply by 3: \\(3 \\times 50 = 150\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-034",
+    "stem": "What is \\(\\frac{1}{6}\\) of ₹ 54?",
+    "options": [
+      "₹ 9",
+      "₹ 48",
+      "₹ 324",
+      "₹ 6"
+    ],
+    "answer": "₹ 9",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{6}\\) of ₹ 54 \\(= \\frac{54}{6} =\\) ₹ 9.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-035",
+    "stem": "What is \\(\\frac{2}{5}\\) of 35?",
+    "options": [
+      "14",
+      "32",
+      "7",
+      "175"
+    ],
+    "answer": "14",
+    "status": "Confirmed",
+    "note": "Divide 35 by 5 first, which gives 7, then multiply by 2: \\(2 \\times 7 = 14\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-036",
+    "stem": "What is \\(\\frac{7}{10}\\) of 90?",
+    "options": [
+      "63",
+      "87",
+      "9",
+      "900"
+    ],
+    "answer": "63",
+    "status": "Confirmed",
+    "note": "\\(\\frac{7}{10}\\) of \\(90 = \\frac{7 \\times 90}{10} = \\frac{630}{10} = 63\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-037",
+    "stem": "What is \\(\\frac{1}{4}\\) of 240 g?",
+    "options": [
+      "60 g",
+      "236 g",
+      "960 g",
+      "96 g"
+    ],
+    "answer": "60 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{4}\\) of 240 g \\(= \\frac{240}{4} = 60\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-038",
+    "stem": "What is \\(\\frac{3}{5}\\) of ₹ 45?",
+    "options": [
+      "₹ 27",
+      "₹ 43",
+      "₹ 9",
+      "₹ 75"
+    ],
+    "answer": "₹ 27",
+    "status": "Confirmed",
+    "note": "Divide 45 by 5 first, which gives 9, then multiply by 3: \\(3 \\times 9 =\\) ₹ 27.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-039",
+    "stem": "What is \\(\\frac{4}{9}\\) of 36?",
+    "options": [
+      "16",
+      "31",
+      "4",
+      "81"
+    ],
+    "answer": "16",
+    "status": "Confirmed",
+    "note": "\\(\\frac{4}{9}\\) of \\(36 = \\frac{4 \\times 36}{9} = \\frac{144}{9} = 16\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-040",
+    "stem": "What is \\(\\frac{5}{6}\\) of 420 g?",
+    "options": [
+      "350 g",
+      "70 g",
+      "504 g",
+      "2520 g"
+    ],
+    "answer": "350 g",
+    "status": "Confirmed",
+    "note": "Divide 420 by 6 first, which gives 70, then multiply by 5: \\(5 \\times 70 = 350\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-041",
+    "stem": "What is \\(\\frac{1}{8}\\) of ₹ 72?",
+    "options": [
+      "₹ 9",
+      "₹ 64",
+      "₹ 576",
+      "₹ 8"
+    ],
+    "answer": "₹ 9",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{8}\\) of ₹ 72 \\(= \\frac{72}{8} =\\) ₹ 9.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-042",
+    "stem": "What is \\(\\frac{2}{3}\\) of 30?",
+    "options": [
+      "20",
+      "29",
+      "10",
+      "45"
+    ],
+    "answer": "20",
+    "status": "Confirmed",
+    "note": "Divide 30 by 3 first, which gives 10, then multiply by 2: \\(2 \\times 10 = 20\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-043",
+    "stem": "What is \\(\\frac{3}{7}\\) of 56?",
+    "options": [
+      "24",
+      "52",
+      "8",
+      "168"
+    ],
+    "answer": "24",
+    "status": "Confirmed",
+    "note": "\\(\\frac{3}{7}\\) of \\(56 = \\frac{3 \\times 56}{7} = \\frac{168}{7} = 24\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-044",
+    "stem": "What is \\(\\frac{1}{10}\\) of 800 g?",
+    "options": [
+      "80 g",
+      "790 g",
+      "8000 g",
+      "800 g"
+    ],
+    "answer": "80 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{10}\\) of 800 g \\(= \\frac{800}{10} = 80\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-045",
+    "stem": "What is \\(\\frac{4}{5}\\) of ₹ 25?",
+    "options": [
+      "₹ 20",
+      "₹ 24",
+      "₹ 5",
+      "₹ 125"
+    ],
+    "answer": "₹ 20",
+    "status": "Confirmed",
+    "note": "Divide 25 by 5 first, which gives 5, then multiply by 4: \\(4 \\times 5 =\\) ₹ 20.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-046",
+    "stem": "What is \\(\\frac{5}{8}\\) of 72?",
+    "options": [
+      "45",
+      "69",
+      "9",
+      "576"
+    ],
+    "answer": "45",
+    "status": "Confirmed",
+    "note": "\\(\\frac{5}{8}\\) of \\(72 = \\frac{5 \\times 72}{8} = \\frac{360}{8} = 45\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-047",
+    "stem": "What is \\(\\frac{2}{9}\\) of 450 g?",
+    "options": [
+      "100 g",
+      "50 g",
+      "2025 g",
+      "900 g"
+    ],
+    "answer": "100 g",
+    "status": "Confirmed",
+    "note": "Divide 450 by 9 first, which gives 50, then multiply by 2: \\(2 \\times 50 = 100\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-048",
+    "stem": "What is \\(\\frac{1}{3}\\) of ₹ 48?",
+    "options": [
+      "₹ 16",
+      "₹ 45",
+      "₹ 144",
+      "₹ 24"
+    ],
+    "answer": "₹ 16",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{3}\\) of ₹ 48 \\(= \\frac{48}{3} =\\) ₹ 16.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-049",
+    "stem": "What is \\(\\frac{3}{4}\\) of 36?",
+    "options": [
+      "27",
+      "35",
+      "9",
+      "48"
+    ],
+    "answer": "27",
+    "status": "Confirmed",
+    "note": "Divide 36 by 4 first, which gives 9, then multiply by 3: \\(3 \\times 9 = 27\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-050",
+    "stem": "What is \\(\\frac{2}{7}\\) of 63?",
+    "options": [
+      "18",
+      "58",
+      "9",
+      "220"
+    ],
+    "answer": "18",
+    "status": "Confirmed",
+    "note": "\\(\\frac{2}{7}\\) of \\(63 = \\frac{2 \\times 63}{7} = \\frac{126}{7} = 18\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-051",
+    "stem": "What is \\(\\frac{1}{5}\\) of 450 g?",
+    "options": [
+      "90 g",
+      "445 g",
+      "2250 g",
+      "50 g"
+    ],
+    "answer": "90 g",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{5}\\) of 450 g \\(= \\frac{450}{5} = 90\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-052",
+    "stem": "What is \\(\\frac{3}{10}\\) of ₹ 60?",
+    "options": [
+      "₹ 18",
+      "₹ 57",
+      "₹ 6",
+      "₹ 200"
+    ],
+    "answer": "₹ 18",
+    "status": "Confirmed",
+    "note": "Divide 60 by 10 first, which gives 6, then multiply by 3: \\(3 \\times 6 =\\) ₹ 18.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-053",
+    "stem": "What is \\(\\frac{5}{6}\\) of 54?",
+    "options": [
+      "45",
+      "53",
+      "9",
+      "324"
+    ],
+    "answer": "45",
+    "status": "Confirmed",
+    "note": "\\(\\frac{5}{6}\\) of \\(54 = \\frac{5 \\times 54}{6} = \\frac{270}{6} = 45\\).",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-054",
+    "stem": "What is \\(\\frac{3}{8}\\) of 160 g?",
+    "options": [
+      "60 g",
+      "20 g",
+      "426 g",
+      "480 g"
+    ],
+    "answer": "60 g",
+    "status": "Confirmed",
+    "note": "Divide 160 by 8 first, which gives 20, then multiply by 3: \\(3 \\times 20 = 60\\) g.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM01-055",
+    "stem": "What is \\(\\frac{1}{7}\\) of ₹ 84?",
+    "options": [
+      "₹ 12",
+      "₹ 77",
+      "₹ 588",
+      "₹ 7"
+    ],
+    "answer": "₹ 12",
+    "status": "Confirmed",
+    "note": "\\(\\frac{1}{7}\\) of ₹ 84 \\(= \\frac{84}{7} =\\) ₹ 12.",
+    "sourceSection": "Lesson 1",
+    "approved": "2026-11-02"
+  }
+]

@@ -1,5 +1,5 @@
 const { parseCorpus } = require('./parseCorpus');
-const { CORPUS_FILE } = require('../config');
+const { getFlashcardSubject } = require('./subjects');
 
 const MEANINGS_SECTION_NUMBER = 1;
 
@@ -16,7 +16,9 @@ const ENGLISH_GLOSS_RE = /\(([A-Za-z][A-Za-z .'-]*)\)/;
  * restricted to Confirmed items that already carry MCQ options.
  */
 function loadFlashcardPool() {
-  const { sections } = parseCorpus(CORPUS_FILE);
+  const subject = getFlashcardSubject();
+  if (!subject) return [];
+  const { sections } = parseCorpus(subject.corpusFile);
   const meanings = sections.find((s) => s.number === MEANINGS_SECTION_NUMBER);
   if (!meanings) return [];
 

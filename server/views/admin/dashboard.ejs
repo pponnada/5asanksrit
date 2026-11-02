@@ -3,13 +3,19 @@
 <main class="admin-dashboard">
   <h1>Papers</h1>
 
-  <div class="dashboard-actions">
-    <a class="build-new-paper-btn" href="/admin/builder">Build New Paper</a>
-    <a class="build-new-paper-btn secondary" href="/admin/bank">Manage Question Bank</a>
-  </div>
+  <% subjects.forEach(function(s) { %>
+    <div class="dashboard-actions">
+      <strong class="subject-label"><%= s.nameEn %></strong>
+      <a class="build-new-paper-btn" href="/admin/s/<%= s.id %>/builder">Build New Paper</a>
+      <a class="build-new-paper-btn secondary" href="/admin/s/<%= s.id %>/bank">Manage Question Bank</a>
+    </div>
+  <% }); %>
 
   <% if (typeof restored !== 'undefined' && restored) { %>
     <p class="flash flash-success" role="status">Backup restored successfully. The data below is from the restored file.</p>
+  <% } %>
+  <% if (typeof flashcardsReset !== 'undefined' && flashcardsReset) { %>
+    <p class="flash flash-success" role="status">Flashcard drill reset. Every card starts again from zero.</p>
   <% } %>
   <% if (typeof backupError !== 'undefined' && backupError) { %>
     <p class="flash flash-error" role="alert"><%= backupError %></p>
@@ -57,6 +63,15 @@
     </details>
   </section>
 
+  <section class="backup-card" aria-labelledby="fc-reset-heading">
+    <h2 id="fc-reset-heading">Flashcard drill</h2>
+    <p class="backup-hint">Clears all drill progress so every card needs to be answered correctly again.</p>
+    <form method="POST" action="/admin/flashcards/reset"
+          onsubmit="return confirm('Reset all flashcard drill progress? This cannot be undone.');">
+      <button type="submit" class="restore-btn">Reset flashcard drill</button>
+    </form>
+  </section>
+
   <% if (papers.length === 0) { %>
     <p>No papers composed yet. Click "Build New Paper" above to create one.</p>
   <% } %>
@@ -66,6 +81,7 @@
       <li class="paper-row">
         <div class="paper-meta">
           <strong><%= p.id %></strong>
+          <span class="subject-tag"><%= p.subjectName %></span>
           <span class="badge badge-<%= p.badge.type %>"><%= p.badge.label %></span>
           <div class="paper-summary">
             <%= p.summary %><% if (p.taken) { %> · Taken — <%= p.score %><% } %>

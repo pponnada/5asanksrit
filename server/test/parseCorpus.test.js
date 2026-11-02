@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const { parseCorpus } = require('../content/parseCorpus');
 
-const CORPUS_FILE = path.join(__dirname, '..', '..', 'qa-corpus.md');
+const CORPUS_FILE = path.join(__dirname, '..', '..', 'subjects', 'sanskrit', 'corpus.md');
 
 test('parses all 18 sections with no items lost or duplicated', () => {
   const { sections } = parseCorpus(CORPUS_FILE);
@@ -81,4 +81,13 @@ test('a section with no free-text source material has a null preamble (e.g. рд╡р
   const { sections } = parseCorpus(CORPUS_FILE);
   const section9 = sections.find((s) => s.number === 9);
   assert.equal(section9.preamble, null);
+});
+
+test('the maths subject corpus parses as lesson sections that are pure source material', () => {
+  const { sections } = parseCorpus(path.join(__dirname, '..', '..', 'subjects', 'math', 'corpus.md'));
+  assert.deepEqual(sections.map((x) => x.number), [1, 2, 3, 4, 5]);
+  assert.ok(sections.every((x) => x.label === 'Lesson'));
+  assert.ok(sections.every((x) => x.items.length === 0));
+  assert.match(sections[1].preamble, /\\frac\{2\}\{3\} \\times \\frac\{3\}\{5\}/);
+  assert.match(sections[2].preamble, /Teacher note/);
 });

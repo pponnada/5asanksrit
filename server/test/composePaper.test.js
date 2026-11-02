@@ -4,19 +4,14 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-// composePaper.js reads CORPUS_FILE/GENAI_APPROVED_DIR/PAPERS_DIR from
-// config.js at require time, so these env vars must be set before it (or
+// config.js reads SUBJECTS_DIR/PAPERS_DIR at require time, so these env vars must be set before it (or
 // config.js) is required anywhere — same pattern as attemptLifecycle.test.js.
 const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'compose-paper-test-'));
-const corpusFile = path.join(tmpDir, 'qa-corpus.md');
-const genaiDir = path.join(tmpDir, 'genai-approved');
 const papersDir = path.join(tmpDir, 'papers');
-fs.mkdirSync(genaiDir);
 fs.mkdirSync(papersDir);
+const { writeSubject } = require('./helpers/subjectFixture');
 
-fs.writeFileSync(
-  corpusFile,
-  `# QA Corpus
+const corpusText = `# QA Corpus
 
 ## विभागः 1 — शब्दार्थाः (Meanings)
 
@@ -36,16 +31,17 @@ Q010: प्रश्नः ३?
 विकल्पाः: क, ख, ग, घ
 Answer: क
 Status: Confirmed
-`,
-  'utf8'
-);
+`;
 
-process.env.CORPUS_FILE = corpusFile;
-process.env.GENAI_APPROVED_DIR = genaiDir;
+process.env.SUBJECTS_DIR = writeSubject(tmpDir, 'sanskrit', corpusText);
 process.env.PAPERS_DIR = papersDir;
 
 const { composePaper } = require('../content/composePaper');
 const { parsePaperFile } = require('../content/parsePaper');
+const { getSubject } = require('../content/subjects');
+
+const subject = getSubject('sanskrit');
+const genaiDir = subject.genaiDir;
 
 test('composes a Draft (no Published-At) with the requested sections and time limit', () => {
   const draft = {
@@ -56,13 +52,14 @@ test('composes a Draft (no Published-At) with the requested sections and time li
     ],
   };
 
-  const id = composePaper(draft);
+  const id = composePaper(subject, draft);
   const filePath = path.join(papersDir, id + '.md');
   assert.ok(fs.existsSync(filePath));
 
   const paper = parsePaperFile(filePath);
   assert.equal(paper.timeLimitMinutes, 20);
   assert.equal(paper.publishedAt, null);
+  assert.equal(paper.subject, 'sanskrit');
   assert.deepEqual(paper.sections, ['विभागः 1', 'विभागः 9']); // ascending order, not selection order
   assert.equal(paper.items.length, 2);
 
@@ -83,10 +80,19 @@ test('draws a section\'s count from its bank (native usable + GenAI-approved) wi
     sections: [{ number: 9, count: 2 }], // विभागः 9's whole bank: Q010 (corpus) + G09-001 (GenAI-approved)
   };
 
-  const id = composePaper(draft);
+  const id = composePaper(subject, draft);
   const paper = parsePaperFile(path.join(papersDir, id + '.md'));
 
   const ids = paper.items.map((i) => i.id);
   assert.equal(ids.length, new Set(ids).size, 'no duplicate item ids in the composed paper');
   assert.deepEqual(new Set(ids), new Set(['Q010', 'G09-001']));
+});
+
+test('two papers composed in the same minute get distinct ids instead of overwriting each other', () => {
+  const draft = { timeLimitMinutes: 10, sections: [{ number: 9, count: 1 }] };
+  const a = composePaper(subject, draft);
+  const b = composePaper(subject, draft);
+  assert.notEqual(a, b);
+  assert.ok(fs.existsSync(path.join(papersDir, a + '.md')));
+  assert.ok(fs.existsSync(path.join(papersDir, b + '.md')));
 });

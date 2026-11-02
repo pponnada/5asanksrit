@@ -52,3 +52,12 @@ test('loadAllCounts sums per-section counts across files', () => {
   assert.equal(counts[9], 2);
   assert.equal(counts[12], 1);
 });
+
+test('a subject can pick its own id prefix and section label', () => {
+  const dir = tmpDir();
+  const stamped = appendApprovedItems(2, [{ stem: 's', options: ['a', 'b'], answer: 'a' }], dir, { idPrefix: 'GM', sectionLabel: 'Lesson' });
+  assert.equal(stamped[0].id, 'GM02-001');
+  assert.equal(stamped[0].sourceSection, 'Lesson 2');
+  const next = appendApprovedItems(2, [{ stem: 's2', options: ['a', 'b'], answer: 'b' }], dir, { idPrefix: 'GM', sectionLabel: 'Lesson' });
+  assert.equal(next[0].id, 'GM02-002');
+});

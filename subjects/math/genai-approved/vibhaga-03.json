@@ -1,0 +1,752 @@
+[
+  {
+    "id": "GM03-001",
+    "stem": "In an area model to multiply \\(\\frac{2}{3}\\) by \\(\\frac{1}{5}\\), a rectangle is divided into equal parts. What is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "15",
+      "8",
+      "2",
+      "5"
+    ],
+    "answer": "15",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is the product of the denominators: \\(3 \\times 5 = 15\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-002",
+    "stem": "When using an area model to multiply \\(\\frac{3}{4}\\) by \\(\\frac{1}{3}\\), how many overlapping shaded parts represent the product?",
+    "options": [
+      "3",
+      "7",
+      "4",
+      "12"
+    ],
+    "answer": "3",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(3 \\times 1 = 3\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-003",
+    "stem": "Use an area model to solve the fraction problem: \\(\\frac{1}{3} \\times \\frac{2}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{2}{15}\\)",
+      "\\(\\frac{3}{8}\\)",
+      "\\(\\frac{5}{6}\\)",
+      "\\(\\frac{1}{15}\\)"
+    ],
+    "answer": "\\(\\frac{2}{15}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(3 \\times 5 = 15\\) parts, and the overlap has \\(1 \\times 2 = 2\\) parts, giving \\(\\frac{2}{15}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-004",
+    "stem": "If you divide a rectangle into 6 equal parts vertically and 5 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "30",
+      "11",
+      "6",
+      "5"
+    ],
+    "answer": "30",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(6 \\times 5 = 30\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-005",
+    "stem": "To multiply \\(\\frac{2}{5}\\) by \\(\\frac{3}{4}\\) using an area model, how many overlapping shaded parts will you count?",
+    "options": [
+      "6",
+      "5",
+      "9",
+      "20"
+    ],
+    "answer": "6",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is determined by multiplying the numerators: \\(2 \\times 3 = 6\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-006",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{1}{4} \\times \\frac{3}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{3}{20}\\)",
+      "\\(\\frac{4}{9}\\)",
+      "\\(\\frac{5}{12}\\)",
+      "\\(\\frac{2}{20}\\)"
+    ],
+    "answer": "\\(\\frac{3}{20}\\)",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(4 \\times 5 = 20\\), and the overlapping parts are \\(1 \\times 3 = 3\\), so the product is \\(\\frac{3}{20}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-007",
+    "stem": "In an area model representing \\(\\frac{3}{7}\\) by \\(\\frac{1}{2}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "14",
+      "9",
+      "3",
+      "7"
+    ],
+    "answer": "14",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is found by multiplying the denominators: \\(7 \\times 2 = 14\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-008",
+    "stem": "When drawing an area model to multiply \\(\\frac{4}{5}\\) by \\(\\frac{2}{3}\\), how many overlapping shaded parts do you get?",
+    "options": [
+      "8",
+      "6",
+      "15",
+      "10"
+    ],
+    "answer": "8",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts equals the product of the numerators: \\(4 \\times 2 = 8\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-009",
+    "stem": "Use an area model to find the result of the fraction problem: \\(\\frac{1}{5} \\times \\frac{1}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{1}{15}\\)",
+      "\\(\\frac{2}{8}\\)",
+      "\\(\\frac{5}{3}\\)",
+      "\\(\\frac{3}{5}\\)"
+    ],
+    "answer": "\\(\\frac{1}{15}\\)",
+    "status": "Confirmed",
+    "note": "The total parts are \\(5 \\times 3 = 15\\), and the overlapping part is \\(1 \\times 1 = 1\\), giving \\(\\frac{1}{15}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-010",
+    "stem": "If a rectangle on grid paper is divided into 4 equal parts vertically and 4 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "16",
+      "8",
+      "4",
+      "1"
+    ],
+    "answer": "16",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(4 \\times 4 = 16\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-011",
+    "stem": "To multiply \\(\\frac{3}{8}\\) by \\(\\frac{1}{2}\\) using an area model, how many overlapping shaded parts will be counted?",
+    "options": [
+      "3",
+      "4",
+      "10",
+      "16"
+    ],
+    "answer": "3",
+    "status": "Confirmed",
+    "note": "The overlapping shaded parts are found by multiplying the numerators: \\(3 \\times 1 = 3\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-012",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{2}{7} \\times \\frac{1}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{2}{21}\\)",
+      "\\(\\frac{3}{10}\\)",
+      "\\(\\frac{7}{6}\\)",
+      "\\(\\frac{1}{21}\\)"
+    ],
+    "answer": "\\(\\frac{2}{21}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(7 \\times 3 = 21\\) equal parts, and the overlap contains \\(2 \\times 1 = 2\\) parts, resulting in \\(\\frac{2}{21}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-013",
+    "stem": "In an area model for the multiplication of \\(\\frac{5}{6}\\) by \\(\\frac{1}{4}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "24",
+      "10",
+      "5",
+      "6"
+    ],
+    "answer": "24",
+    "status": "Confirmed",
+    "note": "The total number of equal parts in the entire rectangle is the product of the denominators: \\(6 \\times 4 = 24\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-014",
+    "stem": "When using an area model to multiply \\(\\frac{2}{3}\\) by \\(\\frac{2}{5}\\), how many overlapping shaded parts represent the product?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "15"
+    ],
+    "answer": "4",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(2 \\times 2 = 4\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-015",
+    "stem": "Use an area model to solve the fraction problem: \\(\\frac{1}{2} \\times \\frac{1}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{1}{10}\\)",
+      "\\(\\frac{2}{7}\\)",
+      "\\(\\frac{5}{2}\\)",
+      "\\(\\frac{2}{5}\\)"
+    ],
+    "answer": "\\(\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(2 \\times 5 = 10\\), and the overlap is \\(1 \\times 1 = 1\\), so the answer is \\(\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-016",
+    "stem": "If you divide a rectangle into 8 equal parts vertically and 3 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "24",
+      "11",
+      "8",
+      "3"
+    ],
+    "answer": "24",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(8 \\times 3 = 24\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-017",
+    "stem": "To multiply \\(\\frac{4}{7}\\) by \\(\\frac{1}{3}\\) using an area model, how many overlapping shaded parts will you count?",
+    "options": [
+      "4",
+      "5",
+      "10",
+      "21"
+    ],
+    "answer": "4",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(4 \\times 1 = 4\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-018",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{3}{5} \\times \\frac{2}{7}\\). What is the product?",
+    "options": [
+      "\\(\\frac{6}{35}\\)",
+      "\\(\\frac{5}{12}\\)",
+      "\\(\\frac{21}{10}\\)",
+      "\\(\\frac{5}{35}\\)"
+    ],
+    "answer": "\\(\\frac{6}{35}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(5 \\times 7 = 35\\) parts, and the overlap has \\(3 \\times 2 = 6\\) parts, giving \\(\\frac{6}{35}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-019",
+    "stem": "In an area model to multiply \\(\\frac{1}{6}\\) by \\(\\frac{1}{5}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "30",
+      "11",
+      "1",
+      "6"
+    ],
+    "answer": "30",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is found by multiplying the denominators: \\(6 \\times 5 = 30\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-020",
+    "stem": "When drawing an area model to multiply \\(\\frac{3}{4}\\) by \\(\\frac{3}{5}\\), how many overlapping shaded parts do you get?",
+    "options": [
+      "9",
+      "6",
+      "7",
+      "20"
+    ],
+    "answer": "9",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts equals the product of the numerators: \\(3 \\times 3 = 9\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-021",
+    "stem": "Use an area model to find the result of the fraction problem: \\(\\frac{2}{3} \\times \\frac{1}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{2}{9}\\)",
+      "\\(\\frac{3}{6}\\)",
+      "\\(\\frac{3}{2}\\)",
+      "\\(\\frac{1}{9}\\)"
+    ],
+    "answer": "\\(\\frac{2}{9}\\)",
+    "status": "Confirmed",
+    "note": "The total parts are \\(3 \\times 3 = 9\\), and the overlapping parts are \\(2 \\times 1 = 2\\), giving \\(\\frac{2}{9}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-022",
+    "stem": "If a rectangle on grid paper is divided into 7 equal parts vertically and 4 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "28",
+      "11",
+      "7",
+      "4"
+    ],
+    "answer": "28",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(7 \\times 4 = 28\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-023",
+    "stem": "To multiply \\(\\frac{5}{8}\\) by     \\(\\frac{1}{3}\\) using an area model, how many overlapping shaded parts will be counted?",
+    "options": [
+      "5",
+      "6",
+      "11",
+      "24"
+    ],
+    "answer": "5",
+    "status": "Confirmed",
+    "note": "The overlapping shaded parts are found by multiplying the numerators: \\(5 \\times 1 = 5\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-024",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{3}{4} \\times \\frac{1}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{3}{20}\\)",
+      "\\(\\frac{4}{9}\\)",
+      "\\(\\frac{5}{4}\\)",
+      "\\(\\frac{2}{20}\\)"
+    ],
+    "answer": "\\(\\frac{3}{20}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(4 \\times 5 = 20\\) equal parts, and the overlap contains \\(3 \\times 1 = 3\\) parts, resulting in \\(\\frac{3}{20}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-025",
+    "stem": "In an area model for the multiplication of \\(\\frac{2}{9}\\) by \\(\\frac{2}{3}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "27",
+      "12",
+      "4",
+      "9"
+    ],
+    "answer": "27",
+    "status": "Confirmed",
+    "note": "The total number of equal parts in the entire rectangle is the product of the denominators: \\(9 \\times 3 = 27\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-026",
+    "stem": "When using an area model to multiply \\(\\frac{1}{5}\\) by \\(\\frac{4}{7}\\), how many overlapping shaded parts represent the product?",
+    "options": [
+      "4",
+      "5",
+      "12",
+      "35"
+    ],
+    "answer": "4",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(1 \\times 4 = 4\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-027",
+    "stem": "Use an area model to solve the fraction problem: \\(\\frac{3}{8} \\times \\frac{1}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{3}{40}\\)",
+      "\\(\\frac{4}{13}\\)",
+      "\\(\\frac{5}{24}\\)",
+      "\\(\\frac{2}{40}\\)"
+    ],
+    "answer": "\\(\\frac{3}{40}\\)",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(8 \\times 5 = 40\\), and the overlap is \\(3 \\times 1 = 3\\), so the answer is \\(\\frac{3}{40}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-028",
+    "stem": "If you divide a rectangle into 5 equal parts vertically and 5 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "25",
+      "10",
+      "5",
+      "1"
+    ],
+    "answer": "25",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(5 \\times 5 = 25\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-029",
+    "stem": "To multiply \\(\\frac{4}{9}\\) by \\(\\frac{1}{2}\\) using an area model, how many overlapping shaded parts will you count?",
+    "options": [
+      "4",
+      "5",
+      "11",
+      "18"
+    ],
+    "answer": "4",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(4 \\times 1 = 4\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-030",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{2}{5} \\times \\frac{2}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{4}{15}\\)",
+      "\\(\\frac{4}{8}\\)",
+      "\\(\\frac{6}{10}\\)",
+      "\\(\\frac{2}{15}\\)"
+    ],
+    "answer": "\\(\\frac{4}{15}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(5 \\times 3 = 15\\) parts, and the overlap has \\(2 \\times 2 = 4\\) parts, giving \\(\\frac{4}{15}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-031",
+    "stem": "In an area model to multiply \\(\\frac{3}{10}\\) by \\(\\frac{1}{2}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "20",
+      "12",
+      "3",
+      "10"
+    ],
+    "answer": "20",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is found by multiplying the denominators: \\(10 \\times 2 = 20\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-032",
+    "stem": "When drawing an area model to multiply \\(\\frac{1}{3}\\) by \\(\\frac{2}{7}\\), how many overlapping shaded parts do you get?",
+    "options": [
+      "2",
+      "3",
+      "10",
+      "21"
+    ],
+    "answer": "2",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts equals the product of the numerators: \\(1 \\times 2 = 2\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-033",
+    "stem": "Use an area model to find the result of the fraction problem: \\(\\frac{4}{5} \\times \\frac{1}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{4}{15}\\)",
+      "\\(\\frac{5}{8}\\)",
+      "\\(\\frac{12}{5}\\)",
+      "\\(\\frac{3}{15}\\)"
+    ],
+    "answer": "\\(\\frac{4}{15}\\)",
+    "status": "Confirmed",
+    "note": "The total parts are \\(5 \\times 3 = 15\\), and the overlapping parts are \\(4 \\times 1 = 4\\), giving \\(\\frac{4}{15}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-034",
+    "stem": "If a rectangle on grid paper is divided into 9 equal parts vertically and 4 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "36",
+      "13",
+      "9",
+      "4"
+    ],
+    "answer": "36",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(9 \\times 4 = 36\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-035",
+    "stem": "To multiply \\(\\frac{1}{6}\\) by \\(\\frac{5}{7}\\) using an area model, how many overlapping shaded parts will be counted?",
+    "options": [
+      "5",
+      "6",
+      "13",
+      "42"
+    ],
+    "answer": "5",
+    "status": "Confirmed",
+    "note": "The overlapping shaded parts are found by multiplying the numerators: \\(1 \\times 5 = 5\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-036",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{2}{3} \\times \\frac{4}{5}\\). What is the product?",
+    "options": [
+      "\\(\\frac{8}{15}\\)",
+      "\\(\\frac{6}{8}\\)",
+      "\\(\\frac{10}{12}\\)",
+      "\\(\\frac{6}{15}\\)"
+    ],
+    "answer": "\\(\\frac{8}{15}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(3 \\times 5 = 15\\) equal parts, and the overlap contains \\(2 \\times 4 = 8\\) parts, resulting in \\(\\frac{8}{15}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-037",
+    "stem": "In an area model for the multiplication of \\(\\frac{3}{8}\\) by \\(\\frac{3}{4}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "32",
+      "12",
+      "6",
+      "8"
+    ],
+    "answer": "32",
+    "status": "Confirmed",
+    "note": "The total number of equal parts in the entire rectangle is the product of the denominators: \\(8 \\times 4 = 32\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-038",
+    "stem": "When using an area model to multiply \\(\\frac{1}{7}\\) by     \\(\\frac{3}{5}\\), how many overlapping shaded parts represent the product?",
+    "options": [
+      "3",
+      "4",
+      "12",
+      "35"
+    ],
+    "answer": "3",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(1 \\times 3 = 3\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-039",
+    "stem": "Use an area model to solve the fraction problem: \\(\\frac{5}{6} \\times \\frac{1}{3}\\). What is the product?",
+    "options": [
+      "\\(\\frac{5}{18}\\)",
+      "\\(\\frac{6}{9}\\)",
+      "\\(\\frac{15}{6}\\)",
+      "\\(\\frac{4}{18}\\)"
+    ],
+    "answer": "\\(\\frac{5}{18}\\)",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(6 \\times 3 = 18\\), and the overlap is \\(5 \\times 1 = 5\\), so the answer is \\(\\frac{5}{18}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-040",
+    "stem": "If you divide a rectangle into 7 equal parts vertically and 3 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "21",
+      "10",
+      "7",
+      "3"
+    ],
+    "answer": "21",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(7 \\times 3 = 21\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-041",
+    "stem": "To multiply \\(\\frac{3}{5}\\) by \\(\\frac{3}{5}\\) using an area model, how many overlapping shaded parts will you count?",
+    "options": [
+      "9",
+      "6",
+      "10",
+      "25"
+    ],
+    "answer": "9",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(3 \\times 3 = 9\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-042",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{1}{8} \\times \\frac{7}{9}\\). What is the product?",
+    "options": [
+      "\\(\\frac{7}{72}\\)",
+      "\\(\\frac{8}{17}\\)",
+      "\\(\\frac{9}{56}\\)",
+      "\\(\\frac{6}{72}\\)"
+    ],
+    "answer": "\\(\\frac{7}{72}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(8 \\times 9 = 72\\) parts, and the overlap has \\(1 \\times 7 = 7\\) parts, giving \\(\\frac{7}{72}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-043",
+    "stem": "In an area model to multiply \\(\\frac{4}{7}\\) by \\(\\frac{1}{5}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "35",
+      "12",
+      "4",
+      "7"
+    ],
+    "answer": "35",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is found by multiplying the denominators: \\(7 \\times 5 = 35\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-044",
+    "stem": "When drawing an area model to multiply \\(\\frac{2}{5}\\) by \\(\\frac{4}{9}\\), how many overlapping shaded parts do you get?",
+    "options": [
+      "8",
+      "6",
+      "14",
+      "45"
+    ],
+    "answer": "8",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts equals the product of the numerators: \\(2 \\times 4 = 8\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-045",
+    "stem": "Use an area model to find the result of the fraction problem: \\(\\frac{1}{6} \\times \\frac{1}{4}\\). What is the product?",
+    "options": [
+      "\\(\\frac{1}{24}\\)",
+      "\\(\\frac{2}{10}\\)",
+      "\\(\\frac{6}{4}\\)",
+      "\\(\\frac{4}{6}\\)"
+    ],
+    "answer": "\\(\\frac{1}{24}\\)",
+    "status": "Confirmed",
+    "note": "The total parts are \\(6 \\times 4 = 24\\), and the overlapping part is \\(1 \\times 1 = 1\\), giving \\(\\frac{1}{24}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-046",
+    "stem": "If a rectangle on grid paper is divided into 10 equal parts vertically and 3 equal parts horizontally to model multiplication, what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "30",
+      "13",
+      "10",
+      "3"
+    ],
+    "answer": "30",
+    "status": "Confirmed",
+    "note": "The total number of equal parts is \\(10 \\times 3 = 30\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-047",
+    "stem": "To multiply \\(\\frac{2}{7}\\) by \\(\\frac{2}{5}\\) using an area model, how many overlapping shaded parts will be counted?",
+    "options": [
+      "4",
+      "7",
+      "12",
+      "35"
+    ],
+    "answer": "4",
+    "status": "Confirmed",
+    "note": "The overlapping shaded parts are found by multiplying the numerators: \\(2 \\times 2 = 4\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-048",
+    "stem": "Solve the fraction multiplication problem using an area model: \\(\\frac{3}{4} \\times \\frac{3}{7}\\). What is the product?",
+    "options": [
+      "\\(\\frac{9}{28}\\)",
+      "\\(\\frac{6}{11}\\)",
+      "\\(\\frac{12}{21}\\)",
+      "\\(\\frac{6}{28}\\)"
+    ],
+    "answer": "\\(\\frac{9}{28}\\)",
+    "status": "Confirmed",
+    "note": "The entire rectangle has \\(4 \\times 7 = 28\\) equal parts, and the overlap contains \\(3 \\times 3 = 9\\) parts, resulting in \\(\\frac{9}{28}\\).",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-049",
+    "stem": "In an area model for the multiplication of \\(\\frac{1}{9}\\) by \\(\\frac{5}{6}\\), what is the total number of equal parts in the entire rectangle?",
+    "options": [
+      "54",
+      "15",
+      "5",
+      "9"
+    ],
+    "answer": "54",
+    "status": "Confirmed",
+    "note": "The total number of equal parts in the entire rectangle is the product of the denominators: \\(9 \\times 6 = 54\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM03-050",
+    "stem": "When using an area model to multiply \\(\\frac{4}{5}\\) by \\(\\frac{4}{7}\\), how many overlapping shaded parts represent the product?",
+    "options": [
+      "16",
+      "8",
+      "12",
+      "35"
+    ],
+    "answer": "16",
+    "status": "Confirmed",
+    "note": "The number of overlapping shaded parts is the product of the numerators: \\(4 \\times 4 = 16\\) parts.",
+    "sourceSection": "Lesson 3",
+    "approved": "2026-11-02"
+  }
+]

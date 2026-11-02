@@ -1,0 +1,22 @@
+{
+  "name": "Maths",
+  "nameEn": "Maths",
+  "flashcards": false,
+  "corpusOnlySections": [],
+  "idPrefix": "GM",
+  "latex": true,
+  "prompt": {
+    "intro": "You are helping a parent build a maths practice test for their child (roughly 5th-grade level, studying fractions).",
+    "matchRule": "Match the phrasing style and difficulty of the lesson text and of any existing items below. Test only skills and ideas that the lesson text actually teaches, and do not repeat any of the stems shown below.",
+    "subPatternExamples": "different question types such as fraction-of-a-number, products of two fractions, mixed fractions and word problems, different number ranges, or different difficulty levels",
+    "distractorHint": "answers a student would get by making a typical mistake (adding instead of multiplying, forgetting to simplify, leaving an improper fraction unconverted, flipping a fraction) — not random numbers",
+    "sourceIntro": "Lesson text for this section, supplied by the Teacher — new questions must test what it teaches:",
+    "grounding": " Every new question must be built from a skill, rule or method taught in the lesson text above. Use NEW numbers rather than copying the worked examples. Work each answer out step by step and double-check the arithmetic before you write it down; the answer must be exactly right and in lowest terms (or as a mixed fraction when the lesson asks for that). Prefer skills not already covered by the existing items below.",
+    "extra": "Money and units can be plain text (e.g. ₹ 20, 720 g). Each question must have exactly one correct option, and the options must be written in the same form (all fractions in lowest terms, or all mixed fractions).",
+    "labels": {
+      "stem": "Question",
+      "options": "Options",
+      "answer": "Answer"
+    }
+  }
+}

@@ -1,0 +1,737 @@
+[
+  {
+    "id": "GM04-001",
+    "stem": "Multiply \\(1\\frac{2}{3}\\) by 2.",
+    "options": [
+      "\\(3\\frac{1}{3}\\)",
+      "\\(2\\frac{2}{3}\\)",
+      "\\(2\\frac{4}{3}\\)",
+      "\\(3\\frac{2}{3}\\)"
+    ],
+    "answer": "\\(3\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{2}{3} \\times 2 = \\frac{5}{3} \\times 2 = \\frac{10}{3} = 3\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-002",
+    "stem": "Multiply \\(1\\frac{3}{4}\\) by 3.",
+    "options": [
+      "\\(5\\frac{1}{4}\\)",
+      "\\(3\\frac{3}{4}\\)",
+      "\\(3\\frac{9}{4}\\)",
+      "\\(4\\frac{1}{4}\\)"
+    ],
+    "answer": "\\(5\\frac{1}{4}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{3}{4} \\times 3 = \\frac{7}{4} \\times 3 = \\frac{21}{4} = 5\\frac{1}{4}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-003",
+    "stem": "Multiply \\(1\\frac{2}{5}\\) by 4.",
+    "options": [
+      "\\(5\\frac{3}{5}\\)",
+      "\\(4\\frac{2}{5}\\)",
+      "\\(4\\frac{8}{5}\\)",
+      "\\(5\\frac{2}{5}\\)"
+    ],
+    "answer": "\\(5\\frac{3}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{2}{5} \\times 4 = \\frac{7}{5} \\times 4 = \\frac{28}{5} = 5\\frac{3}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-004",
+    "stem": "Multiply \\(1\\frac{1}{6}\\) by 5.",
+    "options": [
+      "\\(5\\frac{5}{6}\\)",
+      "\\(5\\frac{1}{6}\\)",
+      "\\(6\\frac{1}{6}\\)",
+      "\\(7\\frac{5}{6}\\)"
+    ],
+    "answer": "\\(5\\frac{5}{6}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{1}{6} \\times 5 = \\frac{7}{6} \\times 5 = \\frac{35}{6} = 5\\frac{5}{6}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-005",
+    "stem": "Multiply \\(2\\frac{1}{3}\\) by 4.",
+    "options": [
+      "\\(9\\frac{1}{3}\\)",
+      "\\(8\\frac{1}{3}\\)",
+      "\\(8\\frac{4}{3}\\)",
+      "\\(9\\frac{2}{3}\\)"
+    ],
+    "answer": "\\(9\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{1}{3} \\times 4 = \\frac{7}{3} \\times 4 = \\frac{28}{3} = 9\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-006",
+    "stem": "Multiply \\(2\\frac{2}{5}\\) by 3.",
+    "options": [
+      "\\(7\\frac{1}{5}\\)",
+      "\\(6\\frac{2}{5}\\)",
+      "\\(6\\frac{6}{5}\\)",
+      "\\(7\\frac{2}{5}\\)"
+    ],
+    "answer": "\\(7\\frac{1}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{2}{5} \\times 3 = \\frac{12}{5} \\times 3 = \\frac{36}{5} = 7\\frac{1}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-007",
+    "stem": "Multiply \\(2\\frac{1}{7}\\) by 4.",
+    "options": [
+      "\\(8\\frac{4}{7}\\)",
+      "\\(8\\frac{1}{7}\\)",
+      "\\(9\\frac{1}{7}\\)",
+      "\\(10\\frac{4}{7}\\)"
+    ],
+    "answer": "\\(8\\frac{4}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{1}{7} \\times 4 = \\frac{15}{7} \\times 4 = \\frac{60}{7} = 8\\frac{4}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-008",
+    "stem": "Multiply \\(3\\frac{1}{4}\\) by 3.",
+    "options": [
+      "\\(9\\frac{3}{4}\\)",
+      "\\(9\\frac{1}{4}\\)",
+      "\\(10\\frac{1}{4}\\)",
+      "\\(12\\frac{3}{4}\\)"
+    ],
+    "answer": "\\(9\\frac{3}{4}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{1}{4} \\times 3 = \\frac{13}{4} \\times 3 = \\frac{39}{4} = 9\\frac{3}{4}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-009",
+    "stem": "Multiply \\(1\\frac{4}{5}\\) by 2.",
+    "options": [
+      "\\(3\\frac{3}{5}\\)",
+      "\\(2\\frac{4}{5}\\)",
+      "\\(2\\frac{8}{5}\\)",
+      "\\(3\\frac{4}{5}\\)"
+    ],
+    "answer": "\\(3\\frac{3}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{4}{5} \\times 2 = \\frac{9}{5} \\times 2 = \\frac{18}{5} = 3\\frac{3}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-010",
+    "stem": "Multiply \\(1\\frac{3}{7}\\) by 3.",
+    "options": [
+      "\\(4\\frac{2}{7}\\)",
+      "\\(3\\frac{3}{7}\\)",
+      "\\(3\\frac{9}{7}\\)",
+      "\\(4\\frac{3}{7}\\)"
+    ],
+    "answer": "\\(4\\frac{2}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{3}{7} \\times 3 = \\frac{10}{7} \\times 3 = \\frac{30}{7} = 4\\frac{2}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-011",
+    "stem": "Multiply \\(2\\frac{3}{8}\\) by 3.",
+    "options": [
+      "\\(7\\frac{1}{8}\\)",
+      "\\(6\\frac{3}{8}\\)",
+      "\\(6\\frac{9}{8}\\)",
+      "\\(7\\frac{3}{8}\\)"
+    ],
+    "answer": "\\(7\\frac{1}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{3}{8} \\times 3 = \\frac{19}{8} \\times 3 = \\frac{57}{8} = 7\\frac{1}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-012",
+    "stem": "Multiply \\(1\\frac{5}{6}\\) by 5.",
+    "options": [
+      "\\(9\\frac{1}{6}\\)",
+      "\\(5\\frac{5}{6}\\)",
+      "\\(5\\frac{25}{6}\\)",
+      "\\(9\\frac{5}{6}\\)"
+    ],
+    "answer": "\\(9\\frac{1}{6}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{5}{6} \\times 5 = \\frac{11}{6} \\times 5 = \\frac{55}{6} = 9\\frac{1}{6}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-013",
+    "stem": "Multiply \\(2\\frac{1}{9}\\) by 4.",
+    "options": [
+      "\\(8\\frac{4}{9}\\)",
+      "\\(8\\frac{1}{9}\\)",
+      "\\(9\\frac{4}{9}\\)",
+      "\\(12\\frac{4}{9}\\)"
+    ],
+    "answer": "\\(8\\frac{4}{9}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{1}{9} \\times 4 = \\frac{19}{9} \\times 4 = \\frac{76}{9} = 8\\frac{4}{9}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-014",
+    "stem": "Multiply \\(3\\frac{2}{5}\\) by 2.",
+    "options": [
+      "\\(6\\frac{4}{5}\\)",
+      "\\(6\\frac{2}{5}\\)",
+      "\\(7\\frac{4}{5}\\)",
+      "\\(8\\frac{2}{5}\\)"
+    ],
+    "answer": "\\(6\\frac{4}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{2}{5} \\times 2 = \\frac{17}{5} \\times 2 = \\frac{34}{5} = 6\\frac{4}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-015",
+    "stem": "Multiply \\(1\\frac{7}{10}\\) by 3.",
+    "options": [
+      "\\(5\\frac{1}{10}\\)",
+      "\\(3\\frac{7}{10}\\)",
+      "\\(3\\frac{21}{10}\\)",
+      "\\(5\\frac{7}{10}\\)"
+    ],
+    "answer": "\\(5\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{7}{10} \\times 3 = \\frac{17}{10} \\times 3 = \\frac{51}{10} = 5\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-016",
+    "stem": "Multiply \\(2\\frac{5}{7}\\) by 2.",
+    "options": [
+      "\\(5\\frac{3}{7}\\)",
+      "\\(4\\frac{5}{7}\\)",
+      "\\(4\\frac{10}{7}\\)",
+      "\\(5\\frac{5}{7}\\)"
+    ],
+    "answer": "\\(5\\frac{3}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{5}{7} \\times 2 = \\frac{19}{7} \\times 2 = \\frac{38}{7} = 5\\frac{3}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-017",
+    "stem": "Multiply \\(1\\frac{4}{9}\\) by 2.",
+    "options": [
+      "\\(2\\frac{8}{9}\\)",
+      "\\(2\\frac{4}{9}\\)",
+      "\\(3\\frac{8}{9}\\)",
+      "\\(4\\frac{4}{9}\\)"
+    ],
+    "answer": "\\(2\\frac{8}{9}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{4}{9} \\times 2 = \\frac{13}{9} \\times 2 = \\frac{26}{9} = 2\\frac{8}{9}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-018",
+    "stem": "Multiply \\(3\\frac{3}{5}\\) by 2.",
+    "options": [
+      "\\(7\\frac{1}{5}\\)",
+      "\\(6\\frac{3}{5}\\)",
+      "\\(6\\frac{6}{5}\\)",
+      "\\(7\\frac{3}{5}\\)"
+    ],
+    "answer": "\\(7\\frac{1}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{3}{5} \\times 2 = \\frac{18}{5} \\times 2 = \\frac{36}{5} = 7\\frac{1}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-019",
+    "stem": "Multiply \\(2\\frac{2}{9}\\) by 4.",
+    "options": [
+      "\\(8\\frac{8}{9}\\)",
+      "\\(8\\frac{2}{9}\\)",
+      "\\(9\\frac{8}{9}\\)",
+      "\\(10\\frac{2}{9}\\)"
+    ],
+    "answer": "\\(8\\frac{8}{9}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{2}{9} \\times 4 = \\frac{20}{9} \\times 4 = \\frac{80}{9} = 8\\frac{8}{9}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-020",
+    "stem": "Multiply \\(1\\frac{3}{8}\\) by 5.",
+    "options": [
+      "\\(6\\frac{7}{8}\\)",
+      "\\(5\\frac{3}{8}\\)",
+      "\\(5\\frac{15}{8}\\)",
+      "\\(6\\frac{3}{8}\\)"
+    ],
+    "answer": "\\(6\\frac{7}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{3}{8} \\times 5 = \\frac{11}{8} \\times 5 = \\frac{55}{8} = 6\\frac{7}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-021",
+    "stem": "Multiply \\(4\\frac{1}{3}\\) by 2.",
+    "options": [
+      "\\(8\\frac{2}{3}\\)",
+      "\\(8\\frac{1}{3}\\)",
+      "\\(9\\frac{2}{3}\\)",
+      "\\(12\\frac{1}{3}\\)"
+    ],
+    "answer": "\\(8\\frac{2}{3}\\)",
+    "status": "Confirmed",
+    "note": "\\(4\\frac{1}{3} \\times 2 = \\frac{13}{3} \\times 2 = \\frac{26}{3} = 8\\frac{2}{3}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-022",
+    "stem": "Multiply \\(2\\frac{3}{7}\\) by 3.",
+    "options": [
+      "\\(7\\frac{2}{7}\\)",
+      "\\(6\\frac{3}{7}\\)",
+      "\\(6\\frac{9}{7}\\)",
+      "\\(7\\frac{3}{7}\\)"
+    ],
+    "answer": "\\(7\\frac{2}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{3}{7} \\times 3 = \\frac{17}{7} \\times 3 = \\frac{51}{7} = 7\\frac{2}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-023",
+    "stem": "Multiply \\(1\\frac{5}{7}\\) by 4.",
+    "options": [
+      "\\(6\\frac{6}{7}\\)",
+      "\\(4\\frac{5}{7}\\)",
+      "\\(4\\frac{20}{7}\\)",
+      "\\(6\\frac{5}{7}\\)"
+    ],
+    "answer": "\\(6\\frac{6}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{5}{7} \\times 4 = \\frac{12}{7} \\times 4 = \\frac{48}{7} = 6\\frac{6}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-024",
+    "stem": "Multiply \\(3\\frac{1}{5}\\) by 4.",
+    "options": [
+      "\\(12\\frac{4}{5}\\)",
+      "\\(12\\frac{1}{5}\\)",
+      "\\(13\\frac{4}{5}\\)",
+      "\\(15\\frac{1}{5}\\)"
+    ],
+    "answer": "\\(12\\frac{4}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{1}{5} \\times 4 = \\frac{16}{5} \\times 4 = \\frac{64}{5} = 12\\frac{4}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-025",
+    "stem": "Multiply \\(2\\frac{5}{8}\\) by 3.",
+    "options": [
+      "\\(7\\frac{7}{8}\\)",
+      "\\(6\\frac{5}{8}\\)",
+      "\\(6\\frac{15}{8}\\)",
+      "\\(7\\frac{5}{8}\\)"
+    ],
+    "answer": "\\(7\\frac{7}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{5}{8} \\times 3 = \\frac{21}{8} \\times 3 = \\frac{63}{8} = 7\\frac{7}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-026",
+    "stem": "Multiply \\(1\\frac{7}{8}\\) by 5.",
+    "options": [
+      "\\(9\\frac{3}{8}\\)",
+      "\\(5\\frac{7}{8}\\)",
+      "\\(5\\frac{35}{8}\\)",
+      "\\(9\\frac{7}{8}\\)"
+    ],
+    "answer": "\\(9\\frac{3}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{7}{8} \\times 5 = \\frac{15}{8} \\times 5 = \\frac{75}{8} = 9\\frac{3}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-027",
+    "stem": "Multiply \\(3\\frac{2}{7}\\) by 3.",
+    "options": [
+      "\\(9\\frac{6}{7}\\)",
+      "\\(9\\frac{2}{7}\\)",
+      "\\(10\\frac{6}{7}\\)",
+      "\\(12\\frac{2}{7}\\)"
+    ],
+    "answer": "\\(9\\frac{6}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{2}{7} \\times 3 = \\frac{23}{7} \\times 3 = \\frac{69}{7} = 9\\frac{6}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-028",
+    "stem": "Multiply \\(2\\frac{4}{9}\\) by 2.",
+    "options": [
+      "\\(4\\frac{8}{9}\\)",
+      "\\(4\\frac{4}{9}\\)",
+      "\\(5\\frac{8}{9}\\)",
+      "\\(6\\frac{4}{9}\\)"
+    ],
+    "answer": "\\(4\\frac{8}{9}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{4}{9} \\times 2 = \\frac{22}{9} \\times 2 = \\frac{44}{9} = 4\\frac{8}{9}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-029",
+    "stem": "Multiply \\(1\\frac{6}{7}\\) by 3.",
+    "options": [
+      "\\(5\\frac{4}{7}\\)",
+      "\\(3\\frac{6}{7}\\)",
+      "\\(3\\frac{18}{7}\\)",
+      "\\(5\\frac{6}{7}\\)"
+    ],
+    "answer": "\\(5\\frac{4}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{6}{7} \\times 3 = \\frac{13}{7} \\times 3 = \\frac{39}{7} = 5\\frac{4}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-030",
+    "stem": "Multiply \\(4\\frac{2}{3}\\) by 2.",
+    "options": [
+      "\\(9\\frac{1}{3}\\)",
+      "\\(8\\frac{2}{3}\\)",
+      "\\(8\\frac{4}{3}\\)",
+      "\\(9\\frac{2}{3}\\)"
+    ],
+    "answer": "\\(9\\frac{1}{3}\\)",
+    "status": "Confirmed",
+    "note": "\\(4\\frac{2}{3} \\times 2 = \\frac{14}{3} \\times 2 = \\frac{28}{3} = 9\\frac{1}{3}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-031",
+    "stem": "Multiply \\(2\\frac{1}{6}\\) by 5.",
+    "options": [
+      "\\(10\\frac{5}{6}\\)",
+      "\\(10\\frac{1}{6}\\)",
+      "\\(11\\frac{5}{6}\\)",
+      "\\(12\\frac{1}{6}\\)"
+    ],
+    "answer": "\\(10\\frac{5}{6}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{1}{6} \\times 5 = \\frac{13}{6} \\times 5 = \\frac{65}{6} = 10\\frac{5}{6}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-032",
+    "stem": "Multiply \\(1\\frac{8}{9}\\) by 4.",
+    "options": [
+      "\\(7\\frac{5}{9}\\)",
+      "\\(4\\frac{8}{9}\\)",
+      "\\(4\\frac{32}{9}\\)",
+      "\\(7\\frac{8}{9}\\)"
+    ],
+    "answer": "\\(7\\frac{5}{9}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{8}{9} \\times 4 = \\frac{17}{9} \\times 4 = \\frac{68}{9} = 7\\frac{5}{9}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-033",
+    "stem": "Multiply \\(3\\frac{3}{4}\\) by 3.",
+    "options": [
+      "\\(11\\frac{1}{4}\\)",
+      "\\(9\\frac{3}{4}\\)",
+      "\\(9\\frac{9}{4}\\)",
+      "\\(11\\frac{3}{4}\\)"
+    ],
+    "answer": "\\(11\\frac{1}{4}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{3}{4} \\times 3 = \\frac{15}{4} \\times 3 = \\frac{45}{4} = 11\\frac{1}{4}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-034",
+    "stem": "Multiply \\(1\\frac{2}{7}\\) by 5.",
+    "options": [
+      "\\(6\\frac{3}{7}\\)",
+      "\\(5\\frac{2}{7}\\)",
+      "\\(5\\frac{10}{7}\\)",
+      "\\(6\\frac{2}{7}\\)"
+    ],
+    "answer": "\\(6\\frac{3}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{2}{7} \\times 5 = \\frac{9}{7} \\times 5 = \\frac{45}{7} = 6\\frac{3}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-035",
+    "stem": "Multiply \\(3\\frac{4}{7}\\) by 2.",
+    "options": [
+      "\\(7\\frac{1}{7}\\)",
+      "\\(6\\frac{4}{7}\\)",
+      "\\(6\\frac{8}{7}\\)",
+      "\\(7\\frac{4}{7}\\)"
+    ],
+    "answer": "\\(7\\frac{1}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{4}{7} \\times 2 = \\frac{25}{7} \\times 2 = \\frac{50}{7} = 7\\frac{1}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-036",
+    "stem": "Multiply \\(2\\frac{2}{7}\\) by 4.",
+    "options": [
+      "\\(9\\frac{1}{7}\\)",
+      "\\(8\\frac{2}{7}\\)",
+      "\\(8\\frac{8}{7}\\)",
+      "\\(9\\frac{2}{7}\\)"
+    ],
+    "answer": "\\(9\\frac{1}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{2}{7} \\times 4 = \\frac{16}{7} \\times 4 = \\frac{64}{7} = 9\\frac{1}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-037",
+    "stem": "Multiply \\(1\\frac{3}{10}\\) by 3.",
+    "options": [
+      "\\(3\\frac{9}{10}\\)",
+      "\\(3\\frac{3}{10}\\)",
+      "\\(4\\frac{9}{10}\\)",
+      "\\(5\\frac{3}{10}\\)"
+    ],
+    "answer": "\\(3\\frac{9}{10}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{3}{10} \\times 3 = \\frac{13}{10} \\times 3 = \\frac{39}{10} = 3\\frac{9}{10}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-038",
+    "stem": "Multiply \\(4\\frac{1}{4}\\) by 3.",
+    "options": [
+      "\\(12\\frac{3}{4}\\)",
+      "\\(12\\frac{1}{4}\\)",
+      "\\(13\\frac{3}{4}\\)",
+      "\\(15\\frac{1}{4}\\)"
+    ],
+    "answer": "\\(12\\frac{3}{4}\\)",
+    "status": "Confirmed",
+    "note": "\\(4\\frac{1}{4} \\times 3 = \\frac{17}{4} \\times 3 = \\frac{51}{4} = 12\\frac{3}{4}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-039",
+    "stem": "Multiply \\(2\\frac{3}{10}\\) by 3.",
+    "options": [
+      "\\(6\\frac{9}{10}\\)",
+      "\\(6\\frac{3}{10}\\)",
+      "\\(7\\frac{9}{10}\\)",
+      "\\(8\\frac{3}{10}\\)"
+    ],
+    "answer": "\\(6\\frac{9}{10}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{3}{10} \\times 3 = \\frac{23}{10} \\times 3 = \\frac{69}{10} = 6\\frac{9}{10}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-040",
+    "stem": "Multiply \\(1\\frac{4}{7}\\) by 4.",
+    "options": [
+      "\\(6\\frac{2}{7}\\)",
+      "\\(4\\frac{4}{7}\\)",
+      "\\(4\\frac{16}{7}\\)",
+      "\\(6\\frac{4}{7}\\)"
+    ],
+    "answer": "\\(6\\frac{2}{7}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{4}{7} \\times 4 = \\frac{11}{7} \\times 4 = \\frac{44}{7} = 6\\frac{2}{7}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-041",
+    "stem": "Multiply \\(3\\frac{2}{5}\\) by 4.",
+    "options": [
+      "\\(13\\frac{3}{5}\\)",
+      "\\(12\\frac{2}{5}\\)",
+      "\\(12\\frac{8}{5}\\)",
+      "\\(13\\frac{2}{5}\\)"
+    ],
+    "answer": "\\(13\\frac{3}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{2}{5} \\times 4 = \\frac{17}{5} \\times 4 = \\frac{68}{5} = 13\\frac{3}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-042",
+    "stem": "Multiply \\(2\\frac{5}{6}\\) by 5.",
+    "options": [
+      "\\(14\\frac{1}{6}\\)",
+      "\\(10\\frac{5}{6}\\)",
+      "\\(10\\frac{25}{6}\\)",
+      "\\(14\\frac{5}{6}\\)"
+    ],
+    "answer": "\\(14\\frac{1}{6}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{5}{6} \\times 5 = \\frac{17}{6} \\times 5 = \\frac{85}{6} = 14\\frac{1}{6}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-043",
+    "stem": "Multiply \\(1\\frac{1}{8}\\) by 7.",
+    "options": [
+      "\\(7\\frac{7}{8}\\)",
+      "\\(7\\frac{1}{8}\\)",
+      "\\(8\\frac{7}{8}\\)",
+      "\\(9\\frac{1}{8}\\)"
+    ],
+    "answer": "\\(7\\frac{7}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{1}{8} \\times 7 = \\frac{9}{8} \\times 7 = \\frac{63}{8} = 7\\frac{7}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-044",
+    "stem": "Multiply \\(3\\frac{5}{8}\\) by 3.",
+    "options": [
+      "\\(10\\frac{7}{8}\\)",
+      "\\(9\\frac{5}{8}\\)",
+      "\\(9\\frac{15}{8}\\)",
+      "\\(10\\frac{5}{8}\\)"
+    ],
+    "answer": "\\(10\\frac{7}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{5}{8} \\times 3 = \\frac{29}{8} \\times 3 = \\frac{87}{8} = 10\\frac{7}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-045",
+    "stem": "Multiply \\(2\\frac{7}{10}\\) by 3.",
+    "options": [
+      "\\(8\\frac{1}{10}\\)",
+      "\\(6\\frac{7}{10}\\)",
+      "\\(6\\frac{21}{10}\\)",
+      "\\(8\\frac{7}{10}\\)"
+    ],
+    "answer": "\\(8\\frac{1}{10}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{7}{10} \\times 3 = \\frac{27}{10} \\times 3 = \\frac{81}{10} = 8\\frac{1}{10}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-046",
+    "stem": "Multiply \\(1\\frac{4}{5}\\) by 4.",
+    "options": [
+      "\\(7\\frac{1}{5}\\)",
+      "\\(4\\frac{4}{5}\\)",
+      "\\(4\\frac{16}{5}\\)",
+      "\\(7\\frac{4}{5}\\)"
+    ],
+    "answer": "\\(7\\frac{1}{5}\\)",
+    "status": "Confirmed",
+    "note": "\\(1\\frac{4}{5} \\times 4 = \\frac{9}{5} \\times 4 = \\frac{36}{5} = 7\\frac{1}{5}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-047",
+    "stem": "Multiply \\(4\\frac{1}{2}\\) by 3.",
+    "options": [
+      "\\(13\\frac{1}{2}\\)",
+      "\\(12\\frac{1}{2}\\)",
+      "\\(12\\frac{3}{2}\\)",
+      "\\(14\\frac{1}{2}\\)"
+    ],
+    "answer": "\\(13\\frac{1}{2}\\)",
+    "status": "Confirmed",
+    "note": "\\(4\\frac{1}{2} \\times 3 = \\frac{9}{2} \\times 3 = \\frac{27}{2} = 13\\frac{1}{2}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-048",
+    "stem": "Multiply \\(2\\frac{2}{3}\\) by 4.",
+    "options": [
+      "\\(10\\frac{2}{3}\\)",
+      "\\(8\\frac{2}{3}\\)",
+      "\\(8\\frac{8}{3}\\)",
+      "\\(10\\frac{1}{3}\\)"
+    ],
+    "answer": "\\(10\\frac{2}{3}\\)",
+    "status": "Confirmed",
+    "note": "\\(2\\frac{2}{3} \\times 4 = \\frac{8}{3} \\times 4 = \\frac{32}{3} = 10\\frac{2}{3}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  },
+  {
+    "id": "GM04-049",
+    "stem": "Multiply \\(3\\frac{3}{8}\\) by 3.",
+    "options": [
+      "\\(10\\frac{1}{8}\\)",
+      "\\(9\\frac{3}{8}\\)",
+      "\\(9\\frac{9}{8}\\)",
+      "\\(10\\frac{3}{8}\\)"
+    ],
+    "answer": "\\(10\\frac{1}{8}\\)",
+    "status": "Confirmed",
+    "note": "\\(3\\frac{3}{8} \\times 3 = \\frac{27}{8} \\times 3 = \\frac{81}{8} = 10\\frac{1}{8}\\).",
+    "sourceSection": "Lesson 4",
+    "approved": "2026-11-02"
+  }
+]

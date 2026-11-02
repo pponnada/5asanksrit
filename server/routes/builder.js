@@ -2,9 +2,12 @@ const express = require('express');
 const requireAdmin = require('../middleware/requireAdmin');
 const sectionSummary = require('../content/sectionSummary');
 const builderDraft = require('../content/builderDraft');
+const loadSubject = require('../middleware/loadSubject');
+const { DEFAULT_SUBJECT } = require('../content/subjects');
 const { composePaper } = require('../content/composePaper');
 
 const router = express.Router();
+router.param('subject', loadSubject);
 const urlencoded = express.urlencoded({ extended: false });
 
 // body-parser leaves req.body undefined (not {}) whenever there's no body
@@ -24,9 +27,12 @@ function available(s) {
 
 // ---------- Step 1: select sections + counts, drawn from each section's question bank ----------
 
-router.get('/admin/builder', requireAdmin, (_req, res) => {
-  const sections = sectionSummary.listSections();
-  const draftSections = builderDraft.getDraft().sections;
+// Pre-subjects bookmark.
+router.get('/admin/builder', requireAdmin, (_req, res) => res.redirect('/admin/s/' + DEFAULT_SUBJECT + '/builder'));
+
+router.get('/admin/s/:subject/builder', requireAdmin, (req, res) => {
+  const sections = sectionSummary.listSections(req.subject);
+  const draftSections = builderDraft.getDraft(req.subject.id).sections;
   res.render('admin/builder-sections', {
     sections: sections.map((s) => Object.assign({ available: available(s) }, s)),
     selected: draftSections,
@@ -34,8 +40,8 @@ router.get('/admin/builder', requireAdmin, (_req, res) => {
   });
 });
 
-router.post('/admin/builder/sections', requireAdmin, parseForm, (req, res) => {
-  const sections = sectionSummary.listSections();
+router.post('/admin/s/:subject/builder/sections', requireAdmin, parseForm, (req, res) => {
+  const sections = sectionSummary.listSections(req.subject);
   const selected = [];
   let error = null;
 
@@ -47,7 +53,7 @@ router.post('/admin/builder/sections', requireAdmin, parseForm, (req, res) => {
 
     const max = available(s);
     if (count > max) {
-      error = `विभागः ${s.number}: only ${max} question(s) banked — lower the count or add more via Manage Question Bank.`;
+      error = `${s.label} ${s.number}: only ${max} question(s) banked — lower the count or add more via Manage Question Bank.`;
     }
     selected.push({ number: s.number, count: Math.min(count, max) });
   });
@@ -62,19 +68,20 @@ router.post('/admin/builder/sections', requireAdmin, parseForm, (req, res) => {
     });
   }
 
-  builderDraft.setSections(selected);
-  res.redirect('/admin/builder/time');
+  builderDraft.setSections(req.subject.id, selected);
+  res.redirect(res.locals.base + '/builder/time');
 });
 
 // ---------- Step 2: time limit, then compose ----------
 
-router.get('/admin/builder/time', requireAdmin, (_req, res) => {
-  if (builderDraft.sectionsList().length === 0) return res.redirect('/admin/builder');
+router.get('/admin/s/:subject/builder/time', requireAdmin, (req, res) => {
+  if (builderDraft.sectionsList(req.subject.id).length === 0) return res.redirect(res.locals.base + '/builder');
   res.render('admin/builder-time', { error: null });
 });
 
-router.post('/admin/builder/time', requireAdmin, parseForm, (req, res) => {
-  if (builderDraft.sectionsList().length === 0) return res.redirect('/admin/builder');
+router.post('/admin/s/:subject/builder/time', requireAdmin, parseForm, (req, res) => {
+  const subjectId = req.subject.id;
+  if (builderDraft.sectionsList(subjectId).length === 0) return res.redirect(res.locals.base + '/builder');
 
   let minutes = parseInt(req.body.minutes === 'other' ? req.body.customMinutes : req.body.minutes, 10);
   if (!minutes || minutes <= 0) {
@@ -83,19 +90,19 @@ router.post('/admin/builder/time', requireAdmin, parseForm, (req, res) => {
 
   const composedDraft = {
     timeLimitMinutes: minutes,
-    sections: builderDraft.sectionsList().map((sec) => ({ number: sec.number, count: sec.count })),
+    sections: builderDraft.sectionsList(subjectId).map((sec) => ({ number: sec.number, count: sec.count })),
   };
 
-  const id = composePaper(composedDraft);
-  builderDraft.reset();
+  const id = composePaper(req.subject, composedDraft);
+  builderDraft.reset(subjectId);
   res.redirect('/admin/preview/' + id);
 });
 
 // ---------- Start over ----------
 
-router.post('/admin/builder/reset', requireAdmin, (_req, res) => {
-  builderDraft.reset();
-  res.redirect('/admin/builder');
+router.post('/admin/s/:subject/builder/reset', requireAdmin, (req, res) => {
+  builderDraft.reset(req.subject.id);
+  res.redirect(res.locals.base + '/builder');
 });
 
 module.exports = router;

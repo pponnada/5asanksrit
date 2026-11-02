@@ -12,6 +12,47 @@ function stripCodeFences(text) {
   return fenced ? fenced[1] : text;
 }
 
+/**
+ * For LaTeX subjects (maths): models often write \frac with a single
+ * backslash even when told to double it, and JSON.parse would then silently
+ * turn \f, \t, \b, \r into control characters ("\frac" -> form-feed +
+ * "rac", "\times" -> tab + "imes"). A lone backslash is therefore treated
+ * as a literal one, while already-doubled backslashes and escaped quotes
+ * pass through untouched.
+ */
+function repairLatexBackslashes(text) {
+  let out = '';
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c !== '\\') {
+      out += c;
+      continue;
+    }
+    const next = text[i + 1];
+    if (next === '\\') {
+      out += '\\\\';
+      i++;
+    } else if (next === '"') {
+      out += '\\"';
+      i++;
+    } else {
+      out += '\\\\';
+    }
+  }
+  return out;
+}
+
+/** \( \) -> $ $ and \[ \] -> $$ $$, so every stored item uses one delimiter style. */
+function normalizeLatexDelimiters(raw) {
+  const fix = (v) => (typeof v === 'string' ? v.replace(/\\[()]/g, '$').replace(/\\[\[\]]/g, '$$$$') : v);
+  return Object.assign({}, raw, {
+    stem: fix(raw.stem),
+    options: Array.isArray(raw.options) ? raw.options.map(fix) : raw.options,
+    answer: fix(raw.answer),
+    note: fix(raw.note),
+  });
+}
+
 function extractJsonArray(text) {
   const start = text.indexOf('[');
   const end = text.lastIndexOf(']');
@@ -24,10 +65,11 @@ function extractJsonArray(text) {
  * out of the LLM's JSON array, or resubmitted from the Teacher's edit
  * form). Returns { item } on success or { error } naming what's wrong.
  */
-function validateItem(raw, { expectedOptionCount = null } = {}) {
+function validateItem(raw, { expectedOptionCount = null, latex = false } = {}) {
   if (!raw || typeof raw !== 'object') {
     return { error: 'not an object' };
   }
+  if (latex) raw = normalizeLatexDelimiters(raw);
 
   const stem = typeof raw.stem === 'string' ? raw.stem.trim() : '';
   if (!stem) return { error: 'missing or empty "stem"' };
@@ -57,11 +99,12 @@ function validateItem(raw, { expectedOptionCount = null } = {}) {
  *   dropped from `items`, not silently coerced into something valid; a
  *   count mismatch is reported, not padded/truncated).
  */
-function parseGenAiReply(rawText, { expectedCount = null, expectedOptionCount = null } = {}) {
+function parseGenAiReply(rawText, { expectedCount = null, expectedOptionCount = null, latex = false } = {}) {
   let text = (rawText || '').trim();
   if (!text) return { items: [], errors: ['Nothing was pasted.'] };
 
   text = stripCodeFences(text).trim();
+  if (latex) text = repairLatexBackslashes(text);
 
   let parsed;
   try {
@@ -89,7 +132,7 @@ function parseGenAiReply(rawText, { expectedCount = null, expectedOptionCount = 
 
   const items = [];
   parsed.forEach((raw, i) => {
-    const { item, error } = validateItem(raw, { expectedOptionCount });
+    const { item, error } = validateItem(raw, { expectedOptionCount, latex });
     if (error) {
       errors.push(`Item ${i + 1}: ${error}.`);
     } else {

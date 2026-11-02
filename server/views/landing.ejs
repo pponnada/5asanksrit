@@ -1,33 +1,41 @@
-<%- include('partials/head', { title: 'संस्कृत अभ्यासः' }) %>
+<%- include('partials/head', { title: 'Practice' }) %>
 
 <main class="landing">
-  <h1>संस्कृत अभ्यासः</h1>
+  <h1>Practice</h1>
 
-  <% if (latestPaper) { %>
-    <a class="take-test-btn" href="/test/<%= latestPaper.id %>">परीक्षां ददातु<br><span class="en">Take Test</span></a>
-  <% } else { %>
-    <p class="empty-state">अद्यापि कोऽपि प्रश्नपत्रः निर्मितः नास्ति।<br><span class="en">No test has been published yet.</span></p>
-  <% } %>
+  <% subjects.forEach(function(subject) { %>
+    <section class="subject-block">
+      <h2><%= subject.name %><% if (subject.nameEn !== subject.name) { %> <span class="en">(<%= subject.nameEn %>)</span><% } %></h2>
 
-  <a class="flashcards-btn" href="/flashcards">शब्दार्थ-अभ्यासपत्राणि<br><span class="en">Flashcards</span></a>
+      <% if (subject.latestPaper) { %>
+        <a class="take-test-btn" href="/test/<%= subject.latestPaper.id %>"><%= subject.ui.text.takeTest %><% if (subject.ui.hint.takeTest) { %><br><span class="en"><%= subject.ui.hint.takeTest %></span><% } %></a>
+      <% } else { %>
+        <p class="empty-state"><%= subject.ui.text.noTest %><% if (subject.ui.hint.noTest) { %><br><span class="en"><%= subject.ui.hint.noTest %></span><% } %></p>
+      <% } %>
 
-  <% if (otherPapers.length > 0) { %>
-    <details class="other-papers">
-      <summary>अन्ये परीक्षाः <span class="en">(other tests)</span></summary>
-      <ul>
-        <% otherPapers.forEach(function(p) { %>
-          <li>
-            <a href="/test/<%= p.id %>">
-              <%= p.id %>
-              <span class="status-tag <%= p.taken ? 'taken' : 'not-taken' %>">
-                <%= p.taken ? ('पूर्णम् — ' + p.score) : 'अपूर्णम्' %>
-              </span>
-            </a>
-          </li>
-        <% }); %>
-      </ul>
-    </details>
-  <% } %>
+      <% if (subject.flashcards) { %>
+        <a class="flashcards-btn" href="/flashcards"><%= subject.ui.text.flashcards %><% if (subject.ui.hint.flashcards) { %><br><span class="en"><%= subject.ui.hint.flashcards %></span><% } %></a>
+      <% } %>
+
+      <% if (subject.otherPapers.length > 0) { %>
+        <details class="other-papers">
+          <summary><%= subject.ui.text.otherTests %><% if (subject.ui.hint.otherTests) { %> <span class="en"><%= subject.ui.hint.otherTests %></span><% } %></summary>
+          <ul>
+            <% subject.otherPapers.forEach(function(p) { %>
+              <li>
+                <a href="/test/<%= p.id %>">
+                  <%= p.id %>
+                  <span class="status-tag <%= p.taken ? 'taken' : 'not-taken' %>">
+                    <%= p.taken ? (subject.ui.text.done + ' — ' + p.score) : subject.ui.text.notDone %>
+                  </span>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </details>
+      <% } %>
+    </section>
+  <% }); %>
 </main>
 
 <%- include('partials/foot') %>

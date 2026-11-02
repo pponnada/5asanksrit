@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseCorpus } = require('./parseCorpus');
 const { loadSectionPool } = require('./genaiApprovedStore');
-const { CORPUS_FILE, GENAI_APPROVED_DIR, PAPERS_DIR } = require('../config');
+const { PAPERS_DIR } = require('../config');
 
 /** Random sample without replacement, up to `n` (or fewer if the pool is smaller). */
 function sample(array, n) {
@@ -32,7 +32,7 @@ function makeId(now) {
 /**
  * Writes papers/<id>.md as a Draft (no Published-At — REQUIREMENTS.md §5)
  * from a resolved builder draft (server/content/builderDraft.js shape):
- * draft.sections = [{ number, count }, ...].
+ * draft.sections = [{ number, count }, ...], for the given subject.
  *
  * For each section, in ascending section-number order: a random sample
  * (size = count) without replacement from native-usable ∪ GenAI-approved
@@ -40,8 +40,8 @@ function makeId(now) {
  * server/routes/questionBank.js build this up ahead of time; composing a
  * paper only ever draws from it, never generates anything new).
  */
-function composePaper(draft) {
-  const { sections: corpusSections } = parseCorpus(CORPUS_FILE);
+function composePaper(subject, draft) {
+  const { sections: corpusSections } = parseCorpus(subject.corpusFile);
   const corpusByNumber = {};
   corpusSections.forEach((s) => {
     corpusByNumber[s.number] = s;
@@ -54,21 +54,27 @@ function composePaper(draft) {
   for (const sec of orderedSections) {
     const corpusSection = corpusByNumber[sec.number];
     if (!corpusSection) continue;
-    sectionLabels.push(`विभागः ${sec.number}`);
+    sectionLabels.push(`${corpusSection.label} ${sec.number}`);
 
     const nativeUsable = corpusSection.items
       .filter((i) => i.status === 'Confirmed' && i.hasOptions)
       .map((i) => ({ id: i.id, stem: i.stem, options: i.options, answer: i.answer, note: i.note }));
-    const genaiPool = loadSectionPool(sec.number, GENAI_APPROVED_DIR);
+    const genaiPool = loadSectionPool(sec.number, subject.genaiDir);
 
     const picks = sample(nativeUsable.concat(genaiPool), sec.count || 0);
     allItems.push(...picks);
   }
 
-  const id = makeId(new Date());
+  fs.mkdirSync(PAPERS_DIR, { recursive: true });
+  const baseId = makeId(new Date());
+  // Two papers composed within the same minute (e.g. one per subject) must not overwrite each other.
+  let id = baseId;
+  for (let n = 2; fs.existsSync(path.join(PAPERS_DIR, id + '.md')); n++) id = `${baseId}-${n}`;
+
   const headerLines = [
     `# Paper ${id}`,
     '',
+    `Subject: ${subject.id}`,
     `Sections: ${sectionLabels.join(', ')}`,
     `Time-Limit-Minutes: ${draft.timeLimitMinutes}`,
     `Composed-At: ${new Date().toISOString()}`,
@@ -78,7 +84,6 @@ function composePaper(draft) {
   const body = allItems.map(formatItemBlock).join('\n\n');
   const contents = headerLines.join('\n') + '\n' + body + '\n';
 
-  fs.mkdirSync(PAPERS_DIR, { recursive: true });
   fs.writeFileSync(path.join(PAPERS_DIR, id + '.md'), contents, 'utf8');
 
   return id;

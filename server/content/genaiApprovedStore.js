@@ -40,7 +40,7 @@ function loadAllCounts(dir) {
 function nextSeq(existingItems) {
   let max = 0;
   for (const item of existingItems) {
-    const m = /^G\d+-(\d+)$/.exec(item.id);
+    const m = /^[A-Z]+\d+-(\d+)$/.exec(item.id);
     if (m) max = Math.max(max, parseInt(m[1], 10));
   }
   return max + 1;
@@ -50,22 +50,24 @@ function nextSeq(existingItems) {
  * Appends newly Teacher-approved items to a section's pool, assigning each
  * the next G<NN>-<seq> id and stamping Confirmed/Source-Section/Approved
  * metadata. Returns the stamped items (with ids) so the caller can track
- * which ones this build session just added.
+ * which ones this build session just added. `idPrefix` keeps ids distinct
+ * across subjects (G09-001 vs GM01-001); `sectionLabel` is the corpus's own
+ * heading word (विभागः, Lesson, ...).
  */
-function appendApprovedItems(sectionNumber, items, dir) {
+function appendApprovedItems(sectionNumber, items, dir, { idPrefix = 'G', sectionLabel = 'विभागः' } = {}) {
   const existing = loadSectionPool(sectionNumber, dir);
   let seq = nextSeq(existing);
   const nn = String(sectionNumber).padStart(2, '0');
   const today = new Date().toISOString().slice(0, 10);
 
   const stamped = items.map((item) => ({
-    id: `G${nn}-${String(seq++).padStart(3, '0')}`,
+    id: `${idPrefix}${nn}-${String(seq++).padStart(3, '0')}`,
     stem: item.stem,
     options: item.options,
     answer: item.answer,
     status: 'Confirmed',
     note: item.note || null,
-    sourceSection: `विभागः ${sectionNumber}`,
+    sourceSection: `${sectionLabel} ${sectionNumber}`,
     approved: today,
   }));
 

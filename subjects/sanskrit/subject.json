@@ -1,0 +1,50 @@
+{
+  "name": "संस्कृत",
+  "nameEn": "Sanskrit",
+  "flashcards": true,
+  "corpusOnlySections": [
+    1
+  ],
+  "idPrefix": "G",
+  "prompt": {
+    "intro": "You are helping a parent build a Sanskrit practice test for their child (roughly 5th-grade level, learning Sanskrit as a second language).",
+    "matchRule": "Match the vocabulary, grammar forms, phrasing style, and difficulty of the existing items below exactly. Do not introduce vocabulary or grammar patterns that aren't already present in this section, and do not repeat any of the stems shown below.",
+    "subPatternExamples": "different pronoun pairs, different grammatical persons, or different named word/option sets",
+    "distractorHint": "other words from the same category, other grammatical forms of the same root — not random unrelated words",
+    "labels": {
+      "stem": "स्तेम",
+      "options": "विकल्पाः",
+      "answer": "उत्तरम्"
+    },
+    "stemPlaceholder": "<question stem in Devanagari>"
+  },
+  "ui": {
+    "text": {
+      "pageTitle": "अभ्यासः",
+      "testTitle": "परीक्षा",
+      "question": "प्रश्न",
+      "correctAnswer": "सही उत्तरम्",
+      "previous": "← पूर्वम्",
+      "next": "अग्रे →",
+      "submit": "समर्पयतु",
+      "reviewTitle": "समीक्षा",
+      "score": "प्राप्तांकाः",
+      "home": "मुख्यपृष्ठम्",
+      "takeTest": "परीक्षां ददातु",
+      "noTest": "अद्यापि कोऽपि प्रश्नपत्रः निर्मितः नास्ति।",
+      "otherTests": "अन्ये परीक्षाः",
+      "done": "पूर्णम्",
+      "notDone": "अपूर्णम्",
+      "flashcards": "शब्दार्थ-अभ्यासपत्राणि"
+    },
+    "hint": {
+      "submit": "Submit",
+      "reviewTitle": "Review",
+      "home": "Home",
+      "takeTest": "Take Test",
+      "noTest": "No test has been published yet.",
+      "otherTests": "(other tests)",
+      "flashcards": "Flashcards"
+    }
+  }
+}

@@ -6,17 +6,26 @@
   const optionsEl = document.getElementById('fc-options');
   const stemEl = document.getElementById('fc-stem');
   const backEl = document.getElementById('fc-back');
+  const progressEl = document.getElementById('fc-progress');
   const nextBtn = document.getElementById('next-card-btn');
-  const statsEl = document.getElementById('fc-stats');
+  const statAttemptedEl = document.getElementById('fc-stat-attempted');
+  const statMasteredEl = document.getElementById('fc-stat-mastered');
+  const statRemainingEl = document.getElementById('fc-stat-remaining');
 
   function renderStats(stats) {
-    if (!statsEl || !stats) return;
-    statsEl.innerHTML = stats.mastered + '/' + stats.total + ' <span class="en">mastered</span>';
+    if (!stats) return;
+    if (statAttemptedEl) statAttemptedEl.innerHTML = '<strong>' + stats.attempted + '/' + stats.total + '</strong>attempted';
+    if (statMasteredEl) statMasteredEl.innerHTML = '<strong>' + stats.mastered + '/' + stats.total + '</strong>mastered';
+    if (statRemainingEl) {
+      statRemainingEl.innerHTML = '<strong>' + stats.remaining + '</strong>left';
+      statRemainingEl.classList.toggle('has-due', stats.remaining > 0);
+    }
   }
 
   function renderFront(newCard) {
     card = newCard;
     stemEl.textContent = card.stem;
+    progressEl.textContent = card.correctCount + '/' + card.required + ' correct';
     optionsEl.dataset.questionId = card.id;
     optionsEl.innerHTML = '';
     card.options.forEach(function (opt) {
@@ -56,6 +65,8 @@
         const resultText = data.correct ? 'सम्यक्! <span class="en">Correct!</span>' : 'असम्यक् <span class="en">Not quite</span>';
 
         let html = '<div class="fc-result ' + resultCls + '">' + resultText + '</div>';
+        html += '<div class="fc-progress">' + data.correctCount + '/' + data.required + ' correct' +
+          (data.correctCount >= data.required ? ' — done!' : '') + '</div>';
         html += '<div class="fc-answer">' + escapeHtml(data.correctAnswer) + '</div>';
         if (data.englishMeaning) {
           html += '<div class="fc-english">English: ' + escapeHtml(data.englishMeaning) + '</div>';
@@ -79,6 +90,14 @@
       .then((r) => r.json())
       .then((data) => {
         if (!data.ok) return;
+
+        if (data.done) {
+          renderStats(data.stats);
+          document.querySelector('.flip-card').outerHTML =
+            '<p class="empty-state" id="fc-done">सर्वं सम्यक्! सर्वाणि पत्राणि पूर्णानि।<br><span class="en">All cards mastered!</span></p>';
+          nextBtn.style.display = 'none';
+          return;
+        }
 
         // Flip back toward the front; swap the DOM content halfway through
         // the animation, while both faces are edge-on and invisible.

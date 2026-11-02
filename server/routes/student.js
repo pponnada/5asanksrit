@@ -1,6 +1,7 @@
 const express = require('express');
 const contentStore = require('../content/contentStore');
 const attemptsDb = require('../db/attempts');
+const { listSubjects, uiForPaper } = require('../content/subjects');
 
 const router = express.Router();
 
@@ -20,24 +21,28 @@ function resolveStartQuestionNumber(paper, answers) {
 }
 
 router.get('/', (_req, res) => {
-  const latestId = contentStore.getLatestId();
-  const latestPaper = latestId ? contentStore.getPaper(latestId) : null;
+  const subjects = listSubjects().map((subject) => {
+    const latestId = contentStore.getLatestId(subject);
+    const latestPaper = latestId ? contentStore.getPaper(latestId) : null;
 
-  const otherPapers = contentStore
-    .listPublishedPapers()
-    .filter((p) => p.id !== latestId)
-    .map((p) => {
-      const attempt = attemptsDb.getByPaperId(p.id);
-      const finalized = attempt && attempt.status !== 'in_progress';
-      let score = null;
-      if (finalized) {
-        const answers = attemptsDb.getAnswersMap(attempt.id);
-        score = scoreAttempt(p, answers) + '/' + p.items.length;
-      }
-      return { id: p.id, taken: !!finalized, score };
-    });
+    const otherPapers = contentStore
+      .listPublishedPapers(subject)
+      .filter((p) => p.id !== latestId)
+      .map((p) => {
+        const attempt = attemptsDb.getByPaperId(p.id);
+        const finalized = attempt && attempt.status !== 'in_progress';
+        let score = null;
+        if (finalized) {
+          const answers = attemptsDb.getAnswersMap(attempt.id);
+          score = scoreAttempt(p, answers) + '/' + p.items.length;
+        }
+        return { id: p.id, taken: !!finalized, score };
+      });
 
-  res.render('landing', { latestPaper, otherPapers });
+    return { id: subject.id, name: subject.name, nameEn: subject.nameEn, flashcards: subject.flashcards, ui: subject.ui, latestPaper, otherPapers };
+  });
+
+  res.render('landing', { subjects });
 });
 
 router.get('/test/:id', (req, res) => {
@@ -75,6 +80,7 @@ router.get('/test/:id/question/:n', (req, res) => {
   const item = paper.items[n - 1];
 
   res.render('test', {
+    ui: uiForPaper(paper),
     paperId: paper.id,
     item,
     questionNumber: n,
@@ -137,6 +143,7 @@ router.get('/test/:id/review', (req, res) => {
   const score = scoreAttempt(paper, answers);
 
   res.render('review', {
+    ui: uiForPaper(paper),
     items: paper.items,
     answers,
     score,

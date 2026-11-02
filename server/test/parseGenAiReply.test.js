@@ -47,3 +47,32 @@ test('rejects non-JSON garbage clearly instead of throwing', () => {
   assert.equal(items.length, 0);
   assert.ok(errors.length > 0);
 });
+
+test('latex subjects: single-backslash LaTeX survives instead of becoming control characters', () => {
+  const reply = '[{"stem": "What is $\\frac{2}{3} \\times 6$?", "options": ["$4$", "$5$"], "answer": "$4$", "note": "$\\text{of}$ means times"}]';
+  const { items, errors } = parseGenAiReply(reply, { latex: true });
+  assert.deepEqual(errors, []);
+  assert.equal(items[0].stem, 'What is $\\frac{2}{3} \\times 6$?');
+  assert.equal(items[0].note, '$\\text{of}$ means times');
+});
+
+test('latex subjects: already-doubled backslashes are not doubled again', () => {
+  const reply = '[{"stem": "$\\\\frac{1}{2}$", "options": ["a", "b"], "answer": "a"}]';
+  const { items } = parseGenAiReply(reply, { latex: true });
+  assert.equal(items[0].stem, '$\\frac{1}{2}$');
+});
+
+test('without latex mode, behaviour is unchanged (escapes are JSON escapes)', () => {
+  const reply = '[{"stem": "a\\tb", "options": ["x", "y"], "answer": "x"}]';
+  assert.equal(parseGenAiReply(reply).items[0].stem, 'a\tb');
+});
+
+test('latex subjects: \( \) and \[ \] delimiters are normalised to $ and $$', () => {
+  const reply = '[{"stem": "What is \\(\\frac{3}{8}\\) of 64?", "options": ["\\(24\\)", "\\(8\\)"], "answer": "\\(24\\)", "note": "\\[3 \\times 8 = 24\\]"}]';
+  const { items, errors } = parseGenAiReply(reply, { latex: true });
+  assert.deepEqual(errors, []);
+  assert.equal(items[0].stem, 'What is $\\frac{3}{8}$ of 64?');
+  assert.deepEqual(items[0].options, ['$24$', '$8$']);
+  assert.equal(items[0].answer, '$24$');
+  assert.equal(items[0].note, '$$3 \\times 8 = 24$$');
+});

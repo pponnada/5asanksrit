@@ -43,6 +43,13 @@ html, body {
   margin-bottom: 40px;
 }
 
+.subject-block + .subject-block {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
+}
+.subject-block h2 { font-size: 1.3em; margin-bottom: 20px; }
+
 .take-test-btn {
   display: block;
   background: var(--color-primary);
@@ -260,7 +267,9 @@ button.option:active { transform: scale(0.98); }
 .badge-taken { background: #e6eefb; color: #2f5fa8; }
 .badge-not-taken { background: #f1ede2; color: var(--color-muted); }
 
-.dashboard-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0 24px; }
+.dashboard-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 8px 0 24px; }
+.subject-label { min-width: 5em; }
+.subject-tag { font-size: 0.8em; color: var(--color-muted); margin: 0 6px; }
 
 .build-new-paper-btn {
   display: inline-block;
@@ -477,6 +486,7 @@ button.option:active { transform: scale(0.98); }
 .fc-result.correct { color: var(--color-correct); }
 .fc-result.incorrect { color: var(--color-wrong); }
 .fc-answer { font-size: 1.5em; font-weight: 700; margin-bottom: 10px; }
+.fc-progress { font-size: 0.85em; opacity: 0.7; margin: 6px 0 10px; }
 .fc-english { color: var(--color-muted); font-family: 'Noto Sans', sans-serif; font-size: 1em; margin-bottom: 8px; }
 .fc-note { color: var(--color-muted); font-size: 0.9em; white-space: pre-line; }
 

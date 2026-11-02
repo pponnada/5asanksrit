@@ -26,3 +26,15 @@ CREATE TABLE IF NOT EXISTS flashcard_progress (
   last_result TEXT,
   last_seen_ts INTEGER
 );
+
+-- Exam-drill state for the flashcards feature, one row per corpus
+-- question_id, created on first answer. A card is finished once
+-- correct_count >= required (3 by default; 5 after any miss). A miss resets
+-- correct_count to 0. No row means: never answered, needs 3.
+CREATE TABLE IF NOT EXISTS flashcard_drill (
+  question_id TEXT PRIMARY KEY,
+  correct_count INTEGER NOT NULL DEFAULT 0,
+  required INTEGER NOT NULL DEFAULT 3,
+  wrong_count INTEGER NOT NULL DEFAULT 0,
+  last_seen_ts INTEGER
+);

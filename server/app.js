@@ -17,6 +17,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+// KaTeX (maths subjects write LaTeX between $...$), served locally so it works on a LAN without internet.
+app.use('/vendor/katex', express.static(path.join(__dirname, '..', 'node_modules', 'katex', 'dist')));
 app.use(
   cookieSession({
     name: 'session',
@@ -37,7 +39,7 @@ if (require.main === module) {
     // staying off the public internet relies on the home router not
     // forwarding this port — no separate auth layer for the Student surface
     // by design (REQUIREMENTS.md §10).
-    console.log(`Sanskrit app listening on http://0.0.0.0:${PORT}`);
+    console.log(`Practice app listening on http://0.0.0.0:${PORT}`);
   });
 }
 
