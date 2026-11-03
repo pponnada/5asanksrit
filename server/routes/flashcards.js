@@ -1,22 +1,12 @@
 const express = require('express');
 const { loadFlashcardPool } = require('../content/flashcardPool');
+const { shuffled } = require('../content/shuffle');
 const flashcardsDb = require('../db/flashcards');
 
 const router = express.Router();
 
 function findItem(pool, id) {
   return pool.find((item) => item.id === id) || null;
-}
-
-// Fisher-Yates; options are reshuffled every time a card is served so the
-// answer's position can't be memorized.
-function shuffled(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }
 
 function cardPayload(item) {

@@ -96,3 +96,32 @@ test('two papers composed in the same minute get distinct ids instead of overwri
   assert.ok(fs.existsSync(path.join(papersDir, a + '.md')));
   assert.ok(fs.existsSync(path.join(papersDir, b + '.md')));
 });
+
+test('balanceAnswerPositions spreads correct answers evenly and keeps each answer among its options', () => {
+  const { balanceAnswerPositions } = require('../content/composePaper');
+  const items = Array.from({ length: 40 }, (_, i) => ({
+    id: `G${i}`,
+    stem: `q${i}`,
+    options: [`ans${i}`, `x${i}`, `y${i}`, `z${i}`], // bank order: answer always first
+    answer: `ans${i}`,
+  }));
+
+  const out = balanceAnswerPositions(items);
+  const counts = [0, 0, 0, 0];
+  out.forEach((item, i) => {
+    assert.deepEqual(item.options.slice().sort(), items[i].options.slice().sort());
+    counts[item.options.indexOf(item.answer)]++;
+  });
+  assert.deepEqual(counts, [10, 10, 10, 10]);
+  assert.equal(items[0].options[0], 'ans0', 'input is not mutated');
+});
+
+test('composed paper does not put every answer in the same position', () => {
+  const draft = { timeLimitMinutes: 10, sections: [{ number: 1, count: 2 }, { number: 9, count: 1 }] };
+  const positions = new Set();
+  for (let n = 0; n < 20; n++) {
+    const paper = parsePaperFile(path.join(papersDir, composePaper(subject, draft) + '.md'));
+    paper.items.forEach((it) => positions.add(it.options.indexOf(it.answer)));
+  }
+  assert.ok(positions.size > 1);
+});

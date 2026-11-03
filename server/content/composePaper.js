@@ -3,6 +3,7 @@ const path = require('path');
 const { parseCorpus } = require('./parseCorpus');
 const { loadSectionPool } = require('./genaiApprovedStore');
 const { PAPERS_DIR } = require('../config');
+const { shuffled } = require('./shuffle');
 
 /** Random sample without replacement, up to `n` (or fewer if the pool is smaller). */
 function sample(array, n) {
@@ -13,6 +14,26 @@ function sample(array, n) {
     picked.push(pool.splice(idx, 1)[0]);
   }
   return picked;
+}
+
+/**
+ * Reorders each item's options so the correct answer's position (A, B, C, ...) is spread evenly across
+ * the paper instead of whatever order the bank stored (GenAI items always had it first). A "deck" of
+ * target positions is dealt out round-robin and shuffled, so counts differ by at most one per position;
+ * distractors are shuffled into the remaining slots. Returns new items; the inputs are not mutated.
+ */
+function balanceAnswerPositions(items) {
+  const maxLen = items.reduce((m, i) => Math.max(m, i.options.length), 0);
+  const deck = shuffled(items.map((_, k) => k % Math.max(maxLen, 1)));
+  return items.map((item, k) => {
+    const answerIdx = item.options.indexOf(item.answer);
+    if (answerIdx === -1) return { ...item, options: shuffled(item.options) };
+    const target = deck[k] % item.options.length;
+    const distractors = shuffled(item.options.filter((_, i) => i !== answerIdx));
+    const options = distractors.slice();
+    options.splice(target, 0, item.answer);
+    return { ...item, options };
+  });
 }
 
 function formatItemBlock(item) {
@@ -81,7 +102,7 @@ function composePaper(subject, draft) {
     '',
   ];
 
-  const body = allItems.map(formatItemBlock).join('\n\n');
+  const body = balanceAnswerPositions(allItems).map(formatItemBlock).join('\n\n');
   const contents = headerLines.join('\n') + '\n' + body + '\n';
 
   fs.writeFileSync(path.join(PAPERS_DIR, id + '.md'), contents, 'utf8');
@@ -89,4 +110,4 @@ function composePaper(subject, draft) {
   return id;
 }
 
-module.exports = { composePaper, makeId, formatItemBlock };
+module.exports = { composePaper, balanceAnswerPositions, makeId, formatItemBlock };
