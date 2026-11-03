@@ -16,13 +16,25 @@ function sample(array, n) {
   return picked;
 }
 
+/** Drops repeated options (compared after trimming), keeping the first occurrence of each. */
+function uniqueOptions(options) {
+  const seen = new Set();
+  return options.filter((o) => {
+    const key = o.trim();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 /**
  * Reorders each item's options so the correct answer's position (A, B, C, ...) is spread evenly across
  * the paper instead of whatever order the bank stored (GenAI items always had it first). A "deck" of
  * target positions is dealt out round-robin and shuffled, so counts differ by at most one per position;
  * distractors are shuffled into the remaining slots. Returns new items; the inputs are not mutated.
  */
-function balanceAnswerPositions(items) {
+function balanceAnswerPositions(rawItems) {
+  const items = rawItems.map((item) => ({ ...item, options: uniqueOptions(item.options) }));
   const maxLen = items.reduce((m, i) => Math.max(m, i.options.length), 0);
   const deck = shuffled(items.map((_, k) => k % Math.max(maxLen, 1)));
   return items.map((item, k) => {
@@ -110,4 +122,4 @@ function composePaper(subject, draft) {
   return id;
 }
 
-module.exports = { composePaper, balanceAnswerPositions, makeId, formatItemBlock };
+module.exports = { composePaper, uniqueOptions, balanceAnswerPositions, makeId, formatItemBlock };

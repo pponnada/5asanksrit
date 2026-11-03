@@ -125,3 +125,9 @@ test('composed paper does not put every answer in the same position', () => {
   }
   assert.ok(positions.size > 1);
 });
+
+test('balanceAnswerPositions removes duplicate options, keeping the answer once', () => {
+  const { balanceAnswerPositions } = require('../content/composePaper');
+  const [out] = balanceAnswerPositions([{ id: 'x', stem: 's', options: ['राम', 'सीता', 'राम', 'लक्ष्मण', 'सीता'], answer: 'राम' }]);
+  assert.deepStrictEqual(out.options.slice().sort(), ['राम', 'लक्ष्मण', 'सीता'].sort());
+});
